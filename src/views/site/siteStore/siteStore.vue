@@ -43,6 +43,9 @@
           <el-input v-model="searchForm.couponNum" placeholder="请输入数量"></el-input>
         </el-form-item>
         <el-form-item>
+          <el-date-picker v-model="value6" type="daterange" range-separator="－" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+        </el-form-item>
+        <el-form-item>
           <el-button type="primary" @click="searchSubmit">查询</el-button>
           <el-button type="primary" @click="searchSubmit">新增</el-button>
         </el-form-item>
@@ -122,9 +125,6 @@
         <el-form-item label="官网">
           <el-input v-model="editorData.website" disabled></el-input>
         </el-form-item>
-        <el-form-item label="有效优惠券">
-          <el-input v-model="editorData.website"></el-input>
-        </el-form-item>
         <el-form-item label="站点分类">
           <el-select v-model="editorData.category" placeholder="请选择语言">
             <el-option label="分类1" value="1"></el-option>
@@ -154,6 +154,11 @@
             <el-option v-for="item in tagList" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
+
+        <el-form-item label="是否只显示人工增加优惠券" label-width="180px">
+          <el-radio v-model="editorData.radio" label="1">是</el-radio>
+          <el-radio v-model="editorData.radio" label="2">否</el-radio>
+        </el-form-item>
         <el-form-item label="title">
           <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.textarea2"></el-input>
         </el-form-item>
@@ -168,10 +173,6 @@
         </el-form-item>
         <el-form-item label="商家介绍">
           <el-input type="textarea" placeholder="请输入内容" :rows="5" v-model="editorData.textarea2"></el-input>
-        </el-form-item>
-        <el-form-item label="是否只显示人工增加优惠券" label-width="180px">
-          <el-radio v-model="editorData.radio" label="1">是</el-radio>
-          <el-radio v-model="editorData.radio" label="2">否</el-radio>
         </el-form-item>
       </el-form>
       <div style="margin-bottom:15px;color: #606266;font-weight: bold;margin-left: 45px;">商家图片上传</div>

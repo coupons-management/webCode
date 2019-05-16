@@ -107,22 +107,6 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/storeManage',
-    component: Layout,
-    name: '管理商家',
-    meta: { title: '管理商家', icon: 'example' },
-    redirect: '/storeManage',
-    children: [
-      {
-        path: '',
-        name: '管理商家',
-        component: () => import('@/views/storeManage/storeManage.vue'),
-        meta: { title: '管理商家', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
     path: '/staffWork',
     component: Layout,
     name: '员工管理',
@@ -131,16 +115,16 @@ export const constantRouterMap = [
     children: [
       {
         path: 'staffdDaily',
-        name: '员工管理',
+        name: '工作记录',
         component: () => import('@/views/staffWork/staffdDaily/staffdDaily.vue'),
-        meta: { title: '员工管理', icon: 'tree' }
+        meta: { title: '工作记录', icon: 'tree' }
       },
-      /*{
+      {
         path: 'dataStat',
-        name: '报表',
-        component: () => import('@/views/staffWork/dataStat/dataStat.vue'),
-        meta: { title: '报表', icon: 'tree' }
-      }*/
+        name: '管理商家',
+        component: () => import('@/views/storeManage/storeManage.vue'),
+        meta: { title: '管理商家', icon: 'tree' }
+      }
     ]
   },
   {
