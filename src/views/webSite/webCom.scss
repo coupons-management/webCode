@@ -1,0 +1,122 @@
+.pageStyle{
+  //padding-bottom: 160px;
+  .centerText{
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .listStyle{
+    display: flex;
+    flex-wrap: wrap;
+    >div{
+      background-color: white;
+      margin: 1%;
+      border: 1px solid lightgrey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .homeSearch{
+    background: url("../../../../static/imgs/BGimg.png") no-repeat;
+    background-size:100% 100%;
+    height: 250px;
+    text-align: center;
+    .searchTitle{
+      font-size: 30px;
+      color: white;
+      margin-top: 50px;
+    }
+    .el-input{
+      width: 50%;
+      margin-top: 20px;
+    }
+  }
+
+  .topStores{
+    background-color: white;
+    .storeList{
+      div{
+        width: 18%;
+        height: 200px;
+      }
+    }
+  }
+
+  .topCoupons{
+    .couponList{
+      .itemCoupons{
+        background-color: white;
+        width: 23%;
+        height: 300px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .couponImg{
+          height: 200px;
+          div{
+            font-size: 12px;
+            padding: 5px 10px;
+            position: absolute;
+            left: 0;
+            top: 10px;
+            background-color: deepskyblue;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            color: white;
+          }
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .couponInfo{
+          width: 100%;
+          padding: 10px;
+          height: 100px;
+          position: relative;
+          >div{
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            color: grey;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .topCategories{
+    .categoryList{
+      justify-content: space-between;
+      div{
+        background-color: white;
+        width: 14%;
+        height: 150px;
+      }
+    }
+  }
+
+
+  .popularStores{
+    background-color: white;
+    color: grey;
+    font-size: 14px;
+    .popularList{
+      div{
+        border: 0;
+        background-color: white;
+        width: 18%;
+        height: 20px;
+        margin: 5px 1% ;
+      }
+    }
+  }
+}

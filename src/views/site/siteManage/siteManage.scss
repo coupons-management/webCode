@@ -1,0 +1,94 @@
+.tableInput{
+  border: 0;
+  padding: 10px 20px;
+  background-color: rgba(0,0,0,0);
+}
+.color-list{
+  display: flex;
+  flex-wrap: wrap;
+
+  div{
+    width: 120px;
+    height: 50px;
+    background-color: #ececec;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .deleteAdvert{
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: red;
+      font-size: 20px;
+    }
+  }
+}
+.secondCate{
+  display:flex;
+  .categoryIcon{
+    align-items: center;
+    display:flex;
+    i{
+      font-size: 18px;
+      margin-left:10px;
+      cursor: pointer;
+    }
+  }
+}
+.cateContent{
+  display: flex;
+  .firCate{
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    overflow-y: scroll;
+    //border-left: 1px solid lightgrey;
+    //border-right: 1px solid lightgrey;
+    div{
+      padding:20px;
+      border-bottom: 1px solid lightgrey;
+      cursor: pointer;
+      border-top: 0;
+      text-align: center;
+      color: grey;
+    }
+    .activeFir{
+      color: #007dff;
+    }
+    i{
+      //font-size: 20px;
+    }
+  }
+  .secCate{
+    width: 80%;
+    .topCate{
+      display: flex;
+      border-bottom: 1px solid lightgrey;
+      cursor: pointer;
+      div{
+        padding: 5px 10px;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: lightgrey;
+        color: white;
+      }
+      .activeSec{
+        color: white;
+        background-color: #3a8ee6;
+      }
+      i{
+        padding: 0 20px;
+      }
+    }
+    .bottomContent{
+      display: flex;
+      flex-direction: column;
+      section{
+        padding: 20px;
+      }
+    }
+  }
+}

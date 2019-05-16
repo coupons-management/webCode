@@ -1,0 +1,93 @@
+
+.homePage{
+  >section{
+    padding: 10px 13%;
+    >div{
+      color: grey;
+      font-size: 22px;
+      padding-bottom: 10px;
+    }
+  }
+  >section:first-child{
+    background-color: white;
+  }
+  .topStores{
+    section{
+      display: flex;
+      justify-content: space-between;
+      img{
+        width: 10%;
+        height: 80px;
+      }
+    }
+  }
+  .TopCoupons{
+    .couponsList{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 16px;
+      >div{
+        width: 46%;
+        margin: 5px 0;
+        padding: 20px 10px 20px 140px;
+        position: relative;
+        height: 100px;
+        background-color: white;
+        img{
+          width: 100px;
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          border: 1px solid #f0f0f0;
+          cursor: pointer;
+        }
+        .coupItem{
+          border-left: 2px solid #f0f0f0;
+          padding: 0 20px;
+          div:first-child{
+            margin-bottom: 20px;
+            cursor: pointer;
+          }
+          div:last-child{
+            display: inline-block;
+            background-color: orange;
+            padding: 7px  20px;
+            color: white;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .TopCategories{
+    .CategoriesList{
+      display: flex;
+      flex-wrap: wrap;
+      background-color: white;
+      .borderStyle{
+        border-right: 1px solid #f0f0f0;
+      }
+      div{
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+        color: grey;
+        cursor: pointer;
+        i{
+          font-size: 25px;
+        }
+        span{
+          margin-top: 20px;
+        }
+      }
+      div:hover{
+        background-color: lightgrey;
+      }
+    }
+  }
+}
