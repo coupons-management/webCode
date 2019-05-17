@@ -37,5 +37,21 @@ exports.install = function (Vue, options) {
     }else{
       return parseFloat(data).toFixed(2);
     }
-  }
+  };
+
+  Vue.prototype.initData = function(list){
+    let _this = this;
+    /*for(let i of list){
+
+    }*/
+    _this.$sendData('get','commons/getSpiderList','',(data,all)=>{//爬虫列表
+      _this.$store.dispatch('setSpider', data);
+    });
+    _this.$sendData('get','commons/getCouponTypeList','',(data,all)=>{//优惠券类型
+      _this.$store.dispatch('setCouponType', data);
+    });
+    _this.$sendData('get','commons/getExpiryList','',(data,all)=>{//过期时间
+      _this.$store.dispatch('setExpiry', data);
+    })
+  };
 };

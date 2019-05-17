@@ -38,7 +38,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + "user-manager/updateUser", {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + "user-manager/updateUser", {
           pkId:data.pkId,
           isPass:'1'
         }).then(function(response) {
@@ -58,7 +58,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + "user-manager/delUser", {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + "user-manager/delUser", {
           pkId:data.pkId
         }).then(function(response) {
           if (response.data.code == 200) {
@@ -95,7 +95,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + "user-manager/updateUser", formData).then(function(response) {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + "user-manager/updateUser", formData).then(function(response) {
           if (response.data.code == 200) {
             _this.getStaffData();
             _this.editorBox = false;
@@ -114,7 +114,7 @@ export default {
     },
     getStaffData(page){
       let _this = this;
-      _this.$axios.post(localStorage.axiosLocalUrl + "user-manager/userlist", {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "user-manager/userlist", {
         keyWords:_this.staffSearch.keyWords,
         isPass:_this.staffSearch.isPass,
         userType:_this.staffSearch.userType,

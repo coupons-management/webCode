@@ -44,7 +44,7 @@ export default {
   methods:{
     getCouponData(page){//获取优惠券
       let _this = this;
-      _this.$axios.post(localStorage.axiosLocalUrl + "couponsite-manager/getCouponList", _this.searchForm).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "couponsite-manager/getCouponList", _this.searchForm).then(function(response) {
         if (response.data.code == 200) {
           _this.couponData = response.data.data;
         }
@@ -67,7 +67,7 @@ export default {
     sendSingleData(data){//提交单个优惠券信息
       let _this = this;
       _this.searchForm.page = 1;
-      _this.$axios.post(localStorage.axiosLocalUrl + "couponsite-manager/upDateCoupon", data).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "couponsite-manager/upDateCoupon", data).then(function(response) {
         if (response.data.code == 200) {
           _this.getCouponData();
         }
@@ -145,7 +145,7 @@ export default {
         cancelButtonText: '重选',
         type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + "couponsite-manager/deleteCouponOrStore", {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + "couponsite-manager/deleteCouponOrStore", {
           siteId:_this.searchForm.siteId,
           pkIdList:list,
           interfaceType:"coupon"
@@ -172,7 +172,7 @@ export default {
     getShopData(){//获取商家列表
       let _this = this;
       this.storeForm.page = 1;
-      _this.$axios.post(localStorage.axiosLocalUrl + "storesite-manager/storeListByPage", _this.storeForm).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "storesite-manager/storeListByPage", _this.storeForm).then(function(response) {
         if (response.data.code == 200) {
           _this.shopData = response.data.data;
         }
@@ -180,17 +180,17 @@ export default {
     },
     getSiteList(){//获取站点列表
       let _this = this;
-      _this.$axios.post(localStorage.axiosLocalUrl + "site-manager/getSiteList", {}).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "site-manager/getSiteList", {}).then(function(response) {
         if (response.data.code == 200) {
           _this.siteList = response.data.data.list;
         }
       });
-      _this.$axios.post(localStorage.axiosLocalUrl + "storesite-manager/queryCategory", {}).then(function(response) {//分类
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "storesite-manager/queryCategory", {}).then(function(response) {//分类
         if (response.data.code == 200) {
           _this.categoryList = response.data.data
         }
       });
-      _this.$axios.post(localStorage.axiosLocalUrl + "storesite-manager/queryCountry", {}).then(function(response) {//国家
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "storesite-manager/queryCountry", {}).then(function(response) {//国家
         if (response.data.code == 200) {
           _this.countryList = response.data.data
         }

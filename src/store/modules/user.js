@@ -38,6 +38,13 @@ const user = {
         login(userName, userInfo.passWord).then(response => {
           if(response.data.code == 0){
             const data = response.data.data;
+            console.log(data);
+            sessionStorage.token = data.sessionKey;
+            sessionStorage.axiosLocalUrl = 'http://39.98.53.2:3332/system/';
+            setTimeout(()=>{
+              sessionStorage.token = '';
+              sessionStorage.axiosLocalUrl = '';
+            },1000*3600*24);
             commit('SET_NAME', data);
             commit('SET_LOGINDATA', data);
             resolve()
@@ -78,7 +85,8 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        localStorage.axiosLocalUrl ='';
+        sessionStorage.token = '';
+        sessionStorage.axiosLocalUrl = '';
         removeToken();
         resolve()
       })
@@ -87,7 +95,8 @@ const user = {
     // 前端 登出
     FedLogOut({ commit }) {
       return new Promise(resolve => {
-        localStorage.axiosLocalUrl ='';
+        sessionStorage.token = '';
+        sessionStorage.axiosLocalUrl = '';
         removeToken();
         resolve()
       })

@@ -55,7 +55,7 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      fileUrl:localStorage.axiosLocalUrl+'site-manager/uploadFile'
+      fileUrl:sessionStorage.axiosLocalUrl+'site-manager/uploadFile'
     }
   },
   mounted(){

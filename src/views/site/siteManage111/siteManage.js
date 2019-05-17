@@ -17,7 +17,7 @@ export default {
         isAutoPush:'1'
       },
       isAddSite:false,//true新增 false修改
-      fileUrl:localStorage.axiosLocalUrl+'site-manager/uploadFile'
+      fileUrl:sessionStorage.axiosLocalUrl+'site-manager/uploadFile'
     }
   },
   mounted(){
@@ -46,7 +46,7 @@ export default {
       let _this = this;
       _this.$confirm('此操作将删除站点：'+data.name+', 是否继续?', '提示', {confirmButtonText: '确定',cancelButtonText: '取消',type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + "site-manager/deleteSite", {pkId:data.pkId}).then(function(response) {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + "site-manager/deleteSite", {pkId:data.pkId}).then(function(response) {
           if (response.data.code == 200) {
             _this.$message({type: 'success',message: '删除成功!'});
             _this.getSiteList();
@@ -62,7 +62,7 @@ export default {
     },
     getSiteList(){//查询站点列表
       let _this = this;
-      _this.$axios.post(localStorage.axiosLocalUrl + "site-manager/getSiteList", {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "site-manager/getSiteList", {
         name:_this.searchSite.name,
         url:_this.searchSite.url
       }).then(function(response) {
@@ -79,7 +79,7 @@ export default {
       }
       _this.$confirm('确认此操作?', '提示', {confirmButtonText: '确定',cancelButtonText: '取消',type: 'warning'
       }).then(() => {
-        _this.$axios.post(localStorage.axiosLocalUrl + sendUrl, _this.siteForm).then(function(response) {
+        _this.$axios.post(sessionStorage.axiosLocalUrl + sendUrl, _this.siteForm).then(function(response) {
           if (response.data.code == 200) {
             _this.$message({type: 'success',message: '操作成功!'});
             _this.addSiteBox = false;

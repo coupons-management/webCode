@@ -7,27 +7,21 @@
     <section v-if="!currPageInfo">
       <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
         <el-form-item label="选择爬虫">
-          <el-select v-model="searchForm.spiderSite" placeholder="请选择爬虫">
-            <el-option label="爬虫1" value="0"></el-option>
-            <el-option label="爬虫2" value="1"></el-option>
-            <el-option label="爬虫3" value="2"></el-option>
+          <el-select v-model="searchForm.scrapy" placeholder="请选择爬虫">
+            <el-option v-for="spiderItem in spiderList" :key="spiderItem.key" :value="spiderItem.key" :label="spiderItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="标题">
-          <el-input v-model="searchForm.title" placeholder="请输入标题"></el-input>
+          <el-input v-model="searchForm.name" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="优惠券类型">
-          <el-select v-model="searchForm.type" placeholder="优惠券类型">
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="code" value="1"></el-option>
-            <el-option label="deal" value="2"></el-option>
+          <el-select v-model="searchForm.typel" placeholder="优惠券类型">
+            <el-option v-for="couponTypeItem in couponTypeList" :key="couponTypeItem.key" :value="couponTypeItem.key" :label="couponTypeItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="是否过期">
-          <el-select v-model="searchForm.isPast" placeholder="是否过期">
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="是" value="1"></el-option>
-            <el-option label="否" value="2"></el-option>
+          <el-select v-model="searchForm.expired" placeholder="是否过期">
+            <el-option v-for="expiryItem in expiryList" :key="expiryItem.key" :value="expiryItem.key" :label="expiryItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>

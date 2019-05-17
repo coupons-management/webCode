@@ -27,7 +27,7 @@ export default {
   },
   mixins: [ResizeMixin],
   mounted(){
-    if(!localStorage.axiosLocalUrl || localStorage.axiosLocalUrl == 'null'){
+    if(!sessionStorage.axiosLocalUrl || sessionStorage.axiosLocalUrl == 'null'){
       this.$message({ type: "warning", message: "尚未登录！"});
       this.$router.push('/login');
     }else{

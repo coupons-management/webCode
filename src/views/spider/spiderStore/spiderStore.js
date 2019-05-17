@@ -36,7 +36,7 @@ export default {
         pageName:'spiderStore',
         storeId:''
       },
-      fileUrl:localStorage.axiosLocalUrl+'site-manager/uploadFile'
+      fileUrl:sessionStorage.axiosLocalUrl+'site-manager/uploadFile'
     }
   },
   mounted(){

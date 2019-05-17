@@ -81,7 +81,7 @@ export default {
     }
   },
   mounted(){
-    localStorage.axiosLocalUrl = null;
+    sessionStorage.axiosLocalUrl = null;
   },
   methods: {
     registerSubmit(){
@@ -90,7 +90,7 @@ export default {
         _this.$message({ type: "warning", message: "用户名或密码为必填！" });
         return false;
       }
-      _this.$axios.post(localStorage.axiosLocalUrl + "user-manager/addUser", sendData).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + "user-manager/addUser", sendData).then(function(response) {
         if (response.data.code == 200) {
           _this.$message({ type: "success", message: "创建成功，等待审核！" });
           _this.loginState = true;
@@ -111,8 +111,7 @@ export default {
           this.loginForm.passWord = md5(this.loginForm.passWord);
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false;
-            localStorage.axiosLocalUrl = 'http://39.98.53.2:3332/system/';
-            //localStorage.axiosLocalUrl = 'http://39.98.53.2:3332/scrapy/';
+            //sessionStorage.axiosLocalUrl = 'http://39.98.53.2:3332/scrapy/';
             this.$router.push({ path: '/' })
           }).catch(() => {
             this.loading = false;

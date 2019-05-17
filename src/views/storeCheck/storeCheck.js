@@ -32,7 +32,7 @@ export default {
         pageName:'spiderStore',
         storeId:''
       },
-      fileUrl:localStorage.axiosLocalUrl+'site-manager/uploadFile',//图片上传地址
+      fileUrl:sessionStorage.axiosLocalUrl+'site-manager/uploadFile',//图片上传地址
       isBatch:false,//批量操作按钮
       storeList:[]//勾选数组
     }

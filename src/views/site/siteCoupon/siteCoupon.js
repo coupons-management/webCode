@@ -28,7 +28,6 @@ export default {
     }
   },
   mounted(){
-
   },
   methods:{
     searchSubmit(){//查询提交

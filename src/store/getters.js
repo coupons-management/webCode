@@ -8,6 +8,9 @@ const getters = {
   loginData: state => state.user.loginData,
 
 
-  siteId: state => state.site.siteId
+  siteId: state => state.site.siteId,
+  spiderList: state => state.site.spiderList,
+  couponTypeList: state => state.site.couponTypeList,
+  expiryList: state => state.site.expiryList
 }
 export default getters

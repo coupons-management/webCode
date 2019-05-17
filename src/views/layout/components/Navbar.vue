@@ -48,7 +48,7 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout() {
-      localStorage.axiosLocalUrl = null;
+      sessionStorage.axiosLocalUrl = null;
      this.$router.push('/login');
     }
   }
