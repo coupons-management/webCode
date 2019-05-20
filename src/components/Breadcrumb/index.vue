@@ -26,8 +26,13 @@ export default {
   },
   methods: {
     getBreadcrumb() {
-      let matched = this.$route.matched.filter(item => item.name)
-      const first = matched[0]
+      if(this.$route.matched[0].name == "内站点数据"){
+        let siteList = JSON.parse(localStorage.siteList);
+        let currSite = siteList[this.$route.matched[1].meta.siteId - 1];
+        this.$route.matched[1].meta.title = currSite.name;
+      }
+      let matched = this.$route.matched.filter(item => item.name);
+      const first = matched[0];
       if (first && first.name !== 'dashboard') {
         matched = [].concat(matched)
       }

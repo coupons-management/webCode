@@ -87,7 +87,19 @@ export const constantRouterMap = [
         path: 'site2',
         name: '站点2',
         component: () => import('@/views/site/siteHome/siteHome.vue'),
-        meta: { title: '站点2', icon: 'tree',siteId:'2' }
+        meta: { title: '站点22', icon: 'tree',siteId:'2' }
+      },
+      {
+        path: 'site3',
+        name: '站点3',
+        component: () => import('@/views/site/siteHome/siteHome.vue'),
+        meta: { title: '站点3', icon: 'tree',siteId:'3' }
+      },
+      {
+        path: 'site4',
+        name: '站点4',
+        component: () => import('@/views/site/siteHome/siteHome.vue'),
+        meta: { title: '站点4', icon: 'tree',siteId:'4' }
       }
     ]
   },
