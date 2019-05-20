@@ -1,65 +1,76 @@
 import couponTable from '../spiderCoupon/spiderCoupon.vue'
+import { mapGetters } from 'vuex'
+
 export default {
   components:{couponTable},
   name: 'spiderStore',
   data(){
     return {
       searchForm: {
-        keyWord: '',
-        country: '0',
-        spiderType: '0',
-        couponNum:'',
-        spiderSite:'1'
-      },
-      tableData: {
+        search: '',
+        country: '',
+        scrapyType:0,
+        validCouponsCount:'',
+        pageNumber:1,
         pageSize:10,
-        pageTotal:3,
-        page:1,
-        tableList:[
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '10', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '12', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '14', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'}
-        ]
+        spiderId:0
       },
-      editorData:{
-        logoUrl:''
-      },
+      tableData: {},
+      editorData:{},
       checkCouponsBox:false,
       editorStoreBox:false,
       currPageInfo:{
         pageName:'spiderStore',
         storeId:''
       },
-      fileUrl:sessionStorage.axiosLocalUrl+'site-manager/uploadFile'
+      fileUrl:sessionStorage.axiosLocalUrl+'file/upload'
     }
   },
   mounted(){
+    this.initData();
 
+    this.searchForm.pageNumber = 1;
+    this.getTableList();
   },
   methods:{
     searchSubmit(){
-
+      this.searchForm.pageNumber = 1;
+      this.getTableList();
     },
     editorInfo(data){
+      this.editorData = JSON.parse(JSON.stringify(data));
       this.editorStoreBox = true;
     },
-    checkCoupons(){
+    checkCoupons(data){
+      this.currPageInfo = data.id;
       this.checkCouponsBox = true;
     },
-    storeChange(){
-
+    storeChange(e){
+      this.searchForm.pageNumber = e;
+      this.getTableList();
+    },
+    getTableList(){
+      let _this = this;
+      _this.$sendData('post','store/getPage',_this.searchForm,(data,all)=>{//爬虫商家列表
+        _this.tableData = data;
+      });
     },
     editorSubmit(){
-
+      let _this = this;
+      _this.$sendData('post','store/edit',_this.editorData,(data,all)=>{//爬虫商家编辑提交
+        _this.getTableList();
+        _this.$message({type: 'success',message: '修改成功!'});
+        _this.editorStoreBox = false;
+      });
     },
     handleAvatarSuccess(e){
-      this.editorData.logoUrl = 'http://39.98.53.2:3332/backend_scrapy_site/'+e.data;
+      this.editorData.logo = 'http://'+e.data;
+      this.editorData.logoUrl = 'http://'+e.data;
     }
+  },
+  computed: {
+    ...mapGetters([
+      'spiderList','typeList','countryList'
+    ])
   }
 }

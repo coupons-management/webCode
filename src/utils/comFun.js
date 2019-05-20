@@ -44,6 +44,12 @@ exports.install = function (Vue, options) {
     /*for(let i of list){
 
     }*/
+    _this.$sendData('get','commons/getTypeList','',(data,all)=>{//爬虫分类列表
+      _this.$store.dispatch('setType', data);
+    });
+    _this.$sendData('get','commons/getCountryDict','',(data,all)=>{//国家列表
+      _this.$store.dispatch('setCountry', data);
+    });
     _this.$sendData('get','commons/getSpiderList','',(data,all)=>{//爬虫列表
       _this.$store.dispatch('setSpider', data);
     });

@@ -7,41 +7,39 @@
     <section class="pageSearch" >
       <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
         <el-form-item label="选择爬虫">
-          <el-select v-model="searchForm.spiderSite" placeholder="请选择爬虫">
-            <el-option label="爬虫1" value="0"></el-option>
-            <el-option label="爬虫2" value="1"></el-option>
-            <el-option label="爬虫3" value="2"></el-option>
+          <el-select v-model="searchForm.spiderId" placeholder="请选择爬虫">
+            <el-option v-for="spiderItem in spiderList" :key="spiderItem.key" :value="spiderItem.key" :label="spiderItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="关键字">
-          <el-input v-model="searchForm.keyWord" placeholder="请输入商家名、官网"></el-input>
+          <el-input v-model="searchForm.search" placeholder="请输入商家名、官网"></el-input>
         </el-form-item>
         <el-form-item label="国家">
           <el-select v-model="searchForm.country" placeholder="请选择国家">
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="美国" value="1"></el-option>
-            <el-option label="英国" value="2"></el-option>
+            <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="爬虫分类">
-          <el-select v-model="searchForm.spiderType" placeholder="请选择分类">
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="是" value="1"></el-option>
-            <el-option label="否" value="2"></el-option>
+          <el-select v-model="searchForm.scrapyType" placeholder="请选择分类" filterable >
+            <el-option v-for="typeItem in typeList" :key="typeItem.key" :value="typeItem.key" :label="typeItem.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label=" 有效优惠券范围">
-          <el-input v-model="searchForm.couponNum" placeholder="请输入数量"></el-input>
+          <el-input type="number" v-model="searchForm.validCouponsCount" placeholder="请输入数量"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchSubmit">查询</el-button>
         </el-form-item>
       </el-form>
 
-      <el-table :data="tableData.tableList" stripe style="width: 100%" border>
+      <el-table :data="tableData.list" stripe style="width: 100%" border>
         <el-table-column prop="id" label="ID" align="center"></el-table-column>
-        <el-table-column prop="storeName" label="商家名" align="center"></el-table-column>
-        <el-table-column prop="website" label="官网" align="center"></el-table-column>
+        <el-table-column prop="name" label="商家名" align="center"></el-table-column>
+        <el-table-column label="官网" align="center">
+          <template slot-scope="scope">
+            <a :href="scope.row.website" target="view_window">{{scope.row.website}}</a>
+          </template>
+        </el-table-column>
         <el-table-column label="LOGO" align="center">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="light" placement="right">
@@ -58,33 +56,35 @@
         </el-table-column>
         <el-table-column label="在展示站" align="center">
           <template slot-scope="scope">
-            <el-tooltip class="item" effect="light" placement="right">
+            <el-tooltip class="item" effect="light" placement="right" v-if="scope.row.showSiteNameList>0">
               <div slot="content">
-                <div v-for="item in scope.row.sitList" class="sitList">{{item.name}}</div>
+                <div v-for="item in scope.row.showSiteNameList" class="sitList">{{item}}</div>
               </div>
-              <div>{{scope.row.sitNum}}</div>
+              <div>{{scope.row.showSiteNameList.length}}</div>
             </el-tooltip>
+            <div v-else>0</div>
           </template>
         </el-table-column>
         <el-table-column label="在爬虫站" align="center">
           <template slot-scope="scope">
-            <el-tooltip class="item" effect="light" placement="right">
+            <el-tooltip class="item" effect="light" placement="right" v-if="scope.row.spiderSiteNameList.length>0">
               <div slot="content">
-                <div v-for="item in scope.row.spiderSitList" class="sitList">{{item.name}}</div>
+                <div v-for="item in scope.row.spiderSiteNameList" class="sitList">{{item}}</div>
               </div>
-              <div>{{scope.row.spiderSitNum}}</div>
+              <div>{{scope.row.spiderSiteNameList.length}}</div>
             </el-tooltip>
+            <div v-else>0</div>
           </template>
         </el-table-column>
-        <el-table-column prop="spiderType" label="爬虫分类" align="center"></el-table-column>
-        <el-table-column label="有效优惠券数量" align="center">
-          <template slot-scope="scope">
+        <el-table-column prop="scrapyType" label="爬虫分类" align="center"></el-table-column>
+        <el-table-column prop="validCouponsCount" label="有效优惠券数量" align="center">
+        <!--  <template slot-scope="scope">
             <span>{{scope.row.couponNum}}/{{scope.row.couponNumTotal}}</span>
-          </template>
+          </template>-->
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
-        <el-table-column prop="lastUpdateTime" label="更新时间" align="center"></el-table-column>
-        <el-table-column prop="lastAddTime" label="优惠券最后新增时间" align="center"></el-table-column>
+        <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
+        <el-table-column prop="couponUpdateTime" label="优惠券最后新增时间" align="center"></el-table-column>
         <el-table-column align="center" label="操作">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="editorInfo(scope.row)">编辑</el-button>
@@ -92,7 +92,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination class="paginationStyle" background layout="total ,prev, pager, next" @current-change="storeChange" :total="tableData.pageTotal" :page-size="tableData.pageSize"></el-pagination>
+      <el-pagination class="paginationStyle" background layout="total ,prev, pager, next" @current-change="storeChange" :total="tableData.totalCount" :page-size="tableData.pageSize"></el-pagination>
     </section>
 
     <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券">
@@ -107,16 +107,15 @@
           </el-col>
         </el-form-item>
         <el-form-item label="　国家">
-          <el-select v-model="editorData.language" placeholder="请选择语言">
-            <el-option label="美国" value="english"></el-option>
-            <el-option label="中国" value="chinese"></el-option>
+          <el-select v-model="editorData.country" placeholder="请选择语言">
+            <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
       <div style="margin-bottom:15px;color: #606266;font-weight: bold;">　站点图片上传</div>
       <div style="text-align: center;">
         <el-upload class="avatar-uploader" :action="fileUrl" :show-file-list="false" :on-success="handleAvatarSuccess">
-          <img v-if="editorData.logoUrl" :src="editorData.logoUrl" class="avatar">
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">　提　交　</el-button>

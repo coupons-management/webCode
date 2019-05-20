@@ -6,35 +6,52 @@ export default {
   data(){
     return {
       searchForm: {//提交给后台的 查询条件
-        name: '',
-        typel: 'CODE',
+        title: '',
+        type: '',
         expired: 0,
-        scrapy:1,
+        scrapy:0,
         pageNumber:1,
-        pageSize:10
+        pageSize:10,
+        storeId:''
       },
-      tableData: [//从后台获取的数组
-        {id: '1', storeName: '商家1', couponName: '优惠券1', code: 'code', describe: '描述1', isPast: '2', pastTime: '2019-04-16',createTime:'2019-04-16'},
-        {id: '2', storeName: '商家2', couponName: '优惠券2', code: 'deal', describe: '描述2', isPast: '1', pastTime: '2019-04-16',createTime:'2019-04-16'},
-        {id: '3', storeName: '商家3', couponName: '优惠券3', code: 'code', describe: '描述3', isPast: '2', pastTime: '2019-04-16',createTime:'2019-04-16'}
-      ]
+      tableData: {}//从后台获取的数组
     }
   },
   mounted(){
-    this.initData();
+    if(this.currPageInfo){//查询商家下的优惠券
+      this.searchForm.storeId = this.currPageInfo;
+    }else{
+      this.initData();
+    }
+    this.searchForm.pageNumber = 1;
+    this.getTableList();
   },
   methods:{
+    couponChange(e){
+      this.searchForm.pageNumber = e;
+      this.getTableList();
+    },
     searchSubmit(){
+      this.searchForm.pageNumber = 1;
+      this.getTableList();
+    },
+    getTableList(){
       let _this = this;
-      console.log(this.searchForm);
-      _this.$sendData('post','coupon/getPage',_this.searchForm,(data,all)=>{//爬虫列表
-        console.log(data);
+      _this.$sendData('post','coupon/getPage',_this.searchForm,(data,all)=>{//爬虫优惠券列表
+        _this.tableData = data;
       });
+    }
+  },
+  watch:{
+    'currPageInfo':function(e){
+      this.searchForm.storeId = this.currPageInfo;
+      this.searchForm.pageNumber = 1;
+      this.getTableList();
     }
   },
   computed: {
     ...mapGetters([
-    'spiderList','couponTypeList','expiryList'
-  ])
-}
+      'spiderList','couponTypeList','expiryList'
+    ])
+  }
 }

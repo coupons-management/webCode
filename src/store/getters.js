@@ -11,6 +11,8 @@ const getters = {
   siteId: state => state.site.siteId,
   spiderList: state => state.site.spiderList,
   couponTypeList: state => state.site.couponTypeList,
+  countryList: state => state.site.countryList,
+  typeList: state => state.site.typeList,
   expiryList: state => state.site.expiryList
 }
 export default getters

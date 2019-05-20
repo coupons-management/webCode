@@ -3,14 +3,21 @@ const site = {
     siteId:false,
     spiderList:[],
     couponTypeList:[],
-    expiryList:[]
+    expiryList:[],
+    countryList:[],
+    typeList:[]
   },
   mutations: {
     setSiteId: (state, id) => {
       state.siteId = id
     },
+    setTypeList: (state, list) => {
+      state.typeList = list
+    },
+    setCountryList: (state, list) => {
+      state.countryList = list
+    },
     setSpiderList: (state, list) => {
-      console.log(list);
       state.spiderList = list
     },
     setCouponTypeList: (state, list) => {
@@ -23,6 +30,12 @@ const site = {
   actions: {
     setNavSiteId: ({ commit },id) => {
       commit('setSiteId',id)
+    },
+    setType: ({ commit },list) => {
+      commit('setTypeList',list)
+    },
+    setCountry: ({ commit },list) => {
+      commit('setCountryList',list)
     },
     setSpider: ({ commit },list) => {
       commit('setSpiderList',list)

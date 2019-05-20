@@ -45,7 +45,6 @@ Vue.prototype.$sendData = function(type,url, params, callback){
   axios[type](url, nparams).then((response) => {
     var all = response.data;
     var data = response.data.data;
-
     if(all.code==0){
       if(callback) callback(data, all);
     }else{
@@ -57,32 +56,3 @@ Vue.prototype.$sendData = function(type,url, params, callback){
     Message({message: '操作失败！', type: 'error'});
   });
 };
-/*Vue.prototype.$sendData = async function(){
-  let data = await function(){
-    axios.get(sessionStorage.axiosLocalUrl + "commons/getExpiryList?sessionKey="+sessionStorage.token).then(function(response) {
-      if (response.data.code == 200) {
-        return response.data.data;
-      }
-    });
-    Message({message: '操作成功！', type: 'success'});
-    return 123;
-  }();
-  return data;
-  /!*return new Promise((resolve,reject)=>{
-    resolve(
-      async function getStockPriceByName(name) {
-      const symbol = await getStockSymbol(name);
-      return symbol;
-    }())
-  })*!/
-
- /!* return new Promise((resolve,reject)=>{
-    let data;
-    axios.get(sessionStorage.axiosLocalUrl + "commons/getExpiryList?sessionKey="+sessionStorage.token).then(function(response) {
-      if (response.data.code == 200) {
-        data = response.data.data;
-        resolve(345)
-      }
-    });
-  })*!/
-};*/
