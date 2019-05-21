@@ -21,7 +21,7 @@ export default {
     if(this.currPageInfo){//查询商家下的优惠券
       this.searchForm.storeId = this.currPageInfo;
     }else{
-      this.initData();
+      this.initData(['spiderSite','couponType','expiry']);
     }
     this.searchForm.pageNumber = 1;
     this.getTableList();

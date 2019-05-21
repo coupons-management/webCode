@@ -28,6 +28,7 @@ export default {
             lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'}
         ]
       },
+      value6:'',
       editorData:{
         logoUrl:''
       },

@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted(){
-    this.initData();
+    this.initData(['spiderSite','country','spiderType']);
 
     this.searchForm.pageNumber = 1;
     this.getTableList();

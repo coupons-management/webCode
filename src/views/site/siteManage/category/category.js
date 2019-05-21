@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'siteCategory',
@@ -14,9 +15,15 @@ export default {
     }
   },
   mounted(){
-
+    this.getCateTree();
   },
   methods:{
+    getCateTree(){
+      let _this = this;
+      _this.$sendData('post','showSiteType/getTypeTree',{siteId:this.siteId},(data,all)=>{//爬虫优惠券列表
+
+      });
+    }
     /*editorCategory(e){//编辑 某个分类的匹配项
      let _this = this;
      _this.currCheckData = e;
@@ -29,5 +36,10 @@ export default {
      deleteCategory(){//删除站点某个分类
 
      },*/
+  },
+  computed: {
+    ...mapGetters([
+      'siteId'
+    ])
   }
 }

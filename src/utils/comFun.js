@@ -67,25 +67,30 @@ exports.install = function (Vue, options) {
     return result;
   };
 
-  Vue.prototype.initData = function(list){
+  Vue.prototype.initData = function(list){//spiderType spiderSite country couponType expiry
     let _this = this;
-    /*for(let i of list){
-
-    }*/
-    _this.$sendData('get','commons/getTypeList','',(data,all)=>{//爬虫分类列表
-      _this.$store.dispatch('setType', data);
-    });
-    _this.$sendData('get','commons/getCountryDict','',(data,all)=>{//国家列表
-      _this.$store.dispatch('setCountry', data);
-    });
-    _this.$sendData('get','commons/getSpiderList','',(data,all)=>{//爬虫列表
-      _this.$store.dispatch('setSpider', data);
-    });
-    _this.$sendData('get','commons/getCouponTypeList','',(data,all)=>{//优惠券类型
-      _this.$store.dispatch('setCouponType', data);
-    });
-    _this.$sendData('get','commons/getExpiryList','',(data,all)=>{//过期时间
-      _this.$store.dispatch('setExpiry', data);
-    })
+    for(let i = 0; i<list.length;i++){
+      if(list[i] == 'spiderType'){//爬虫分类列表
+        _this.$sendData('get','commons/getTypeList','',(data,all)=>{
+          _this.$store.dispatch('setType', data);
+        });
+      }else if(list[i] == 'country'){//国家列表
+        _this.$sendData('get','commons/getCountryDict','',(data,all)=>{
+          _this.$store.dispatch('setCountry', data);
+        });
+      }else if(list[i] == 'spiderSite'){//爬虫列表
+        _this.$sendData('get','commons/getSpiderList','',(data,all)=>{
+          _this.$store.dispatch('setSpider', data);
+        });
+      }else if(list[i] == 'couponType'){//优惠券类型
+        _this.$sendData('get','commons/getCouponTypeList','',(data,all)=>{
+          _this.$store.dispatch('setCouponType', data);
+        });
+      }else if(list[i] == 'expiry'){//过期时间
+        _this.$sendData('get','commons/getExpiryList','',(data,all)=>{
+          _this.$store.dispatch('setExpiry', data);
+        })
+      }
+    }
   };
 };
