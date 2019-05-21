@@ -20,7 +20,7 @@ export default {
   methods:{
     getCateTree(){
       let _this = this;
-      _this.$sendData('post','showSiteType/getTypeTree',{siteId:this.siteId},(data,all)=>{//爬虫优惠券列表
+      _this.$sendData('post','showSiteType/getTree',{siteId:this.siteId},(data,all)=>{//爬虫优惠券列表
 
       });
     }

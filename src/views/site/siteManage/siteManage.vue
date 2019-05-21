@@ -4,7 +4,7 @@
 
 <template>
   <section class="siteManagePage">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName" @tab-click="handleClick" v-if="showFlag">
 
       <el-tab-pane label="广告推荐" name="first">
         <advert></advert>
