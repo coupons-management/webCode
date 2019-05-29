@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       searchForm: {
-        siteId: '',
+        outId: '',
         country: '',
         typeId: '',
         mark: '',
@@ -39,6 +39,7 @@ export default {
         list: []
       },
       checkCouponsBox: false,
+      addStoreBox: false,
       editorStoreBox: false,
       currPageInfo: {
         pageName: 'siteStore',
@@ -73,7 +74,7 @@ export default {
   mounted() {
     //this.getStoreCate();
     this.initData(['country', 'couponType']);
-    this.searchForm.siteId = this.siteId;
+    this.searchForm.outId = this.siteId;
     this.getCatygory();
     this.getTableData();
   },
@@ -90,14 +91,26 @@ export default {
     },
     statInfo(item) {
       //报表
-      this.reportData.outId = item.outSiteId;
+      this.reportData.outId = this.siteId;
       this.getReport();
       this.reportBox = true;
+    },
+    addStore() {
+      //添加商家
+      console.log('add store');
+      this.editorData = {};
+      this.addStoreBox = true;
     },
     editorInfo(data) {
       //编辑
       this.editorData = this.deepClone(data);
-      this.editorStoreBox = true;
+      this.$sendData('post', 'showSiteTwo/getSiteStroreById', { id: data.id }, (data, all) => {
+        this.editorData = {
+          ...this.editorData,
+          ...data
+        };
+        this.editorStoreBox = true;
+      });
     },
     checkCoupons(item) {
       //查看优惠券
@@ -114,7 +127,7 @@ export default {
     },
     deleteStore(item) {
       //删除
-      this.$sendData('post', 'showSiteTwo/deleteSiteStore', { outId: item.outSiteId, storeId: item.storeId }, (data, all) => {
+      this.$sendData('post', 'showSiteTwo/deleteSiteStore', { id: item.id }, (data, all) => {
         this.getTableData();
         this.$message({ type: 'success', message: '操作成功！' });
       });
@@ -123,7 +136,21 @@ export default {
       this.searchForm.pageNumber = e;
       this.getTableData();
     },
-    editorSubmit() {},
+    addSubmit() {
+      //添加商家提交
+      // this.$sendData('post', 'showSiteTwo/deleteSiteStore', this.editorData, (data, all) => {
+      //   this.getTableData();
+      //   this.$message({ type: 'success', message: '添加成功！' });
+      // });
+    },
+    editorSubmit() {
+      //编辑商家提交
+      this.$sendData('post', 'showSiteTwo/updateSiteStore', this.editorData, (data, all) => {
+        this.getTableData();
+        this.editorStoreBox = false;
+        this.$message({ type: 'success', message: '编辑成功！' });
+      });
+    },
     handleAvatarSuccess(e) {
       this.editorData.logo = 'http://39.98.53.2:3332/backend_scrapy_site/' + e.data;
     },

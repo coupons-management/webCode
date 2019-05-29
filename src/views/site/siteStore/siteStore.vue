@@ -20,6 +20,7 @@
         </el-form-item>
         <el-form-item label="商家分类">
           <el-select v-model="searchForm.typeId" placeholder="请选择分类" style="width: 120px;">
+            <el-option label="全部" value></el-option>
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             <!-- <el-option label="分类1" value="1"></el-option> -->
             <!-- <el-option label="分类2" value="2"></el-option> -->
@@ -53,13 +54,18 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="searchSubmit">查询</el-button>
-            <el-button type="primary" @click="searchSubmit">新增</el-button>
+            <el-button type="primary" @click="addStore">新增</el-button>
           </el-form-item>
         </div>
       </el-form>
 
       <el-table :data="tableData.list" stripe style="width: 100%" border>
-        <el-table-column prop="id" label="id" align="center"></el-table-column>
+        <el-table-column prop="id" label="id" align="center">
+          <template slot-scope="scope">
+            {{scope.row.id}}
+            <input type="hidden" :value="scope.row.storeId">
+          </template>
+        </el-table-column>
         <el-table-column prop="storeName" label="商家名" align="center">
           <template slot-scope="scope">
             <router-link to="/websiteFir" target="_blank">
@@ -129,6 +135,78 @@
       ></el-pagination>
     </section>
 
+    <el-dialog :visible.sync="addStoreBox" class="editorStore" title="添加商家" width="60%" top="3%">
+      <el-form :model="editorData" size="small" label-width="140px" :inline="true">
+        <el-form-item label="商家名">
+          <el-input v-model="editorData.storeName" placeholder="请输入商家名"></el-input>
+        </el-form-item>
+        <el-form-item label="官网">
+          <el-input v-model="editorData.webSite"></el-input>
+        </el-form-item>
+        <el-form-item label="站点分类">
+          <el-select v-model="editorData.category" placeholder="请选择语言">
+            <el-option label="分类1" value="1"></el-option>
+            <el-option label="分类2" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="国家">
+          <el-select v-model="editorData.country" placeholder="请选择语言">
+            <el-option
+              v-for="countryItem in countryList"
+              :key="countryItem.key"
+              :value="countryItem.key"
+              :label="countryItem.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="广告地址">
+          <el-input v-model="editorData.adAddress"></el-input>
+        </el-form-item>
+        <el-form-item label="标签">
+          <el-select v-model="editorData.tags" multiple collapse-tags placeholder="请选择">
+            <el-option
+              v-for="item in tagList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="是否只显示人工增加优惠券" label-width="180px">
+          <el-radio v-model="editorData.isManual" label="1">是</el-radio>
+          <el-radio v-model="editorData.isManual" label="2">否</el-radio>
+        </el-form-item>
+        <el-form-item label="title">
+          <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.title"></el-input>
+        </el-form-item>
+        <el-form-item label="keywords">
+          <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.keywords"></el-input>
+        </el-form-item>
+        <el-form-item label="description">
+          <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.headerDes"></el-input>
+        </el-form-item>
+        <el-form-item label="商家展示名称">
+          <el-input type="textarea" placeholder="请输入内容" :rows="5" v-model="editorData.showName"></el-input>
+        </el-form-item>
+        <el-form-item label="商家介绍">
+          <el-input type="textarea" placeholder="请输入内容" :rows="5" v-model="editorData.storeDes"></el-input>
+        </el-form-item>
+      </el-form>
+      <div style="margin-bottom:15px;color: #606266;font-weight: bold;margin-left: 45px;">商家图片上传</div>
+      <div style="text-align: center">
+        <el-upload
+          class="avatar-uploader"
+          :action="fileUrl"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+        >
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <el-button type="primary" @click="addSubmit" style="margin-top:20px;">提 交</el-button>
+      </div>
+    </el-dialog>
     <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="60%" top="3%">
       <el-form :model="editorData" size="small" label-width="140px" :inline="true">
         <el-form-item label="id">

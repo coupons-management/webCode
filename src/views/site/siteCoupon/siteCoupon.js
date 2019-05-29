@@ -6,21 +6,7 @@ export default {
   data() {
     return {
       searchForm: {
-        //提交给后台的 查询条件
-      },
-      tableData: {}, //从后台获取的数组
-      editorCouponsBox: false,
-      editorData: {}
-    };
-  },
-  mounted() {
-    if (this.currPageInfo) {
-      //查询商家下的优惠券
-      this.searchForm = { storeId: this.currPageInfo.storeId, pageNumber: 1 };
-    } else {
-      this.initData(['dataSource', 'couponType', 'expiry', 'approval']);
-      this.searchForm = {
-        siteId: this.siteId,
+        siteId: '',
         search: '',
         couponType: '',
         expiry: 0,
@@ -28,7 +14,19 @@ export default {
         pageSize: 10,
         pageNumber: 1,
         state: ''
-      };
+      },
+      tableData: {}, //从后台获取的数组
+      editorCouponsBox: false,
+      editorData: {}
+    };
+  },
+  mounted() {
+    this.searchForm.siteId = this.siteId;
+    if (this.currPageInfo) {
+      //查询商家下的优惠券
+      this.searchForm.storeId = this.currPageInfo.storeId;
+    } else {
+      this.initData(['dataSource', 'couponType', 'expiry', 'approval']);
     }
     this.getTableData();
   },
