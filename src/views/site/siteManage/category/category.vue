@@ -41,13 +41,13 @@
       </section>
       <section class="bottomContent" v-if="secCateName">
         <section>
-          <el-col :span="6">
+          <el-col :span="10">
             <el-input placeholder="请输入内容" v-model="firCateName.name">
               <el-button slot="prepend">一级类名:</el-button>
               <el-button slot="append" @click="changeCateName(firCateName)">确定</el-button>
             </el-input>
           </el-col>
-          <el-col :span="6" :offset="1">
+          <el-col :span="10" :offset="1">
             <el-input placeholder="请输入内容" v-model="secCateName.name">
               <el-button slot="prepend">二级类名:</el-button>
               <el-button slot="append" @click="changeCateName(secCateName)">确定</el-button>

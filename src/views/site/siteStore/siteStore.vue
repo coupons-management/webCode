@@ -124,7 +124,7 @@
         background
         layout="total ,prev, pager, next"
         @current-change="storeChange"
-        :total="tableData.totalPage"
+        :total="tableData.totalCount"
         :page-size="tableData.pageSIze"
       ></el-pagination>
     </section>
