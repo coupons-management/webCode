@@ -1,31 +1,56 @@
 <style lang="scss" scoped>
-
 </style>
 
 <template>
-  <section  class="siteCouponPage">
-    <el-form v-if="!currPageInfo" :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
+  <section class="siteCouponPage">
+    <el-form
+      v-if="!currPageInfo"
+      :inline="true"
+      :model="searchForm"
+      class="demo-form-inline"
+      size="mini"
+    >
       <el-form-item label="关键字">
         <el-input v-model="searchForm.search" placeholder="请输入标题/商家"></el-input>
       </el-form-item>
       <el-form-item label="优惠券类型">
         <el-select v-model="searchForm.couponType" placeholder="优惠券类型" style="width: 150px;">
-          <el-option v-for="couponTypeItem in couponTypeList" :key="couponTypeItem.key" :value="couponTypeItem.key" :label="couponTypeItem.value"></el-option>
+          <el-option
+            v-for="couponTypeItem in couponTypeList"
+            :key="couponTypeItem.key"
+            :value="couponTypeItem.key"
+            :label="couponTypeItem.value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="是否过期">
         <el-select v-model="searchForm.expiry" placeholder="是否过期" style="width: 150px;">
-          <el-option v-for="expiryItem in expiryList" :key="expiryItem.key" :value="expiryItem.key" :label="expiryItem.value"></el-option>
+          <el-option
+            v-for="expiryItem in expiryList"
+            :key="expiryItem.key"
+            :value="expiryItem.key"
+            :label="expiryItem.value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="数据来源">
         <el-select v-model="searchForm.cteateType" placeholder="是否过期" style="width: 150px;">
-          <el-option v-for="sourceItem in dataSourceList" :key="sourceItem.key" :value="sourceItem.key" :label="sourceItem.value"></el-option>
+          <el-option
+            v-for="sourceItem in dataSourceList"
+            :key="sourceItem.key"
+            :value="sourceItem.key"
+            :label="sourceItem.value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="searchForm.state" placeholder="是否过期" style="width: 150px;">
-          <el-option v-for="approvalItem in approvalList" :key="approvalItem.key" :value="approvalItem.key" :label="approvalItem.value"></el-option>
+          <el-option
+            v-for="approvalItem in approvalList"
+            :key="approvalItem.key"
+            :value="approvalItem.key"
+            :label="approvalItem.value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <!--<el-form-item label="是否查看新增的优惠券">
@@ -60,7 +85,7 @@
       </el-table-column>
       <el-table-column prop="expiryTime" label="过期时间" align="center">
         <template slot-scope="scope">
-          <span>{{changeDate(scope.row.expiryTime)}}</span>
+          <span>{{!currPageInfo?changeDate(scope.row.expiryTime):changeDate(scope.row.expireAt)}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="state" label="状态" align="center">
@@ -83,11 +108,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination class="paginationStyle" background layout="total ,prev, pager, next" @current-change="couponChange" :total="tableData.totalCount" :page-size="tableData.pageSize"></el-pagination>
+    <el-pagination
+      class="paginationStyle"
+      background
+      layout="total ,prev, pager, next"
+      @current-change="couponChange"
+      :total="tableData.totalCount"
+      :page-size="tableData.pageSize"
+    ></el-pagination>
 
-    <el-dialog :visible.sync="editorCouponsBox" class="checkCoupons" title="编辑优惠券" width="400px">
+    <el-dialog :visible.sync="editorCouponsBox" class="checkCoupons" title="编辑优惠券" width="400px" :modal-append-to-body="false" append-to-body>
       <el-form :model="editorData" size="small" label-width="80px" label-position="left">
-
         <el-form-item label=" 现标题">
           <el-input v-model="editorData.currentTitle" placeholder="请输入名字"></el-input>
         </el-form-item>

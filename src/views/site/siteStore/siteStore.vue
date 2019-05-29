@@ -217,17 +217,20 @@
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券">
+    <el-dialog :visible.sync="checkCouponsBox" class="editorStore" width="60%" title="查看优惠券">
       <couponTable :currPageInfo="currPageInfo"></couponTable>
     </el-dialog>
 
     <el-dialog :visible.sync="addCouponBox" class="editorStore" title="新增优惠券" width="40%" top="3%">
       <el-form :model="couponItem" size="small" label-width="140px" :inline="true">
-        <el-form-item label="标题">
-          <el-input v-model="couponItem.title" placeholder="请输入标题"></el-input>
+        <el-form-item label="名称">
+          <el-input v-model="couponItem.name" placeholder="请输入名称"></el-input>
         </el-form-item>
-        <el-form-item label="code">
-          <el-select v-model="couponItem.couponType" placeholder="请选择类型">
+        <el-form-item label="优惠券码">
+          <el-input v-model="couponItem.code" placeholder="请输入code"></el-input>
+        </el-form-item>
+        <el-form-item label="类型">
+          <el-select v-model="couponItem.couponype" placeholder="请选择类型">
             <el-option
               v-for="couponTypeItem in couponTypeList"
               :key="couponTypeItem.key"
@@ -236,11 +239,14 @@
             ></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="标题">
+          <el-input v-model="couponItem.title" placeholder="请输入标题"></el-input>
+        </el-form-item>
         <el-form-item label="描述">
-          <el-input v-model="couponItem.description" placeholder="请输入描述"></el-input>
+          <el-input v-model="couponItem.des" placeholder="请输入描述"></el-input>
         </el-form-item>
         <el-form-item label="过期时间">
-          <el-date-picker v-model="couponItem.expiryTime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+          <el-date-picker v-model="couponItem.expireAt" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
       </el-form>
       <div style="text-align:center;">

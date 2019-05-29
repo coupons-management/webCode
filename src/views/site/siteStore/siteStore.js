@@ -101,17 +101,20 @@ export default {
     },
     checkCoupons(item) {
       //查看优惠券
-      this.currPageInfo = item.outSiteId;
+      this.currPageInfo = item;
       this.checkCouponsBox = true;
     },
-    addCoupon() {
+    addCoupon(item) {
       //新增优惠券
-      this.couponItem = {};
+      this.couponItem = {
+        storeId: item.storeId,
+        siteId: this.siteId
+      };
       this.addCouponBox = true;
     },
     deleteStore(item) {
       //删除
-      this.$sendData('post', 'showSiteCoupon/delete', { outId: item.outSiteId }, (data, all) => {
+      this.$sendData('post', 'showSiteTwo/deleteSiteStore', { outId: item.outSiteId, storeId: item.storeId }, (data, all) => {
         this.getTableData();
         this.$message({ type: 'success', message: '操作成功！' });
       });
@@ -142,7 +145,7 @@ export default {
       _this.$sendData('post', 'showSiteTwo/getStoreSort', { siteId: _this.siteId }, (data, all) => {});
     },
     couponSubmit() {
-      this.$sendData('post', '', this.couponItem, (data, all) => {
+      this.$sendData('post', 'coupon/create', this.couponItem, (data, all) => {
         this.addCouponBox = false;
       });
     },
