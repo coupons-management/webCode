@@ -16,7 +16,7 @@ export default {
   mounted() {
     if (this.currPageInfo) {
       //查询商家下的优惠券
-      this.searchForm = { outId: this.currPageInfo.outSiteId, storeId: this.currPageInfo.storeId, pageNumber: 1 };
+      this.searchForm = { storeId: this.currPageInfo.storeId, pageNumber: 1 };
     } else {
       this.initData(['dataSource', 'couponType', 'expiry', 'approval']);
       this.searchForm = {
@@ -80,20 +80,13 @@ export default {
     getTableData() {
       //获取优惠券列表
       let _this = this;
-      if (!this.currPageInfo) {
-        _this.$sendData('post', 'showSiteCoupon/getCouponPage', _this.searchForm, (data, all) => {
-          _this.tableData = data;
-        });
-      } else {
-        _this.$sendData('post', 'showSiteTwo/getCouponList', _this.searchForm, (data, all) => {
-          _this.tableData = data;
-        });
-      }
+      _this.$sendData('post', 'showSiteCoupon/getCouponPage', _this.searchForm, (data, all) => {
+        _this.tableData = data;
+      });
     }
   },
   watch: {
     currPageInfo: function(e) {
-      this.searchForm.outId = this.currPageInfo.outSiteId;
       this.searchForm.storeId = this.currPageInfo.storeId;
       this.searchForm.pageNumber = 1;
       this.getTableData();

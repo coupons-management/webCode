@@ -32,30 +32,30 @@
             <el-option label="标签2" value="2"></el-option>
           </el-select>
         </el-form-item>-->
-        <el-form-item label="商家类型">
-          <el-select v-model="searchForm.storeType" placeholder="请选择">
-            <el-option label="全部" value></el-option>
-            <el-option label="有新增优惠券的商家" value="0"></el-option>
-            <el-option label="无新增优惠券的商家" value="1"></el-option>
-            <el-option label="新增的商家" value="2"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label=" 有效优惠券范围">
           <el-input v-model="searchForm.range" placeholder="请输入数量"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-date-picker
-            v-model="searchForm.timer"
-            type="daterange"
-            range-separator="－"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          ></el-date-picker>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="searchSubmit">查询</el-button>
-          <el-button type="primary" @click="searchSubmit">新增</el-button>
-        </el-form-item>
+        <div>
+          <el-form-item label="商家类型">
+            <el-select v-model="searchForm.storeType" placeholder="请选择">
+              <el-option label="全部" value></el-option>
+              <el-option label="有新增优惠券的商家" value="0"></el-option>
+              <el-option label="无新增优惠券的商家" value="1"></el-option>
+              <el-option label="新增的商家" value="2"></el-option>
+            </el-select>
+            <el-date-picker
+              v-model="searchForm.timer"
+              type="daterange"
+              range-separator="－"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="searchSubmit">查询</el-button>
+            <el-button type="primary" @click="searchSubmit">新增</el-button>
+          </el-form-item>
+        </div>
       </el-form>
 
       <el-table :data="tableData.list" stripe style="width: 100%" border>
