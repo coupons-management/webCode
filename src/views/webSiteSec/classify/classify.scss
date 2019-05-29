@@ -1,0 +1,43 @@
+
+.classify{
+  >section{
+    padding: 10px 13%;
+  }
+  .classifyTitle{
+    text-align: center;
+    padding: 20px 0;
+    font-size: 22px;
+    background-color: white;
+  }
+
+  .TopCategories{
+    .CategoriesList{
+      display: flex;
+      flex-wrap: wrap;
+      background-color: white;
+      .borderStyle{
+        border-right: 1px solid #f0f0f0;
+      }
+      div{
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5px 0;
+        padding: 20px 0;
+        color: grey;
+        cursor: pointer;
+        i{
+          font-size: 25px;
+        }
+        span{
+          margin-top: 20px;
+        }
+      }
+      div:hover{
+        background-color: lightgrey;
+      }
+    }
+  }
+}

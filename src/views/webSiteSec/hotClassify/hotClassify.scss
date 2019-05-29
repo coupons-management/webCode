@@ -1,0 +1,51 @@
+
+.hotClassify{
+  >section{
+    padding: 10px 13%;
+  }
+  .hotClassifyTitle{
+    padding: 20px 0;
+    text-align: center;
+    font-size: 22px;
+    background-color: white;
+  }
+  .TopCoupons{
+    .couponsList{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 16px;
+      >div{
+        width: 46%;
+        margin: 10px 0;
+        padding: 20px 10px 20px 140px;
+        position: relative;
+        height: 100px;
+        background-color: white;
+        img{
+          width: 100px;
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          border: 1px solid #f0f0f0;
+          cursor: pointer;
+        }
+        .coupItem{
+          border-left: 2px solid #f0f0f0;
+          padding: 0 20px;
+          div:first-child{
+            margin-bottom: 20px;
+            cursor: pointer;
+          }
+          div:last-child{
+            display: inline-block;
+            background-color: orange;
+            padding: 7px  20px;
+            color: white;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

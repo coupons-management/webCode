@@ -1,0 +1,63 @@
+
+.webSiteSec{
+  min-width: 1400px;
+  background-color: rgb(235,239,242);
+  .topPart{
+    padding: 0 13%;
+    background-color: rgb(236,96,0);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    .el-input{
+      width: 40%;
+    }
+    >div{
+      margin-right: 5%;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  .contentPart{
+    min-height: 74vh;
+  }
+  .bottomPart{
+    margin-top: 20px;
+    height: 160px;
+    .bottomNav{
+      width: 100%;
+      height: 120px;
+      background-color: white;
+      padding: 0 13%;
+      display: flex;
+      align-items: center;
+      >div{
+        margin-right: 15%;
+        display: flex;
+        flex-direction: column;
+        span{
+          margin: 5px 0;
+          color: grey;
+          font-size: 14px;
+          cursor: pointer;
+        }
+        span:first-child{
+          color: #333;
+          font-size: 18px;
+        }
+      }
+      >div:last-child{
+        margin-right: 0;
+        width: 30%;
+      }
+    }
+    .bottomInfo{
+      height: 40px;
+      background-color: rgb(235,239,242);
+      padding: 0 13%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+  }
+}
