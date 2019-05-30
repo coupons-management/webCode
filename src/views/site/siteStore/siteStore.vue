@@ -310,7 +310,7 @@
           <el-input v-model="couponItem.code" placeholder="请输入code"></el-input>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select v-model="couponItem.couponype" placeholder="请选择类型">
+          <el-select v-model="couponItem.couponType" placeholder="请选择类型">
             <el-option
               v-for="couponTypeItem in couponTypeList"
               :key="couponTypeItem.key"
