@@ -18,17 +18,17 @@ export default {
       this.getCategory();
     },
     getStore() {
-      this.$sendData('post', 'storeAudit/getTopHotStroreList', { outId: this.siteId || 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /* this.siteId || */ 1 }, (data, all) => {
         this.storeList = data;
       });
     },
     getCoupon() {
-      this.$sendData('post', 'storeAudit/getTopAdviseCouponList', { outSiteId: this.siteId || 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
         this.couponList = data;
       });
     },
     getCategory() {
-      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: this.siteId || 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
         this.categoryList = data.splice(0, 20);
       });
     }
