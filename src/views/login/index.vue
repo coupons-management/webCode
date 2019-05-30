@@ -81,7 +81,7 @@ export default {
     }
   },
   mounted(){
-    sessionStorage.axiosLocalUrl = null;
+    sessionStorage.axiosLocalUrl = '';
   },
   methods: {
     registerSubmit(){
