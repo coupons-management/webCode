@@ -27,6 +27,7 @@ export default {
         list: []
       },
       editorData: {
+        tags: [],
         logo: ''
       },
       addCouponBox: false,
@@ -98,7 +99,9 @@ export default {
     addStore() {
       //添加商家
       console.log('add store');
-      this.editorData = {};
+      this.editorData = {
+        tags: []
+      };
       this.addStoreBox = true;
     },
     editorInfo(data) {

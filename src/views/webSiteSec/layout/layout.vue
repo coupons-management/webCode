@@ -13,8 +13,8 @@
         </template>
       </el-input>
 
-      <div @click="togglePage('classify')">STORES</div>
-      <div @click="togglePage('hotClassify')">CATEGORIES</div>
+      <div @click="togglePage('hotClassify')">STORES</div>
+      <div @click="togglePage('classify')">CATEGORIES</div>
     </section>
     <section class="contentPart">
       <HomePage v-show="webSitePageNav == 'homePage'"></HomePage>

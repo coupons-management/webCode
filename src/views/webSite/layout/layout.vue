@@ -47,7 +47,7 @@
         <span @click="goToPage('storePage')">STORES</span>
         <span @click="goToPage('categoryPage')">CATEGORIES</span>
         <span @click="goToPage('detailFirst')">TOP COUPONS</span>
-        <el-input placeholder="Search for stores,offers or brands"  v-model="input2" size="mini"><i slot="suffix" class="el-input__icon el-icon-search" style="cursor: pointer"></i></el-input>
+        <el-input placeholder="Search for stores,offers or brands"  v-model="input2" size="mini"><i slot="suffix" class="el-input__icon el-icon-search" style="cursor: pointer" @click="search"></i></el-input>
       </div>
     </section>
 

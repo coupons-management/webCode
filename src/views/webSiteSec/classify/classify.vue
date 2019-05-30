@@ -13,7 +13,7 @@
       <section class="CategoriesList">
         <div v-for="(item,index) in CategoriesList" :class="(index+1)%5==0?'':'borderStyle'">
           <i class="el-icon-tickets"></i>
-          <span>ShoppingMall</span>
+          <span>{{item.name}}</span>
         </div>
       </section>
     </section>

@@ -1,15 +1,18 @@
-
 export default {
-  name:'homePage',
-  data(){
+  name: 'homePage',
+  data() {
     return {
-      CategoriesList: [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
+      CategoriesList: []
+    };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: this.siteId || 1 }, (data, all) => {
+        this.CategoriesList = data;
+      });
     }
-  },
-  mounted(){
-
-  },
-  methods:{
-
   }
-}
+};
