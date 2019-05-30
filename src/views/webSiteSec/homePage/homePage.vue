@@ -9,12 +9,12 @@
       <section v-if="storeList&&storeList.length>0">
         <div
           class="item"
-          v-for="item in storeList"
-          :key="item"
-          :style="{backgroundImage: `url(${item.logo})`}"
+          v-for="(item,index) in storeList"
+          :key="index"
+          :style="{backgroundImage: `url(${item.logoUrl})`}"
         >
           <div class="cover"></div>
-          <div class="text">{{item.showName}}</div>
+          <div class="text">{{item.name}}</div>
         </div>
         <!-- <img v-for="item in storeList" :src="item.logo" :alt="item.showName"> -->
       </section>
@@ -23,11 +23,11 @@
     <section class="TopCoupons">
       <div>Top Coupons</div>
       <section class="couponsList" v-if="couponList&&couponList.length>0">
-        <div v-for="item in couponList" :key="item">
+        <div v-for="(item, index) in couponList" :key="index">
           <img src="static/imgs/nike.jpg">
           <div class="coupItem">
-            <div>Up to 30% Off End of Season Sale</div>
-            <div>Get Deal</div>
+            <div>{{item.name}}</div>
+            <div @click="goUrl(item.link)">Get Deal</div>
           </div>
         </div>
       </section>

@@ -50,6 +50,7 @@
               range-separator="－"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
+              value-format="yyyy-MM-DD" 
             ></el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -326,7 +327,7 @@
           <el-input v-model="couponItem.des" placeholder="请输入描述"></el-input>
         </el-form-item>
         <el-form-item label="过期时间">
-          <el-date-picker v-model="couponItem.expireAt" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="couponItem.expireAtTime" type="date" value-format="yyyy-MM-DD" placeholder="选择日期"></el-date-picker>
         </el-form-item>
       </el-form>
       <div style="text-align:center;">

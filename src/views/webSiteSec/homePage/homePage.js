@@ -31,6 +31,9 @@ export default {
       this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
         this.categoryList = data.splice(0, 20);
       });
+    },
+    goUrl(url) {
+      window.open(url);
     }
   }
 };

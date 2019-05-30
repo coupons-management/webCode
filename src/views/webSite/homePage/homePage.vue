@@ -20,7 +20,7 @@
       </div>
       <section class="storeList listStyle">
         <div v-for="item in storeList">
-          <img :src="item.logo" :alt="item.showName">
+          <img :src="item.logoUrl" :alt="item.name">
         </div>
       </section>
     </section>
@@ -35,7 +35,7 @@
             <img src="static/imgs/coupon.jpg" alt>
           </div>
           <div class="couponInfo">
-            <span style="font-size: 14px;">{{item.title}}</span>
+            <span style="font-size: 14px;">{{item.name}}</span>
             <div>
               <span>15 USED</span>
               <span>
