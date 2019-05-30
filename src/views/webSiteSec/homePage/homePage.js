@@ -29,7 +29,7 @@ export default {
     },
     getCategory() {
       this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: this.siteId || 1 }, (data, all) => {
-        this.categoryList = data;
+        this.categoryList = data.splice(0, 20);
       });
     }
   }

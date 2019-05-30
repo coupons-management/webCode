@@ -112,7 +112,7 @@ export default {
       });
     },
     getPopular() {
-      this.$sendData('post', 'storeAudit/getPopularStoresList', { outSiteId: this.siteId || 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getPopularStoresList', { outSiteId: this.siteId || 1 }, (data, all) => {
         this.popularList = data;
       });
     },
