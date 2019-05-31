@@ -13,16 +13,31 @@
   .topStores {
     section {
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
+      flex-wrap: wrap;
+      overflow: hidden;
       .item {
         position: relative;
-        width: 150px;
-        height: 150px;
+        margin: 10px 1%;
+        flex: 0 0 18%;
+        // padding-top: 100%;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         overflow: hidden;
         border: 1px solid #ededed;
+        .pic {
+          width: 100%;
+          padding-top: 100%;
+        }
+        img {
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          max-width: 90%;
+          transform: translate(-50%, -50%);
+        }
         .cover {
           position: absolute;
           top: 0;

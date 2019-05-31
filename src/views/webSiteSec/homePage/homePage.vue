@@ -7,12 +7,10 @@
     <section class="topStores">
       <div>Top Stores</div>
       <section v-if="storeList&&storeList.length>0">
-        <div
-          class="item"
-          v-for="(item,index) in storeList"
-          :key="index"
-          :style="{backgroundImage: `url(${item.logoUrl})`}"
-        >
+        <div class="item" v-for="(item,index) in storeList" :key="index">
+          <div class="pic">
+            <img :src="item.logoUrl" alt>
+          </div>
           <div class="cover"></div>
           <div class="text">{{item.name}}</div>
         </div>
