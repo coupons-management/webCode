@@ -116,9 +116,23 @@ export default {
         this.popularList = data;
       });
     },
+    goCoupon(item) {
+      window.open(item.link);
+    },
+    goStore(item) {
+      this.$router.push(`/websiteFir/detailFirst/1`);
+    },
+    goCategory(item) {
+      this.$router.push(`/websiteSec/detailFirst/1`);
+    },
     search() {
       console.log(this.input2);
-      this.$parent.goToPage('searchPage');
+      this.$parent.goToPage('searchPage', this.input2);
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.getData();
     }
   }
 };

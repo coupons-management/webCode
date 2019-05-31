@@ -2,29 +2,38 @@ export default {
   name: 'homePage',
   data() {
     return {
-      storeList: [
-        { img: '', name: '图片1' },
-        { img: '', name: '图片2' },
-        { img: '', name: '图片3' },
-        { img: '', name: '图片4' },
-        { img: '', name: '图片5' },
-        { img: '', name: '图片6' },
-        { img: '', name: '图片7' },
-        { img: '', name: '图片8' },
-        { img: '', name: '图片9' },
-        { img: '', name: '图片10' }
-      ],
-      couponList: [
-        { img: '', name: '图片1' },
-        { img: '', name: '图片2' },
-        { img: '', name: '图片3' },
-        { img: '', name: '图片4' },
-        { img: '', name: '图片5' },
-        { img: '', name: '图片6' },
-        { img: '', name: '图片7' },
-        { img: '', name: '图片8' }
-      ]
+      storeList: [],
+      couponList: []
     };
   },
-  methods: {}
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      this.getStore();
+      this.getCoupon();
+    },
+    getStore() {
+      this.$sendData('post', 'officialWebsite/getTopStoreList', { name: this.$route.query.search, siteId: /*this.siteId || */ 2 }, (data, all) => {
+        this.storeList = data;
+      });
+    },
+    getCoupon() {
+      this.$sendData('post', 'officialWebsite/getTopCouponList', { name: this.$route.query.search, outSiteId: /*this.siteId || */ 2 }, (data, all) => {
+        this.couponList = data;
+      });
+    },
+    goCoupon(item) {
+      window.open(item.link);
+    },
+    goStore(item) {
+      this.$router.push(`/websiteFir/detailFirst/1`);
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.getData();
+    }
+  }
 };

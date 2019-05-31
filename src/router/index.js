@@ -236,8 +236,76 @@ export const constantRouterMap = [
 ]
 },*/
 
-  { path: '/websiteFir', component: () => import('@/views/webSite/layout/layout.vue'), hidden: true },
-  { path: '/websiteSec', component: () => import('@/views/webSiteSec/layout/layout.vue'), hidden: true },
+  {
+    path: '/websiteFir',
+    component: () => import('@/views/webSite/layout/layout.vue'),
+    hidden: true,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/webSite/homePage/homePage.vue')
+      },
+      {
+        path: 'searchPage',
+        component: () => import('@/views/webSite/searchPage/searchPage.vue')
+      },
+      {
+        path: 'categoryPage',
+        component: () => import('@/views/webSite/categoryPage/categoryPage.vue')
+      },
+      {
+        path: 'storePage',
+        component: () => import('@/views/webSite/storePage/storePage.vue')
+      },
+      {
+        path: 'detailFirst/:id',
+        component: () => import('@/views/webSite/couponsDetail/detailFirst.vue')
+      },
+      {
+        path: 'aboutUs',
+        component: () => import('@/views/webSite/aboutUs/aboutUs.vue')
+      },
+      {
+        path: 'contactUs',
+        component: () => import('@/views/webSite/contactUs/contactUs.vue')
+      }
+    ]
+  },
+  {
+    path: '/websiteSec',
+    component: () => import('@/views/webSiteSec/layout/layout.vue'),
+    hidden: true,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/webSiteSec/homePage/homePage.vue')
+      },
+      {
+        path: 'classify',
+        component: () => import('@/views/webSiteSec/classify/classify.vue')
+      },
+      {
+        path: 'hotClassify/:id',
+        component: () => import('@/views/webSiteSec/hotClassify/hotClassify.vue')
+      },
+      {
+        path: 'storePage',
+        component: () => import('@/views/webSiteSec/storePage/storePage.vue')
+      },
+      {
+        path: 'hotStores/:id',
+        component: () => import('@/views/webSiteSec/hotStores/hotStores.vue')
+      },
+      {
+        path: 'aboutUs',
+        component: () => import('@/views/webSiteSec/aboutUs/aboutUs.vue')
+      },
+      {
+        path: 'contactUs',
+        component: () => import('@/views/webSiteSec/contactUs/contactUs.vue')
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ];
 

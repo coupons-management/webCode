@@ -18,22 +18,51 @@ export default {
       this.getCategory();
     },
     getStore() {
-      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /* this.siteId || */ 1 }, (data, all) => {
-        this.storeList = data;
-      });
+      if (this.$route.query.search) {
+        this.$sendData('post', 'officialWebsite/getTopStoreList', { name: this.$route.query.search, siteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.storeList = data;
+        });
+      } else {
+        this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.storeList = data;
+        });
+      }
     },
     getCoupon() {
-      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
-        this.couponList = data;
-      });
+      if (this.$route.query.search) {
+        this.$sendData('post', 'officialWebsite/getTopCouponList', { name: this.$route.query.search, outSiteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.couponList = data;
+        });
+      } else {
+        this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.couponList = data;
+        });
+      }
     },
     getCategory() {
-      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
-        this.categoryList = data.splice(0, 20);
-      });
+      if (this.$route.query.search) {
+        this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.categoryList = data.splice(0, 20);
+        });
+      } else {
+        this.$sendData('post', 'officialWebsite/getCategoriesList', { name: this.$route.query.search, outSiteId: /* this.siteId || */ 1 }, (data, all) => {
+          this.categoryList = data.splice(0, 20);
+        });
+      }
     },
     goUrl(url) {
       window.open(url);
+    },
+    goStore(item) {
+      this.$router.push(`/websiteSec/hotStores/${item.webSite}`);
+    },
+    goCategory(item) {
+      this.$router.push(`/websiteSec/hotClassify/1`);
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.getData();
     }
   }
 };

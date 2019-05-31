@@ -9,16 +9,19 @@ export default {
   name: 'homePage',
   data() {
     return {
-      searchInput: '',
+      searchInput: this.$route.query.search || '',
       webSitePageNav: 'homePage' //homePage  classify  hotClassify  hotStores
     };
   },
   mounted() {},
   methods: {
     togglePage(page) {
-      this.webSitePageNav = page;
-      if (page === 'hotStores') {
-        console.log(this.searchInput);
+      if (page === 'homePage') {
+        this.$router.push('/websiteSec');
+      } else if (page === 'homePage2') {
+        this.searchInput ? this.$router.push(`/websiteSec?search=${this.searchInput}`) : this.$router.push('/websiteSec');
+      } else {
+        this.$router.push(`/websiteSec/${page}`);
       }
     }
   }

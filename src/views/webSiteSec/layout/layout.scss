@@ -1,58 +1,63 @@
-
-.webSiteSec{
+.webSiteSec {
   min-width: 1400px;
-  background-color: rgb(235,239,242);
-  .topPart{
+  background-color: rgb(235, 239, 242);
+  .topPart {
     padding: 0 13%;
-    background-color: rgb(236,96,0);
+    background-color: rgb(236, 96, 0);
     height: 70px;
     display: flex;
     align-items: center;
-    .el-input{
+    .el-input {
       width: 40%;
     }
-    >div{
+    .topPart-item {
+      display: block;
+      margin-right: 5%;
+      color: white;
+      cursor: pointer;
+    }
+    > div {
       margin-right: 5%;
       color: white;
       cursor: pointer;
     }
   }
-  .contentPart{
+  .contentPart {
     min-height: 74vh;
   }
-  .bottomPart{
+  .bottomPart {
     margin-top: 20px;
     height: 160px;
-    .bottomNav{
+    .bottomNav {
       width: 100%;
       height: 120px;
       background-color: white;
       padding: 0 13%;
       display: flex;
       align-items: center;
-      >div{
+      > div {
         margin-right: 15%;
         display: flex;
         flex-direction: column;
-        span{
+        span {
           margin: 5px 0;
           color: grey;
           font-size: 14px;
           cursor: pointer;
         }
-        span:first-child{
+        span:first-child {
           color: #333;
           font-size: 18px;
         }
       }
-      >div:last-child{
+      > div:last-child {
         margin-right: 0;
         width: 30%;
       }
     }
-    .bottomInfo{
+    .bottomInfo {
       height: 40px;
-      background-color: rgb(235,239,242);
+      background-color: rgb(235, 239, 242);
       padding: 0 13%;
       display: flex;
       align-items: center;

@@ -7,12 +7,19 @@
       <!--<section class="categoryList listStyle">
         <div v-for="item in categoryList">{{item.name}}</div>
       </section>-->
-      <section class="popularList listStyle">
-        <div v-for="item in storeList">{{item.showName}}</div>
+      <section class="storePage listStyle">
+        <div v-for="item in storeData.list" @click="goStore(item)">
+          <div class="pic"></div>
+          <img :src="item.logoUrl" alt>
+        </div>
       </section>
 
       <div style="text-align: center;margin-top: 15px;">
-        <el-pagination layout="total, prev, pager, next" :total="1000"></el-pagination>
+        <el-pagination
+          layout="total, prev, pager, next"
+          :total="storeData.totalCount"
+          @current-change="changePage"
+        ></el-pagination>
       </div>
     </section>
   </section>
@@ -23,62 +30,48 @@ export default {
   name: "homePage",
   data() {
     return {
-      categoryList: [
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" },
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" },
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" }
-      ],
-      storeList: [
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" },
-        { name: "Amazon" }
+      storeData: {
+        pageNumber: 1,
+        pageSize: 10
+      },
+      wordsList: [
+        "TOP",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
       ]
     };
   },
@@ -89,12 +82,23 @@ export default {
     getData() {
       this.$sendData(
         "post",
-        "storeAudit/getTopHotStroreList",
-        { outId: this.$route.query.id || 1 },
+        "officialWebsite/getStorePageList",
+        {
+          siteId: /* this.siteId || */ 1,
+          pageNumber: this.storeData.pageNumber,
+          pageSize: this.storeData.pageSize
+        },
         (data, all) => {
-          this.storeList = data;
+          this.storeData = data;
         }
       );
+    },
+    goStore(item) {
+      this.$router.push("/websiteFir/detailFirst/1");
+    },
+    changePage(e) {
+      this.storeData.pageNumber = e;
+      this.getData();
     }
   }
 };

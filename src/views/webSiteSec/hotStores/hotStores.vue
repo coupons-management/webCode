@@ -37,7 +37,7 @@
               v-for="item in typeList"
               @click="toggleNav(item)"
             >
-              <span>{{item.name}} {{item.num}}</span>
+              <span>{{item.name}}</span>
             </div>
           </section>
           <div>
@@ -56,10 +56,10 @@
                 <span
                   :class="item.titleState == 'DEAL'?'titleBtn dealBtn':'titleBtn codeBtn'"
                 >{{item.titleState}}</span>
-                <span class="coupTitle">Up to 30% Off End Of Season Sale</span>
+                <span class="coupTitle">{{item.title}}</span>
               </div>
               <div>
-                <span>Grab this fantastic offer and get Up to 30% Off End Of Season Sale.</span>
+                <span>{{item.name}}</span>
               </div>
               <div class="coupBottom">
                 <div>
@@ -81,7 +81,7 @@
               </div>
             </section>
             <section>
-              <div class="activeBtn">GET DEAL</div>
+              <div class="activeBtn" @click="goCoupon(item)">GET DEAL</div>
             </section>
           </section>
         </section>
@@ -96,10 +96,10 @@
             <section>
               <div>
                 <span class="titleBtn">DEAL</span>
-                <span class="coupTitle">Up to 30% Off End Of Season Sale</span>
+                <span class="coupTitle">{{item.title}}</span>
               </div>
               <div>
-                <span>Grab this fantastic offer and get Up to 30% Off End Of Season Sale.</span>
+                <span>{{item.name}}</span>
               </div>
               <div class="coupBottom">
                 <div>
@@ -130,16 +130,21 @@
       <section class="contentRight">
         <section class="rightTop">
           <div>Top Coupons</div>
-          <div>
+          <div
+            v-for="(item, index) in couponList"
+            :key="index"
+            class="item"
+            @click="goCoupon(item)"
+          >
             <i class="el-icon-tickets"></i>
-            <span>20% Off Your Order</span>
+            <span>{{item.name}}</span>
           </div>
         </section>
         <section class="rightStore">
           <div>Top Stores</div>
           <section class="rightStoreList">
-            <div v-for="item in rightStoreList">
-              <img src="static/imgs/nike.jpg">
+            <div v-for="(item, index) in rightStoreList" @click="goStore(item)" :key="index">
+              <img :src="item.logoUrl">
             </div>
           </section>
         </section>

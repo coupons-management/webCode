@@ -1,10 +1,10 @@
 <style scoped lang="scss">
- @import './layout.scss';
+@import "./layout.scss";
 </style>
 <template>
   <section class="pageStyle" style="height: 100vh;">
     <section class="topNav">
-      <img src="static/imgs/logo1.jpg" @click="goToPage('homePage')" style="cursor: pointer"/>
+      <img src="static/imgs/logo1.jpg" @click="goToPage('homePage')" style="cursor: pointer">
       <!--<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <el-submenu index="1">
           <template slot="title">STROES</template>
@@ -46,8 +46,15 @@
       <div class="topBtns">
         <span @click="goToPage('storePage')">STORES</span>
         <span @click="goToPage('categoryPage')">CATEGORIES</span>
-        <span @click="goToPage('detailFirst')">TOP COUPONS</span>
-        <el-input placeholder="Search for stores,offers or brands"  v-model="input2" size="mini"><i slot="suffix" class="el-input__icon el-icon-search" style="cursor: pointer" @click="search"></i></el-input>
+        <span @click="goToPage('detailFirst/1')">TOP COUPONS</span>
+        <el-input placeholder="Search for stores,offers or brands" v-model="input2" size="mini">
+          <i
+            slot="suffix"
+            class="el-input__icon el-icon-search"
+            style="cursor: pointer"
+            @click="search"
+          ></i>
+        </el-input>
       </div>
     </section>
 
@@ -57,24 +64,26 @@
       <div>Clothes</div>
       <div style="font-size: 14px;">In the summer holiday day,I like eating watermelon.</div>
     </section>-->
-    <section class="topText" style="text-align: left;">
-
-    </section>
+    <section class="topText" style="text-align: left;"></section>
     <!--<section class="wordsList"><span v-for="word in wordsList">{{word}}</span></section>-->
-    <homePage v-show="showPage.homePage"></homePage>
-    <searchPage v-show="showPage.searchPage"></searchPage>
-    <aboutUs v-show="showPage.aboutUs"></aboutUs>
-    <categoryPage v-show="showPage.categoryPage"></categoryPage>
-    <storePage v-show="showPage.storePage"></storePage>
-    <detailFirst v-show="showPage.detailFirst"></detailFirst>
+    <div class="website-page">
+      <router-view>
+        <!-- <homePage v-show="showPage.homePage"></homePage>
+      <searchPage v-show="showPage.searchPage"></searchPage>
+      <aboutUs v-show="showPage.aboutUs"></aboutUs>
+      <categoryPage v-show="showPage.categoryPage"></categoryPage>
+      <storePage v-show="showPage.storePage"></storePage>
+        <detailFirst v-show="showPage.detailFirst"></detailFirst>-->
+      </router-view>
+    </div>
 
     <section class="bottomNav">
-      <img src="static/imgs/logo1.jpg"/>
+      <img src="static/imgs/logo1.jpg">
       <section>
         <div>
           <span>DISCOUNTMM</span>
           <span @click="goToPage('aboutUs')">About us</span>
-          <span @click="goToPage('aboutUs')">Contact us</span>
+          <span @click="goToPage('contactUs')">Contact us</span>
         </div>
         <div>
           <span>SITEMAP</span>

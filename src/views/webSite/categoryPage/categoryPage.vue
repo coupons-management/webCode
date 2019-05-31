@@ -5,8 +5,16 @@
   <section class="pageStyle">
     <section class="topCategories">
       <section class="categoryList listStyle">
-        <div v-for="item in categoryList">{{item.name}}</div>
+        <div v-for="item in categoryData.list" @click="goCategory(item)">{{item.name}}</div>
       </section>
+      <div style="text-align: center;margin-top: 15px;">
+        <el-pagination
+          background
+          layout="total, prev, pager, next"
+          :total="categoryData.totalCount"
+          @current-change="changePage"
+        ></el-pagination>
+      </div>
     </section>
   </section>
 </template>
@@ -16,26 +24,10 @@ export default {
   name: "homePage",
   data() {
     return {
-      categoryList: [
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" },
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" },
-        { img: "", name: "图片1" },
-        { img: "", name: "图片2" },
-        { img: "", name: "图片3" },
-        { img: "", name: "图片4" },
-        { img: "", name: "图片5" },
-        { img: "", name: "图片6" }
-      ]
+      categoryData: {
+        pageNumber: 1,
+        pageSize: 10
+      }
     };
   },
   mounted() {
@@ -45,12 +37,24 @@ export default {
     getData() {
       this.$sendData(
         "post",
-        "officialWebsite/getCategoriesList",
-        { outSiteId: this.$route.query.id || 1 },
+        "officialWebsite/getCategoriesPageList",
+        {
+          outSiteId: this.siteId || 1,
+          pageNumber: this.categoryData.pageNumber,
+          pageSize: this.categoryData.pageSize
+        },
         (data, all) => {
-          this.categoryList = data;
+          this.categoryData = data;
         }
       );
+    },
+    goCategory(item) {
+      console.log(item);
+      this.$router.push(`/websiteFir/detailFirst/1`);
+    },
+    changePage(e) {
+      this.categoryData.pageNumber = e;
+      this.getData();
     }
   }
 };

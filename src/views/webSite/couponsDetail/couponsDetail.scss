@@ -1,41 +1,42 @@
-.detailFirst{
+.detailFirst {
   display: flex;
+  margin-top: 20px;
   padding-bottom: 160px;
-  .leftPart{
+  .leftPart {
     width: 21%;
     margin-right: 2%;
     display: flex;
     flex-direction: column;
-    >section {
+    > section {
       width: 100%;
     }
-    .allNum{
+    .allNum {
       padding: 15px 20px;
       background-color: white;
     }
-    .treeForCoup{
+    .treeForCoup {
       margin: 10px 0;
       background-color: white;
-      padding: 15px 0 15px 20px ;
-      >div:first-child{
+      padding: 15px 0 15px 20px;
+      > div:first-child {
         font-size: 20px;
         border-bottom: 1px solid grey;
         padding-bottom: 15px;
       }
-      >div:nth-child(2){
+      > div:nth-child(2) {
         margin: 10px 0;
       }
     }
-    .top20{
+    .top20 {
       background-color: white;
       margin: 10px 0;
       padding: 15px 20px;
-      >div:first-child{
+      > div:first-child {
         font-size: 20px;
         padding-bottom: 15px;
         color: black;
       }
-      div{
+      div {
         margin: 7px 0;
         font-size: 14px;
         cursor: pointer;
@@ -43,12 +44,12 @@
       }
     }
   }
-  .rightPart{
+  .rightPart {
     width: 77%;
     display: flex;
     flex-direction: column;
-    .rightTools{
-      >div{
+    .rightTools {
+      > div {
         padding: 8px 15px;
         display: inline-block;
         margin: 0 10px;
@@ -57,11 +58,10 @@
         font-size: 14px;
         cursor: pointer;
       }
-      .buttonActive{
-        background-color: rgb(55,111,24);
+      .buttonActive {
+        background-color: rgb(55, 111, 24);
         color: white;
       }
     }
   }
 }
-

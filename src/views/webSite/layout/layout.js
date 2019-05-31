@@ -69,16 +69,23 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    goToPage(type) {
-      let data = this.showPage;
-      for (let i in data) {
-        data[i] = false;
+    goToPage(type, value) {
+      // let data = this.showPage;
+      // for (let i in data) {
+      //   data[i] = false;
+      // }
+      // this.showPage[type] = true;
+      if (type === 'homePage') {
+        this.$router.push(`/websiteFir`);
+      } else if (type === 'searchPage') {
+        this.$router.push(`/websiteFir/searchPage?search=${value}`);
+      } else {
+        this.$router.push(`/websiteFir/${type}`);
       }
-      this.showPage[type] = true;
     },
     search() {
       console.log(this.input2);
-      this.goToPage('searchPage')
+      this.goToPage('searchPage', this.input2);
     }
   }
 };

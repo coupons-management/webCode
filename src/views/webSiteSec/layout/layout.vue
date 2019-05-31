@@ -11,7 +11,7 @@
 
       <el-input placeholder="Search for stores,offers or brands" v-model="searchInput" size="small">
         <template slot="append">
-          <el-button slot="append" icon="el-icon-search" @click="togglePage('hotStores')"></el-button>
+          <el-button slot="append" icon="el-icon-search" @click="togglePage('homePage2')"></el-button>
         </template>
       </el-input>
 
@@ -19,11 +19,13 @@
       <div @click="togglePage('classify')">CATEGORIES</div>
     </section>
     <section class="contentPart">
-      <HomePage v-show="webSitePageNav == 'homePage'"></HomePage>
-      <Classify v-show="webSitePageNav == 'classify'"></Classify>
-      <HotClassify v-show="webSitePageNav == 'hotClassify'"></HotClassify>
-      <HotStores v-show="webSitePageNav == 'hotStores'"></HotStores>
-      <StorePage v-show="webSitePageNav == 'storePage'"></StorePage>
+      <router-view>
+        <!-- <HomePage v-show="webSitePageNav == 'homePage'"></HomePage> -->
+        <!-- <Classify v-show="webSitePageNav == 'classify'"></Classify> -->
+        <!-- <HotClassify v-show="webSitePageNav == 'hotClassify'"></HotClassify> -->
+        <!-- <HotStores v-show="webSitePageNav == 'hotStores'"></HotStores> -->
+        <!-- <StorePage v-show="webSitePageNav == 'storePage'"></StorePage> -->
+      </router-view>
     </section>
 
     <section class="bottomPart">
@@ -33,13 +35,13 @@
         </div>
         <div>
           <span>DISCOUNTMM</span>
-          <span>About us</span>
-          <span>Contact us</span>
+          <span @click="goToPage('aboutUs')">About us</span>
+          <span @click="goToPage('contactUs')">Contact us</span>
         </div>
         <div>
           <span>SITEMAP</span>
-          <span>Home</span>
-          <span>Stores</span>
+          <span @click="goToPage('homePage')">Home</span>
+          <span @click="goToPage('storePage')">Stores</span>
         </div>
         <div>
           <span>OUR CONTACTS</span>

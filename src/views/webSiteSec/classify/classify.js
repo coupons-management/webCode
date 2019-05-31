@@ -2,7 +2,7 @@ export default {
   name: 'homePage',
   data() {
     return {
-      CategoriesList: []
+      categoryData: []
     };
   },
   mounted() {
@@ -10,9 +10,17 @@ export default {
   },
   methods: {
     getData() {
-      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: this.siteId || 1 }, (data, all) => {
-        this.CategoriesList = data;
+      this.$sendData('post', 'officialWebsite/getCategoriesPageList', { outSiteId: this.siteId || 1 }, (data, all) => {
+        this.categoryData = data;
       });
+    },
+    goCategory(item) {
+      console.log(item);
+      this.$router.push(`/websiteSec/hotClassify/${item.id}`);
+    },
+    changePage(e) {
+      this.categoryData.pageNumber = e;
+      this.getData();
     }
   }
 };

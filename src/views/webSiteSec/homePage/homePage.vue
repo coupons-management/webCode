@@ -7,7 +7,7 @@
     <section class="topStores">
       <div>Top Stores</div>
       <section v-if="storeList&&storeList.length>0">
-        <div class="item" v-for="(item,index) in storeList" :key="index">
+        <div class="item" v-for="(item,index) in storeList" :key="index" @click="goStore(item)">
           <div class="pic">
             <img :src="item.logoUrl" alt>
           </div>
@@ -22,7 +22,7 @@
       <div>Top Coupons</div>
       <section class="couponsList" v-if="couponList&&couponList.length>0">
         <div v-for="(item, index) in couponList" :key="index">
-          <img src="static/imgs/nike.jpg">
+          <img :src="item.storeLogo">
           <div class="coupItem">
             <div>{{item.name}}</div>
             <div @click="goUrl(item.link)">Get Deal</div>
@@ -38,6 +38,7 @@
           v-for="(item,index) in categoryList"
           :key="index"
           :class="(index+1)%5==0?'':'borderStyle'"
+          @click="goCategory(item)"
         >
           <i class="el-icon-tickets"></i>
           <span>{{item.name}}</span>

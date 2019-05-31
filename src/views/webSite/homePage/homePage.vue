@@ -19,7 +19,8 @@
         <i>TOP STORES</i>
       </div>
       <section class="storeList listStyle">
-        <div v-for="item in storeList">
+        <div v-for="item in storeList" @click="goStore(item)">
+          <div class="pic"></div>
           <img :src="item.logoUrl" :alt="item.name">
         </div>
       </section>
@@ -29,10 +30,10 @@
         <i>TOP COUPONS</i>
       </div>
       <section class="couponList listStyle">
-        <div v-for="item in couponList" class="itemCoupons">
+        <div v-for="item in couponList" class="itemCoupons" @click="goCoupon(item)">
           <div class="couponImg">
             <div>CODE</div>
-            <img src="static/imgs/coupon.jpg" alt>
+            <img :src="item.storeLogo" alt>
           </div>
           <div class="couponInfo">
             <span style="font-size: 14px;">{{item.name}}</span>

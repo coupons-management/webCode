@@ -1,61 +1,61 @@
-.pageStyle{
+.pageStyle {
   min-width: 1400px;
   position: relative;
-  .topNav{
+  .topNav {
     background-color: white;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
 
-    img{
+    img {
       width: 120px;
       height: 40px;
     }
-    .el-menu--horizontal{
+    .el-menu--horizontal {
       width: 700px;
       display: inline-block;
       float: right;
       border: 0;
     }
-    .el-input{
+    .el-input {
       width: 35%;
     }
-    .el-menu--horizontal>.el-submenu .el-submenu__title{
+    .el-menu--horizontal > .el-submenu .el-submenu__title {
       color: #000 !important;
     }
   }
-  .topBtns{
+  .topBtns {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
-    >span{
+    > span {
       margin-left: 20px;
     }
-    >span:nth-child(3){
+    > span:nth-child(3) {
       width: 140px;
     }
   }
 
-  .topText{
-    background:linear-gradient(to left,rgb(80,168,81),rgb(72,149,93));
+  .topText {
+    background: linear-gradient(to left, rgb(80, 168, 81), rgb(72, 149, 93));
     padding: 20px 10%;
     font-size: 20px;
     color: white;
     text-align: center;
   }
 
-  .wordsList{
+  .wordsList {
     background-color: white;
     padding: 10px 0;
     text-align: center;
-    span{
+    span {
       padding: 0 7px;
       cursor: pointer;
     }
   }
 
-  .bottomText{
+  .bottomText {
     text-align: center;
     padding: 20px 0;
     font-size: 12px;
@@ -65,7 +65,7 @@
     width: 100%;
   }
 
-  .bottomNav{
+  .bottomNav {
     box-shadow: 0 -2px 2px #cec8c8;
     //position: fixed;
     //bottom: 50px;
@@ -73,29 +73,31 @@
     overflow: hidden;
     margin-top: 15px;
     background-color: white;
-    img{
+    img {
       width: 120px;
       height: 40px;
     }
-    section{
+    section {
       width: 70%;
       float: right;
       display: flex;
-      div{
+      div {
         width: 33.33%;
         display: flex;
         flex-direction: column;
-        span{
+        span {
           color: grey;
           margin: 5px 0;
           font-size: 12px;
           cursor: pointer;
         }
-        span:first-child{
-          color:#333;
+        span:first-child {
+          color: #333;
           font-size: 14px;
         }
       }
     }
   }
 }
+
+
