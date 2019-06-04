@@ -40,14 +40,20 @@ export default {
       urlsList: {
         hotStore: 'showSiteTwo/getTwoList',
         introduceStore: 'showSiteTwo/getTwoList',
-        hotCoupon: 'showSiteTwo/getCouponList',
-        intruduceCoupon: 'showSiteTwo/getCouponList'
+        hotCoupon: 'showSiteCoupon/getCouponPage',
+        intruduceCoupon: 'showSiteCoupon/getCouponPage'
       },
       urlsPostList: {
         hotStore: 'storeAudit/updateHotSortBatch',
         introduceStore: 'storeAudit/updateAdviseSortBatch',
-        hotCoupon: 'storeAudit/updateHotSortBatch',
-        intruduceCoupon: 'storeAudit/updateAdviseSortBatch'
+        hotCoupon: 'storeAudit/updateCouponHotSortBatch',
+        intruduceCoupon: 'storeAudit/updateCouponAdviseSortBatch'
+      },
+      deleteUrl: {
+        hotStore: 'storeAudit/deleteHotSort',
+        introduceStore: 'storeAudit/deleteAdviseSort',
+        hotCoupon: 'storeAudit/deleteCouponHotSort',
+        intruduceCoupon: 'storeAudit/deleteCouponAdviseSort'
       },
       tableData: {
         pageNumber: 1,
@@ -59,6 +65,7 @@ export default {
   mounted() {
     this.$dragging.$on('dragged', ({ value }) => {
       //排序拖拽后的数组重建
+      console.log(value.list);
       this.orderList = value.list;
     });
   },
@@ -76,6 +83,7 @@ export default {
     },
     getAdSingle() {
       let params = {};
+      this.orderList = [];
       if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
         params.outSiteId = this.siteId;
       } else {
@@ -83,27 +91,33 @@ export default {
       }
       this.$sendData('post', this.urlsTopList[this.type], params, (data, all) => {
         this.advData = data;
+        this.orderList = data;
         this.advertBox = true;
       });
     },
     deleteAdvert() {
       //单个广告词条的删除
     },
-    deleteAdvertBtn() {
+    deleteAdvertBtn(item) {
       //单个广告词条中 商家的单个删除
+      this.$sendData('post', this.deleteUrl[this.type], { id: item.id }, (data, all) => {
+        this.getAdSingle();
+        this.$message({ type: 'success', message: '删除成功！' });
+      });
     },
     tableChange(e) {
       this.tableData.pageNumber = e;
       this.addStore(true);
     },
     addStore(bool) {
-      // let params = {};
-      // if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
-      //   params.outSiteId = this.siteId;
-      // } else {
-      //   params.outId = this.siteId;
-      // }
-      this.$sendData('post', this.urlsList[this.type], { outId: this.siteId, pageNumber: this.tableData.pageNumber, pageSize: this.tableData.pageSize }, (data, all) => {
+      let params = { pageNumber: this.tableData.pageNumber, pageSize: this.tableData.pageSize };
+      if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
+        params.siteId = this.siteId;
+      } else {
+        params.outId = this.siteId;
+      }
+
+      this.$sendData('post', this.urlsList[this.type], params, (data, all) => {
         this.tableData = data;
         this.$nextTick(() => {
           this.toggleSelection(this.advData);
@@ -119,40 +133,80 @@ export default {
     toggleSelection(rows) {
       if (rows) {
         rows.forEach(row => {
-          let temp = this.tableData.list.filter(i => i.id === row.id);
-          if (temp.lenngth > 0) {
-            this.$refs.multipleTable.toggleRowSelection(temp);
+          if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
+            let temp = this.tableData.list.filter(i => i.mapId === row.id);
+            if (temp.length > 0) {
+              this.$refs.multipleTable.toggleRowSelection(temp[0], true);
+            }
+          } else {
+            let temp = this.tableData.list.filter(i => i.id === row.id);
+            if (temp.length > 0) {
+              this.$refs.multipleTable.toggleRowSelection(temp[0], true);
+            }
           }
         });
       } else {
         this.$refs.multipleTable.clearSelection();
       }
     },
+    submitOrder() {
+      let _data = {
+        hotStore: 'hotSort',
+        introduceStore: 'adviseSort',
+        hotCoupon: 'hotSort',
+        intruduceCoupon: 'adviseSort'
+      };
+      let params = { outId: this.siteId };
+      if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
+        params.cpOutSiteCouponList = this.orderList.map((i, x) => ({
+          id: i.id,
+          [_data[this.type]]: x + 1
+        }));
+      } else {
+        params.cpOutSiteStoreList = this.orderList.map((i, x) => ({
+          id: i.id,
+          [_data[this.type]]: x + 1
+        }));
+      }
+      this.$sendData('post', this.urlsPostList[this.type], params, (data, all) => {
+        this.$message({ type: 'success', message: '排序成功！' });
+      });
+    },
     handleSelectionChange(vals) {
       this.selectList = vals;
       // this.toggleSelection(this.selectList);
     },
     handleSelectCoupon() {
-      this.$sendData(
-        'post',
-        this.urlsPostList[this.type],
-        {
-          outId: this.siteId,
-          cpOutSiteStoreList: this.selectList.map((i, x) => ({
-            id: i.id,
-            hotsort: x + 1
-          }))
-        },
-        (data, all) => {
-          this.getAdSingle();
-          this.$message({ type: 'success', message: '编辑成功！' });
-          if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
-            this.selectCouponBox = false;
-          } else {
-            this.selectStoreBox = false;
-          }
+      let _data = {
+        hotStore: 'hotSort',
+        introduceStore: 'adviseSort',
+        hotCoupon: 'hotSort',
+        intruduceCoupon: 'adviseSort'
+      };
+      let params = { outId: this.siteId };
+      if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
+        params.cpOutSiteCouponList = this.selectList.map((i, x) => ({
+          id: i.mapId,
+          [_data[this.type]]: x + 1
+        }));
+      } else {
+        params.cpOutSiteStoreList = this.selectList.map((i, x) => ({
+          id: i.id,
+          [_data[this.type]]: x + 1
+        }));
+      }
+
+      this.$sendData('post', this.urlsPostList[this.type], params, (data, all) => {
+        this.getAdSingle();
+        this.$message({ type: 'success', message: '编辑成功！' });
+        this.toggleSelection();
+
+        if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
+          this.selectCouponBox = false;
+        } else {
+          this.selectStoreBox = false;
         }
-      );
+      });
     }
   },
   computed: {

@@ -36,10 +36,10 @@
           v-dragging="{ item: item, list: advData, group: 'color' }"
           :key="item.id"
         >
-          {{type === 'hotCoupon' || type === 'intruduceCoupon'?item.storeName:item.showName}}
+          {{type === 'hotCoupon' || type === 'intruduceCoupon'?item.title:item.showName}}
           <i
             class="el-icon-error deleteAdvert"
-            @click="deleteAdvertBtn"
+            @click="deleteAdvertBtn(item)"
           ></i>
         </div>
       </div>
@@ -49,7 +49,7 @@
           round
           @click="addStore"
         >{{type === 'hotCoupon' || type === 'intruduceCoupon'?`编辑优惠券`:`编辑商家`}}</el-button>
-        <el-button type="primary" round>提交排序</el-button>
+        <el-button type="primary" round @click="submitOrder">提交排序</el-button>
       </section>
     </el-dialog>
 
@@ -122,8 +122,9 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="id" label="id" align="center"></el-table-column>
-        <el-table-column prop="storeName" label="名称" align="center"></el-table-column>
-        <el-table-column prop="title" label="标题" align="center"></el-table-column>
+        <el-table-column prop="currentTitle" label="名称" align="center"></el-table-column>
+        <el-table-column prop="couponType" label="类型" align="center"></el-table-column>
+        <el-table-column prop="description" label="描述" align="center"></el-table-column>
       </el-table>
       <el-pagination
         class="paginationStyle"

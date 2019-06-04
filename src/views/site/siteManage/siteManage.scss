@@ -1,13 +1,15 @@
-.tableInput{
+.tableInput {
   border: 0;
   padding: 10px 20px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
 }
-.color-list{
+.color-list {
   display: flex;
   flex-wrap: wrap;
-
-  div{
+  i {
+    cursor: pointer;
+  }
+  div {
     width: 120px;
     height: 50px;
     background-color: #ececec;
@@ -18,7 +20,7 @@
     position: relative;
     text-align: center;
 
-    .deleteAdvert{
+    .deleteAdvert {
       position: absolute;
       top: -5px;
       right: -5px;
@@ -27,21 +29,21 @@
     }
   }
 }
-.secondCate{
-  display:flex;
-  .categoryIcon{
+.secondCate {
+  display: flex;
+  .categoryIcon {
     align-items: center;
-    display:flex;
-    i{
+    display: flex;
+    i {
       font-size: 18px;
-      margin-left:10px;
+      margin-left: 10px;
       cursor: pointer;
     }
   }
 }
-.cateContent{
+.cateContent {
   display: flex;
-  .firCate{
+  .firCate {
     width: 13%;
     display: flex;
     flex-direction: column;
@@ -49,32 +51,32 @@
     overflow-y: scroll;
     //border-left: 1px solid lightgrey;
     //border-right: 1px solid lightgrey;
-    div{
-      padding:20px 30px 20px 20px;
+    div {
+      padding: 20px 30px 20px 20px;
       border-bottom: 1px solid lightgrey;
       cursor: pointer;
       border-top: 0;
       text-align: center;
       color: grey;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .activeFir{
+    .activeFir {
       color: #007dff;
     }
-    i{
+    i {
       //font-size: 20px;
     }
   }
-  .secCate{
+  .secCate {
     width: 87%;
-    .topCate{
+    .topCate {
       display: flex;
       border-bottom: 1px solid lightgrey;
       flex-wrap: wrap;
       cursor: pointer;
-      div{
+      div {
         padding: 5px 20px 5px 10px;
         margin: 10px;
         border-radius: 10px;
@@ -87,15 +89,15 @@
         white-space: nowrap;
         font-size: 14px;
       }
-      .activeSec{
+      .activeSec {
         color: white;
         background-color: #3a8ee6;
       }
     }
-    .bottomContent{
+    .bottomContent {
       display: flex;
       flex-direction: column;
-      section{
+      section {
         padding: 20px;
       }
     }
