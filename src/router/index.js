@@ -262,6 +262,10 @@ export const constantRouterMap = [
         component: () => import('@/views/webSite/couponsDetail/detailFirst.vue')
       },
       {
+        path: 'detailSecond/:id',
+        component: () => import('@/views/webSite/couponsDetail/detailSecond.vue')
+      },
+      {
         path: 'aboutUs',
         component: () => import('@/views/webSite/aboutUs/aboutUs.vue')
       },

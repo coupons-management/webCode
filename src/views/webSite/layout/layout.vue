@@ -64,7 +64,7 @@
       <div>Clothes</div>
       <div style="font-size: 14px;">In the summer holiday day,I like eating watermelon.</div>
     </section>-->
-    <section class="topText" style="text-align: left;"></section>
+    <!-- <section class="topText" style="text-align: left;"></section> -->
     <!--<section class="wordsList"><span v-for="word in wordsList">{{word}}</span></section>-->
     <div class="website-page">
       <router-view>
@@ -98,7 +98,7 @@
       </section>
     </section>
     <section class="bottomText">
-      <div>Copyright © 2018.All rights reserved.</div>
+      <div>Copyright © 2019.All rights reserved.</div>
     </section>
   </section>
 </template>

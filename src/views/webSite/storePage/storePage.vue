@@ -2,27 +2,30 @@
 @import "../webCom.scss";
 </style>
 <template>
-  <section class="pageStyle">
-    <section class="topCategories popularStores">
-      <!--<section class="categoryList listStyle">
+  <div>
+    <section class="topText">Stores in Cannabispromocodes.com</section>
+    <section class="pageStyle">
+      <section class="topCategories popularStores">
+        <!--<section class="categoryList listStyle">
         <div v-for="item in categoryList">{{item.name}}</div>
-      </section>-->
-      <section class="storePage listStyle">
-        <div v-for="item in storeData.list" @click="goStore(item)">
-          <div class="pic"></div>
-          <img :src="item.logoUrl" alt>
+        </section>-->
+        <section class="storePage listStyle">
+          <div v-for="item in storeData.list" @click="goStore(item)">
+            <div class="pic"></div>
+            <img :src="item.logoUrl" alt>
+          </div>
+        </section>
+
+        <div style="text-align: center;margin-top: 15px;">
+          <el-pagination
+            layout="total, prev, pager, next"
+            :total="storeData.totalCount"
+            @current-change="changePage"
+          ></el-pagination>
         </div>
       </section>
-
-      <div style="text-align: center;margin-top: 15px;">
-        <el-pagination
-          layout="total, prev, pager, next"
-          :total="storeData.totalCount"
-          @current-change="changePage"
-        ></el-pagination>
-      </div>
     </section>
-  </section>
+  </div>
 </template>
 
 <script type="es6">
@@ -84,7 +87,7 @@ export default {
         "post",
         "officialWebsite/getStorePageList",
         {
-          siteId: /* this.siteId || */ 1,
+          siteId: /* this.siteId || */ 2,
           pageNumber: this.storeData.pageNumber,
           pageSize: this.storeData.pageSize
         },
@@ -94,7 +97,7 @@ export default {
       );
     },
     goStore(item) {
-      this.$router.push("/websiteFir/detailFirst/1");
+      this.$router.push(`/websiteFir/detailSecond/${item.webSite}`);
     },
     changePage(e) {
       this.storeData.pageNumber = e;

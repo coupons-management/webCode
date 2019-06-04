@@ -60,7 +60,7 @@
         <i>TOP CATEGORIES</i>
       </div>
       <section class="categoryList listStyle">
-        <div v-for="item in categoryList">{{item.name}}</div>
+        <div v-for="item in categoryList" @click="goCategory(item)">{{item.name}}</div>
       </section>
     </section>
     <section class="popularStores">
@@ -68,7 +68,7 @@
         <i>POPULAR STORES</i>
       </div>
       <section class="popularList listStyle" v-if="popularList&&popularList.length>0">
-        <div v-for="item in popularList">{{item.name}}</div>
+        <div v-for="item in popularList" @click="goStore(item)">{{item.name}}</div>
       </section>
     </section>
   </section>

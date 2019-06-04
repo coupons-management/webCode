@@ -28,7 +28,7 @@ export default {
       window.open(item.link);
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailFirst/1`);
+      this.$router.push(`/websiteFir/detailFirst/${item.webSite}`);
     }
   },
   watch: {

@@ -25,7 +25,10 @@ export default {
       let _this = this;
       //console.log(_this.pid);
       _this.$sendData('post', 'showSiteType/getTree', { siteId: this.siteId }, (data, all) => {
-        _this.getSecCateList(data.id);
+        // console.log(data);
+        if (data.childList.length > 0) {
+          _this.getSecCateList(data.childList[0].id);
+        }
         // if (_this.pid) {
         //   for (let i of data.childList) {
         //     if (i.id == _this.pid) {
