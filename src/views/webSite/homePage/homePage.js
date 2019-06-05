@@ -120,10 +120,10 @@ export default {
       window.open(item.link);
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.webSite}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
     },
     goCategory(item) {
-      this.$router.push(`/websiteFir/detailFirst/${item.id}`);
+      this.$router.push(`/websiteFir/detailFirst/${item.id}?name=${item.name}`);
     },
     search() {
       console.log(this.input2);

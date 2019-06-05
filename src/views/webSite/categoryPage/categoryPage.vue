@@ -52,7 +52,7 @@ export default {
       );
     },
     goCategory(item) {
-      this.$router.push(`/websiteFir/detailFirst/${item.id}`);
+      this.$router.push(`/websiteFir/detailFirst/${item.id}?name=${item.name}`);
     },
     changePage(e) {
       this.categoryData.pageNumber = e;

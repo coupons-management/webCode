@@ -50,7 +50,7 @@
               range-separator="－"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
-              value-format="yyyy-MM-DD" 
+              value-format="yyyy-MM-DD"
             ></el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -144,10 +144,9 @@
         <el-form-item label="官网">
           <el-input v-model="editorData.webSite"></el-input>
         </el-form-item>
-        <el-form-item label="站点分类">
+        <el-form-item label="商家类别">
           <el-select v-model="editorData.category" placeholder="请选择语言">
-            <el-option label="分类1" value="1"></el-option>
-            <el-option label="分类2" value="2"></el-option>
+            <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="国家">
@@ -224,10 +223,14 @@
           <el-form-item label="官网">
             <el-input v-model="editorData.webSite" disabled></el-input>
           </el-form-item>
-          <el-form-item label="站点分类">
+          <el-form-item label="商家类别">
             <el-select v-model="editorData.category" placeholder="请选择语言">
-              <el-option label="分类1" value="1"></el-option>
-              <el-option label="分类2" value="2"></el-option>
+              <el-option
+                v-for="item in typeList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="加入时间">
@@ -304,13 +307,13 @@
 
     <el-dialog :visible.sync="addCouponBox" class="editorStore" title="新增优惠券" width="40%" top="3%">
       <el-form :model="couponItem" size="small" label-width="140px" :inline="true">
-        <el-form-item label="名称">
+        <!-- <el-form-item label="名称">
           <el-input v-model="couponItem.name" placeholder="请输入名称"></el-input>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item label="优惠券码">
           <el-input v-model="couponItem.code" placeholder="请输入code"></el-input>
         </el-form-item>
-        <el-form-item label="类型">
+        <!-- <el-form-item label="类型">
           <el-select v-model="couponItem.couponType" placeholder="请选择类型">
             <el-option
               v-for="couponTypeItem in couponTypeList"
@@ -319,7 +322,7 @@
               :label="couponTypeItem.value"
             ></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item label="标题">
           <el-input v-model="couponItem.title" placeholder="请输入标题"></el-input>
         </el-form-item>
@@ -327,7 +330,12 @@
           <el-input v-model="couponItem.des" placeholder="请输入描述"></el-input>
         </el-form-item>
         <el-form-item label="过期时间">
-          <el-date-picker v-model="couponItem.expireAtTime" type="date" value-format="yyyy-MM-DD" placeholder="选择日期"></el-date-picker>
+          <el-date-picker
+            v-model="couponItem.expireAtTime"
+            type="date"
+            value-format="timestamp"
+            placeholder="选择日期"
+          ></el-date-picker>
         </el-form-item>
       </el-form>
       <div style="text-align:center;">

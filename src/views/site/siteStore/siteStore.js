@@ -130,7 +130,7 @@ export default {
     },
     deleteStore(item) {
       //删除
-      this.$sendData('post', 'showSiteTwo/deleteSiteStore', { id: item.id }, (data, all) => {
+      this.$sendData('post', 'showSiteTwo/deleteSiteStore', { siteId: ~~this.siteId, storeId: item.storeId }, (data, all) => {
         this.getTableData();
         this.$message({ type: 'success', message: '操作成功！' });
       });

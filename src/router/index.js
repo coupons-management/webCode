@@ -34,8 +34,8 @@ export const constantRouterMap = [
   {
     path: '/spider',
     component: Layout,
-    name: '爬虫站数据',
-    meta: { title: '爬虫站数据', icon: 'example' },
+    name: '基本数据',
+    meta: { title: '基本数据', icon: 'example' },
     redirect: '/spider/spiderCoupon',
     children: [
       {
@@ -73,8 +73,8 @@ export const constantRouterMap = [
   {
     path: '/site',
     component: Layout,
-    name: '内站点数据',
-    meta: { title: '内站点数据', icon: 'example' },
+    name: '网站数据',
+    meta: { title: '网站数据', icon: 'example' },
     redirect: '/site/site1',
     children: [
       {

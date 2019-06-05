@@ -72,7 +72,7 @@
           <span v-if="scope.row.inType == 1" style="color: red;">{{scope.row.id}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="sourceTile" label="原标题" align="center"></el-table-column>
+      <el-table-column prop="sourceTile" label="本站标题" align="center"></el-table-column>
       <el-table-column prop="currentTitle" label="现标题" align="center"></el-table-column>
       <el-table-column prop="couponType" label="类型" align="center"></el-table-column>
       <el-table-column prop="code" label="code" align="center"></el-table-column>

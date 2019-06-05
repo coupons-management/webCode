@@ -50,7 +50,7 @@ Vue.prototype.$sendData = function(type, url, params, callback) {
     url = `${url}?sessionKey=${sessionStorage.token}`;
   }
   var nparams = params;
-  axios[type](url, nparams)
+  axios[type](url, type == 'get' ? { params: nparams } : nparams)
     .then(response => {
       var all = response.data;
       var data = response.data.data;

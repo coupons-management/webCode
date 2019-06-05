@@ -5,14 +5,14 @@
 <template>
   <div>
     <section class="topText" style="text-align:left;">
-      Vaporizers
+      {{$route.query.name}}
       <p
         style="font-size:14px;"
       >Update the most popular stores daily, Have the best coupons & Deals!</p>
     </section>
     <section class="detailFirst">
       <section class="leftPart">
-        <section class="allNum">8766 Offers</section>
+        <section class="allNum">{{couponsData.totalCount}} Offers</section>
         <section class="treeForCoup">
           <div style="cursor: pointer;">Categories</div>
           <div>
@@ -57,17 +57,20 @@
         <section class="rightContent">
           <section class="topCoupons">
             <section class="couponList listStyle" v-if="couponsData.list">
-              <div v-for="(item,index) in couponsData.list" class="itemCoupons" :key="index">
+              <div
+                v-for="(item,index) in couponsData.list"
+                class="itemCoupons"
+                :key="index"
+                @click="handleClickCoupon(item)"
+              >
                 <div class="couponImg">
-                  <div>CODE</div>
-                  <img src="static/imgs/coupon.jpg" alt>
+                  <div v-if="item.couponType">{{item.couponType}}</div>
+                  <img :src="item.storeLogo" alt>
                 </div>
                 <div class="couponInfo">
-                  <span
-                    style="font-size: 14px;"
-                  >Up to 30% Off End of Season Sale,Up to 30% Off End of Season Sale</span>
+                  <span style="font-size: 14px;text-align:center;">{{item.title}}</span>
                   <div>
-                    <span>15 USED</span>
+                    <span>USED</span>
                     <span>
                       <span style="display: inline-block;vertical-align: middle;">
                         <el-rate
@@ -85,7 +88,12 @@
             </section>
           </section>
           <div style="text-align: center">
-            <el-pagination layout="total, prev, pager, next" :total="couponsData.to"></el-pagination>
+            <el-pagination
+              layout="total, prev, pager, next"
+              @current-change="changePage"
+              :total="couponsData.totalCount"
+              :page-size="couponsData.pageSize"
+            ></el-pagination>
           </div>
         </section>
       </section>
@@ -101,12 +109,13 @@ export default {
       couponsData: { pageNumber: 1, pageSize: 10, list: [] },
       isChecked: true,
       buttonList: [
-        { name: "All Offers", state: true },
-        { name: "Coupon Codes", state: false },
-        { name: "Deals", state: false }
+        { name: "All Offers", state: true, value: "" },
+        { name: "Coupon Codes", state: false, value: "CODE" },
+        { name: "Deals", state: false, value: "DEAL" }
       ],
       isShowMore: false,
       storeList: [],
+      couponType: [],
       data: [
         {
           label: "一级 1",
@@ -182,15 +191,16 @@ export default {
     getCouponList() {
       this.$sendData(
         "post",
-        "officialWebsite/getStoreCategoryCouponList",
+        "website/getCouponsByCategory",
         {
-          outSiteId: /* this.siteId || */ 2,
-          id: this.$route.params.id,
+          siteId: /* this.siteId || */ 2,
+          id: ~~this.$route.params.id,
           pageNumber: this.couponsData.pageNumber,
-          pageSize: this.couponsData.pageSize
+          pageSize: this.couponsData.pageSize,
+          couponType: this.buttonList.filter(i => i.state)[0].value
         },
         (data, all) => {
-          this.couponsData.list = data;
+          this.couponsData = data;
         }
       );
     },
@@ -226,10 +236,20 @@ export default {
         i.state = false;
       }
       data.state = true;
+      this.couponsData.pageNumber = 1;
+      this.getCouponList();
       //this.$forceUpdate();
     },
+
+    changePage(e) {
+      this.storeData.pageNumber = e;
+      this.getCouponList();
+    },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.webSite}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
+    },
+    handleClickCoupon(item) {
+      this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
     }
   }
 };

@@ -5,14 +5,28 @@
 <template>
   <div>
     <section class="topText" style="text-align:left;">
-      <div class="detail-info"></div>
+      <div class="detail-info">
+        <div class="pic">
+          <img :src="storeData.logo" alt>
+        </div>
+        <div class="info-des">
+          <p class="info-des-title">{{storeData.name}}</p>
+          <p class="info-des-des">{{storeData.description}}</p>
+          <a
+            class="visit-btn"
+            :href="`http://${storeData.website}`"
+            target="_blank"
+            rel="nofollow"
+          >Visit Website</a>
+        </div>
+      </div>
     </section>
     <section class="detailFirst">
       <section class="leftPart">
         <section class="top20">
           <div>TOP Stores</div>
           <section class="detail-store">
-            <div class="item" v-for="item in storeList" @click="goStore(item)">
+            <div class="item" v-for="(item,index) in storeList" @click="goStore(item)" :key="index">
               <div class="pic"></div>
               <img :src="item.logoUrl" :alt="item.name">
             </div>
@@ -22,32 +36,40 @@
       <section class="rightPart">
         <section class="rightTools">
           <div
-            v-for="item in buttonList"
+            v-for="(item,index) in buttonList"
+            :key="index"
             :class="item.state?'buttonActive':''"
             @click="toggleButton(item)"
           >{{item.name}}</div>
           <div style="float: right;">
-            <el-checkbox v-model="isChecked" @change="boxChange">备选项</el-checkbox>
+            <!-- <el-checkbox v-model="isChecked" @change="boxChange">备选项</el-checkbox> -->
           </div>
         </section>
         <section class="rightContent">
           <section class="topCoupons">
             <section class="couponDetailList listStyle">
-              <div v-for="item in couponList" class="item">
+              <div v-for="(item,index) in storeData.couponList.list" class="item" :key="index">
                 <div class="item-pic">
-                  <div class="item-text">80% OFF</div>
-                  <span class="item-type type1">CODE</span>
+                  <div class="item-text">{{item.name}}</div>
+                  <span class="item-type type1">{{item.couponType}}</span>
                 </div>
                 <div class="item-info">
-                  <div
-                    class="item-info-text"
-                  >Up to 30% Off End of Season Sale,Up to 30% Off End of Season Sale</div>
+                  <div class="item-info-text">{{item.title}}</div>
                   <div style="text-align:right;">
-                    <button class="item-btn">GET DEAL</button>
+                    <button class="item-btn" @click="goCoupon(item)">GET DEAL</button>
                   </div>
                 </div>
               </div>
             </section>
+
+            <!-- <div style="text-align: center">
+              <el-pagination
+                layout="total, prev, pager, next"
+                @current-change="changePage"
+                :total="storeData.couponList.totalCount"
+                :page-size="storeData.couponList.pageSize"
+              ></el-pagination>
+            </div>-->
           </section>
         </section>
       </section>
@@ -60,93 +82,19 @@ export default {
   name: "detailFirst",
   data() {
     return {
-      couponList: [
-        { img: "", name: "图片1", value: 1 },
-        { img: "", name: "图片2", value: 2 },
-        { img: "", name: "图片3", value: 3 },
-        { img: "", name: "图片4", value: 4 },
-        { img: "", name: "图片5", value: 5 },
-        { img: "", name: "图片6", value: 5 },
-        { img: "", name: "图片7", value: 5 },
-        { img: "", name: "图片8", value: 5 },
-        { img: "", name: "图片5", value: 5 },
-        { img: "", name: "图片6", value: 5 },
-        { img: "", name: "图片7", value: 5 },
-        { img: "", name: "图片8", value: 5 },
-        { img: "", name: "图片5", value: 5 },
-        { img: "", name: "图片6", value: 5 },
-        { img: "", name: "图片7", value: 5 },
-        { img: "", name: "图片8", value: 5 }
-      ],
+      storeData: {
+        couponList: {
+          pageNumber: 1,
+          pageSize: 20
+        }
+      },
       isChecked: true,
       buttonList: [
-        { name: "All Offers", state: true },
-        { name: "Coupon Codes", state: false },
-        { name: "Deals", state: false }
+        { name: "All Offers", state: true, value: "" },
+        { name: "Coupon Codes", state: false, value: "CODE" },
+        { name: "Deals", state: false, value: "DEAL" }
       ],
-      isShowMore: false,
-      storeList: [],
-      data: [
-        {
-          label: "一级 1",
-          children: [
-            {
-              label: "二级 1-1",
-              children: [
-                {
-                  label: "三级 1-1-1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          label: "一级 2",
-          children: [
-            {
-              label: "二级 2-1",
-              children: [
-                {
-                  label: "三级 2-1-1"
-                }
-              ]
-            },
-            {
-              label: "二级 2-2",
-              children: [
-                {
-                  label: "三级 2-2-1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          label: "一级 3",
-          children: [
-            {
-              label: "二级 3-1",
-              children: [
-                {
-                  label: "三级 3-1-1"
-                }
-              ]
-            },
-            {
-              label: "二级 3-2",
-              children: [
-                {
-                  label: "三级 3-2-1"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      defaultProps: {
-        children: "children",
-        label: "label"
-      }
+      storeList: []
     };
   },
   mounted() {
@@ -155,6 +103,7 @@ export default {
   methods: {
     getData() {
       this.getTopStore();
+      this.getStoreData();
     },
     getTopStore() {
       this.$sendData(
@@ -166,8 +115,24 @@ export default {
         }
       );
     },
+    getStoreData() {
+      this.$sendData(
+        "post",
+        "website/getStoreDetail",
+        {
+          siteId: /*this.siteId || */ 2,
+          storeId: this.$route.params.id,
+          // pageNumber: this.storeData.couponList.pageNumber,
+          // pageSize: this.storeData.couponList.pageSize,
+          couponType: this.buttonList.filter(i => i.state)[0].value
+        },
+        (data, all) => {
+          this.storeData = data;
+        }
+      );
+    },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.webSite}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
     },
     boxChange(e) {
       console.log(e);
@@ -175,12 +140,20 @@ export default {
     handleNodeClick(data) {
       console.log(data);
     },
+    changePage(e) {
+      this.storeData.couponList.pageNumber = e;
+      this.getStoreData();
+    },
     toggleButton(data) {
       for (let i of this.buttonList) {
         i.state = false;
       }
       data.state = true;
+      this.getStoreData();
       //this.$forceUpdate();
+    },
+    goCoupon(item) {
+      window.open(`http://${item.storeWebSite}`);
     }
   }
 };

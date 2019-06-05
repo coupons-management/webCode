@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     getBreadcrumb() {
-      if(this.$route.matched[0].name == "内站点数据"){
+      if(this.$route.matched[0].name == "网站数据"){
         let siteList = JSON.parse(localStorage.siteList);
         let currSite = siteList[this.$route.matched[1].meta.siteId - 1];
         this.$route.matched[1].meta.title = currSite.name;

@@ -1,6 +1,6 @@
 .detailFirst {
   display: flex;
-  margin-top: 20px;
+  // margin-top: 20px;
   padding: 25px 10%;
   padding-bottom: 160px;
   .leftPart {
@@ -160,6 +160,45 @@
       cursor: pointer;
       background-image: linear-gradient(-95deg, #2c9b33 1%, #25bb5f 100%);
       border-radius: 2px;
+    }
+  }
+}
+
+.detail-info {
+  display: flex;
+  align-items: center;
+  .pic {
+    img {
+      display: block;
+      width: 150px;
+      box-sizing: border-box;
+    }
+  }
+  .info-des {
+    text-align: left;
+    margin-left: 30px;
+    p {
+      margin: 0 0 10px;
+    }
+    .info-des-title {
+      font-size: 26px;
+      font-weight: normal;
+    }
+    .info-des-des {
+      font-size: 14px;
+    }
+    .visit-btn {
+      border: 1px solid #d8d8d8;
+      border-radius: 2px;
+      width: 150px;
+      height: 36px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 36px;
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.05);
     }
   }
 }

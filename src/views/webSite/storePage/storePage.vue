@@ -21,6 +21,7 @@
             layout="total, prev, pager, next"
             :total="storeData.totalCount"
             @current-change="changePage"
+            :page-size="storeData.pageSize"
           ></el-pagination>
         </div>
       </section>
@@ -35,7 +36,7 @@ export default {
     return {
       storeData: {
         pageNumber: 1,
-        pageSize: 10
+        pageSize: 30
       },
       wordsList: [
         "TOP",
@@ -97,7 +98,7 @@ export default {
       );
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.webSite}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
     },
     changePage(e) {
       this.storeData.pageNumber = e;

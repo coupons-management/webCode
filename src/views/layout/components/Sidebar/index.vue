@@ -35,7 +35,7 @@ export default {
     getSiteList(routeList){
       let _this = this,siteList = [];
       for(let i of routeList){
-        if(i.name == "内站点数据"){
+        if(i.name == "网站数据"){
           _this.$sendData('get','showSite/getList','',(data,all)=>{//爬虫优惠券列表
             localStorage.siteList = JSON.stringify(data);
             for(let j of data){
