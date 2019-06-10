@@ -23,7 +23,7 @@
               empty-text="数据为空"
             ></el-tree>
           </div>
-          <div style="cursor: pointer;">all Categories</div>
+          <!-- <div style="cursor: pointer;">all Categories</div> -->
         </section>
         <section class="top20">
           <div>TOP Stores</div>
@@ -217,11 +217,11 @@ export default {
     getCategoryTree() {
       this.$sendData(
         "post",
-        "showSiteType/getTree",
-        { siteId: 2 },
+        "website/getCategoryChild",
+        { siteId: 2, id: ~~this.$route.params.id },
         (data, all) => {
           console.log(data);
-          this.data = data.childList;
+          this.data = data;
         }
       );
     },
@@ -230,6 +230,9 @@ export default {
     },
     handleNodeClick(data) {
       console.log(data);
+      this.$router.replace(
+        `/websiteFir/detailFirst/${data.id}?name=${data.name}`
+      );
     },
     toggleButton(data) {
       for (let i of this.buttonList) {
@@ -250,6 +253,11 @@ export default {
     },
     handleClickCoupon(item) {
       this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
+    }
+  },
+  watch: {
+    $route() {
+      this.getData();
     }
   }
 };

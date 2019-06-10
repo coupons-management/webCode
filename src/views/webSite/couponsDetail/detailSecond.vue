@@ -155,6 +155,11 @@ export default {
     goCoupon(item) {
       window.open(`${item.link}`);
     }
+  },
+  watch: {
+    $route() {
+      this.getData();
+    }
   }
 };
 </script>
