@@ -41,16 +41,16 @@
             :class="item.state?'buttonActive':''"
             @click="toggleButton(item)"
           >{{item.name}}</div>
-          <div style="float: right;">
-            <!-- <el-checkbox v-model="isChecked" @change="boxChange">备选项</el-checkbox> -->
-          </div>
+          <!-- <div style="float: right;"> -->
+          <!-- <el-checkbox v-model="isChecked" @change="boxChange">备选项</el-checkbox> -->
+          <!-- </div> -->
         </section>
         <section class="rightContent">
           <section class="topCoupons">
             <section class="couponDetailList listStyle">
               <div v-for="(item,index) in storeData.couponList.list" class="item" :key="index">
                 <div class="item-pic">
-                  <div class="item-text">{{item.name}}</div>
+                  <div class="item-text">{{item.sale}}</div>
                   <span class="item-type type1">{{item.couponType}}</span>
                 </div>
                 <div class="item-info">
@@ -132,7 +132,7 @@ export default {
       );
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
     },
     boxChange(e) {
       console.log(e);
@@ -153,7 +153,7 @@ export default {
       //this.$forceUpdate();
     },
     goCoupon(item) {
-      window.open(`http://${item.storeWebSite}`);
+      window.open(`${item.link}`);
     }
   }
 };

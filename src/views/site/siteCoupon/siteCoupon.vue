@@ -72,8 +72,8 @@
           <span v-if="scope.row.inType == 1" style="color: red;">{{scope.row.id}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="sourceTile" label="本站标题" align="center"></el-table-column>
-      <el-table-column prop="currentTitle" label="现标题" align="center"></el-table-column>
+      <el-table-column prop="sourceTile" label="原标题" align="center"></el-table-column>
+      <el-table-column prop="currentTitle" label="本站标题" align="center"></el-table-column>
       <el-table-column prop="couponType" label="类型" align="center"></el-table-column>
       <el-table-column prop="code" label="code" align="center"></el-table-column>
       <el-table-column prop="description" label="描述" align="center"></el-table-column>
@@ -117,7 +117,14 @@
       :page-size="tableData.pageSize"
     ></el-pagination>
 
-    <el-dialog :visible.sync="editorCouponsBox" class="checkCoupons" title="编辑优惠券" width="400px" :modal-append-to-body="false" append-to-body>
+    <el-dialog
+      :visible.sync="editorCouponsBox"
+      class="checkCoupons"
+      title="编辑优惠券"
+      width="400px"
+      :modal-append-to-body="false"
+      append-to-body
+    >
       <el-form :model="editorData" size="small" label-width="80px" label-position="left">
         <el-form-item label=" 现标题">
           <el-input v-model="editorData.currentTitle" placeholder="请输入名字"></el-input>

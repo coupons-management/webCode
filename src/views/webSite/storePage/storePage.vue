@@ -98,7 +98,7 @@ export default {
       );
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
     },
     changePage(e) {
       this.storeData.pageNumber = e;

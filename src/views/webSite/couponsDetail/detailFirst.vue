@@ -246,7 +246,7 @@ export default {
       this.getCouponList();
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
     },
     handleClickCoupon(item) {
       this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);

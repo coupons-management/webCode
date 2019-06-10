@@ -120,7 +120,7 @@ export default {
       window.open(item.link);
     },
     goStore(item) {
-      this.$router.push(`/websiteFir/detailSecond/${item.id}`);
+      this.$router.push(`/websiteFir/detailSecond/${item.storeId}`);
     },
     goCategory(item) {
       this.$router.push(`/websiteFir/detailFirst/${item.id}?name=${item.name}`);
