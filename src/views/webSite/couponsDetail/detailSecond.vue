@@ -128,6 +128,14 @@ export default {
         },
         (data, all) => {
           this.storeData = data;
+          this.$sendData(
+            "post",
+            "website/visitStore",
+            { id: data.id },
+            (data, all) => {
+              console.log(data);
+            }
+          );
         }
       );
     },

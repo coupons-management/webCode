@@ -16,7 +16,7 @@ export default {
   name: 'siteHome',
   data(){
     return {
-      navList:[{name:'站点管理',value:'site',state:true},{name:'商家管理',value:'store',state:false},{name:'优惠券管理',value:'coupon',state:false},{name:'统计',value:'stat',state:false}],
+      navList:[{name:'站点管理',value:'site',state:true},{name:'商家管理',value:'store',state:false},{name:'维护商家',value:'maintain',state:false},{name:'优惠券管理',value:'coupon',state:false},{name:'统计',value:'stat',state:false}],
       navState:{
         site:false,
         store:false,
