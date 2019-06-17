@@ -26,22 +26,22 @@ export default {
       this.getCouponByType();
     },
     getCouponByType() {
-      this.$sendData('post', 'officialWebsite/getStoreCouponList', { outSiteId: /* this.siteId || */ 1, storeUrl: this.$route.params.id, type: this.type }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getStoreCouponList', { outSiteId: /* this.siteId || */ 2, storeUrl: this.$route.params.id, type: this.type }, (data, all) => {
         this.activeList = data;
       });
     },
     getExpiredCouponByType() {
-      this.$sendData('post', 'officialWebsite/getStoreExpCouponList', { outSiteId: /* this.siteId || */ 1, storeUrl: this.$route.params.id, type: this.type }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getStoreExpCouponList', { outSiteId: /* this.siteId || */ 2, storeUrl: this.$route.params.id, type: this.type }, (data, all) => {
         this.expiredList = data;
       });
     },
     getStoreData() {
-      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /* this.siteId || */ 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /* this.siteId || */ 2 }, (data, all) => {
         this.rightStoreList = data;
       });
     },
     getTopCoupon() {
-      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /* this.siteId || */ 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /* this.siteId || */ 2 }, (data, all) => {
         this.couponList = data;
       });
     },

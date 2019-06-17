@@ -109,7 +109,7 @@ export default {
       this.$sendData(
         "post",
         "officialWebsite/getTopStoreList",
-        { siteId: /*this.siteId || */ 2 },
+        { siteId: /*this.siteId || */ 1 },
         (data, all) => {
           this.storeList = data;
         }
@@ -120,7 +120,7 @@ export default {
         "post",
         "website/getStoreDetail",
         {
-          siteId: /*this.siteId || */ 2,
+          siteId: /*this.siteId || */ 1,
           storeId: this.$route.params.id,
           // pageNumber: this.storeData.couponList.pageNumber,
           // pageSize: this.storeData.couponList.pageSize,

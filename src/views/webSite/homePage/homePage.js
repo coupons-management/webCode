@@ -97,22 +97,22 @@ export default {
       this.getPopular();
     },
     getStore() {
-      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopStoreList', { siteId: /*this.siteId || */ 1 }, (data, all) => {
         this.storeList = data;
       });
     },
     getCoupon() {
-      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopCouponList', { outSiteId: /*this.siteId || */ 1 }, (data, all) => {
         this.couponList = data;
       });
     },
     getCategory() {
-      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getCategoriesList', { outSiteId: /*this.siteId || */ 1 }, (data, all) => {
         this.categoryList = data;
       });
     },
     getPopular() {
-      this.$sendData('post', 'officialWebsite/getPopularStoresList', { outSiteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getPopularStoresList', { outSiteId: /*this.siteId || */ 1 }, (data, all) => {
         this.popularList = data;
       });
     },

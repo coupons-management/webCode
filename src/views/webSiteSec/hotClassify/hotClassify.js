@@ -16,7 +16,7 @@ export default {
       this.$sendData(
         'post',
         'officialWebsite/getStoreCategoryCouponList',
-        { outSiteId: /* this.siteId || */ 1, id: this.$route.params.id, pageNumber: this.couponsData.pageNumber, pageSize: this.couponsData.pageSize },
+        { outSiteId: /* this.siteId || */ 2, id: this.$route.params.id, pageNumber: this.couponsData.pageNumber, pageSize: this.couponsData.pageSize },
         (data, all) => {
           this.couponsData = data;
         }

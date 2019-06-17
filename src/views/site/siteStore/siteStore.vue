@@ -278,7 +278,7 @@
           <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.keywords"></el-input>
         </el-form-item>
         <el-form-item label="description">
-          <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.headerDes"></el-input>
+          <el-input type="textarea" placeholder="请输入内容" :rows="3" v-model="editorData.des"></el-input>
         </el-form-item>
         <el-form-item label="商家展示名称">
           <el-input type="textarea" placeholder="请输入内容" :rows="5" v-model="editorData.showName"></el-input>

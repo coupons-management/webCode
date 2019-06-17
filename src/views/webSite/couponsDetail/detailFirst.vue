@@ -193,7 +193,7 @@ export default {
         "post",
         "website/getCouponsByCategory",
         {
-          siteId: /* this.siteId || */ 2,
+          siteId: /* this.siteId || */ 1,
           id: ~~this.$route.params.id,
           pageNumber: this.couponsData.pageNumber,
           pageSize: this.couponsData.pageSize,
@@ -208,7 +208,7 @@ export default {
       this.$sendData(
         "post",
         "officialWebsite/getTopStoreList",
-        { siteId: /*this.siteId || */ 2 },
+        { siteId: /*this.siteId || */ 1 },
         (data, all) => {
           this.storeList = data;
         }
@@ -218,7 +218,7 @@ export default {
       this.$sendData(
         "post",
         "website/getCategoryChild",
-        { siteId: 2, id: ~~this.$route.params.id },
+        { siteId: 1, id: ~~this.$route.params.id },
         (data, all) => {
           console.log(data);
           this.data = data;

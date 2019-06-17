@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$sendData('post', 'officialWebsite/getCategoriesPageList', { outSiteId: this.siteId || 1 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getCategoriesPageList', { outSiteId: this.siteId || 2 }, (data, all) => {
         this.categoryData = data;
       });
     },

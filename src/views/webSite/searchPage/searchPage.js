@@ -15,12 +15,12 @@ export default {
       this.getCoupon();
     },
     getStore() {
-      this.$sendData('post', 'officialWebsite/getTopStoreList', { name: this.$route.query.search, siteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopStoreList', { name: this.$route.query.search, siteId: /*this.siteId || */ 1 }, (data, all) => {
         this.storeList = data;
       });
     },
     getCoupon() {
-      this.$sendData('post', 'officialWebsite/getTopCouponList', { name: this.$route.query.search, outSiteId: /*this.siteId || */ 2 }, (data, all) => {
+      this.$sendData('post', 'officialWebsite/getTopCouponList', { name: this.$route.query.search, outSiteId: /*this.siteId || */ 1 }, (data, all) => {
         this.couponList = data;
       });
     },

@@ -88,7 +88,7 @@ export default {
         "post",
         "officialWebsite/getStorePageList",
         {
-          siteId: /* this.siteId || */ 2,
+          siteId: /* this.siteId || */ 1,
           pageNumber: this.storeData.pageNumber,
           pageSize: this.storeData.pageSize
         },

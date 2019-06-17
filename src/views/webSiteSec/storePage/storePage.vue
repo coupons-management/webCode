@@ -2,7 +2,7 @@
   <div class="store">
     <div class="title">Stores in VOUCHERPA-TEST</div>
     <div class="store-list">
-      <div class="item" v-for="item in storeData.list" @click="goStore(item)">{{item.name}}</div>
+      <div class="item" v-for="item in storeData.list" @click="goStore(item)">{{item.showName}}</div>
     </div>
 
     <div style="text-align: center;margin-top: 15px;">
@@ -74,7 +74,7 @@ export default {
         "post",
         "officialWebsite/getStorePageList",
         {
-          siteId: /* this.siteId || */ 1,
+          siteId: /* this.siteId || */ 2,
           pageNumber: this.storeData.pageNumber,
           pageSize: this.storeData.pageSize
         },
