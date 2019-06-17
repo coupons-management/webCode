@@ -69,7 +69,7 @@
         </el-table-column>
         <el-table-column prop="storeName" label="商家名" align="center">
           <template slot-scope="scope">
-            <router-link :to="siteId==1?`/websiteSec`:`/websiteFir`" target="_blank">
+            <router-link :to="siteId==1?`/websiteFir`:`/websiteSec`" target="_blank">
               <a>{{scope.row.storeName}}</a>
             </router-link>
           </template>

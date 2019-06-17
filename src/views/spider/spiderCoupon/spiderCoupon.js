@@ -19,7 +19,7 @@ export default {
   },
   mounted(){
     if(this.currPageInfo){//查询商家下的优惠券
-      this.searchForm.storeId = this.currPageInfo;
+      this.searchForm.storeId = this.currPageInfo.storeId;
     }else{
       this.initData(['spiderSite','spiderType','expiry']);
     }
