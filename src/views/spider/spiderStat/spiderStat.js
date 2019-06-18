@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getData() {
-      console.log(this.time);
+      // console.log(this.time);
 
       this.$sendData('post', 'statistic/spider', { beginTime: this.time[0] || '', endTime: this.time[1] || '', spiderId: this.spiderId, range: this.range }, (data, all) => {
         this.data = data;

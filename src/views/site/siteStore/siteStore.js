@@ -80,6 +80,10 @@ export default {
     this.searchForm.outId = this.siteId;
     this.getCatygory();
     this.getTableData();
+
+    this.$dragging.$on('dragged', ({ value }) => {
+      this.couponSelected = value.list;
+    });
   },
   methods: {
     getCatygory() {
@@ -203,12 +207,6 @@ export default {
       console.log(this.couponSelected);
       if (this.couponSelected && this.couponSelected.length > 0) {
         this.sortCouponBox = true;
-        this.$nextTick(() => {
-          this.$dragging.$off('dragged')
-          this.$dragging.$on('dragged', ({ value }) => {
-            this.couponSelected = value.list;
-          });
-        });
       } else {
         this.$message({ type: 'error', message: '请选择排序的优惠券！' });
       }

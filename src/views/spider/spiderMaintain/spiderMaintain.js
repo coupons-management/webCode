@@ -18,56 +18,7 @@ export default {
       tableData: {
         pageSize: 10,
         pageNumber: 1,
-        list: [
-          {
-            id: '1',
-            storeName: '商家1',
-            website: 'www.baidu.com',
-            logo: 'static/imgs/nike.jpg',
-            sitNum: '3',
-            sitList: [{ name: '站点1' }, { name: '站点2' }, { name: '站点3' }],
-            spiderSitNum: '2',
-            spiderSitList: [{ name: '爬虫站1' }, { name: '爬虫站2' }],
-            spiderType: 'abc',
-            couponNum: '10',
-            couponNumTotal: '10',
-            createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16',
-            lastAddTime: '2019-04-16'
-          },
-          {
-            id: '1',
-            storeName: '商家1',
-            website: 'www.baidu.com',
-            logo: 'static/imgs/nike.jpg',
-            sitNum: '3',
-            sitList: [{ name: '站点1' }, { name: '站点2' }, { name: '站点3' }],
-            spiderSitNum: '2',
-            spiderSitList: [{ name: '爬虫站1' }, { name: '爬虫站2' }],
-            spiderType: 'abc',
-            couponNum: '10',
-            couponNumTotal: '12',
-            createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16',
-            lastAddTime: '2019-04-16'
-          },
-          {
-            id: '1',
-            storeName: '商家1',
-            website: 'www.baidu.com',
-            logo: 'static/imgs/nike.jpg',
-            sitNum: '3',
-            sitList: [{ name: '站点1' }, { name: '站点2' }, { name: '站点3' }],
-            spiderSitNum: '2',
-            spiderSitList: [{ name: '爬虫站1' }, { name: '爬虫站2' }],
-            spiderType: 'abc',
-            couponNum: '10',
-            couponNumTotal: '14',
-            createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16',
-            lastAddTime: '2019-04-16'
-          }
-        ]
+        list: []
       },
       editorData: {
         logoUrl: ''
