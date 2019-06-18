@@ -1,4 +1,30 @@
 <style lang="scss" scoped>
+.color-list {
+  display: flex;
+  flex-wrap: wrap;
+  i {
+    cursor: pointer;
+  }
+  div {
+    width: 120px;
+    height: 50px;
+    background-color: #ececec;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+
+    .deleteAdvert {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: red;
+      font-size: 20px;
+    }
+  }
+}
 </style>
 
 <template>
@@ -218,7 +244,7 @@
             <el-input v-model="editorData.endTime" disabled></el-input>
           </el-form-item>
           <el-form-item label="商家名">
-            <el-input v-model="editorData.storeName" placeholder="请输入商家名"></el-input>
+            <el-input v-model="editorData.showName" placeholder="请输入商家名"></el-input>
           </el-form-item>
           <el-form-item label="官网">
             <el-input v-model="editorData.webSite" disabled></el-input>
@@ -301,8 +327,15 @@
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="checkCouponsBox" class="editorStore" width="60%" title="查看优惠券">
-      <couponTable :currPageInfo="currPageInfo"></couponTable>
+    <el-dialog
+      :visible.sync="checkCouponsBox"
+      class="editorStore"
+      width="80%"
+      top="1%"
+      title="查看优惠券"
+    >
+      <el-button type="primary" style="margin-bottom:20px;" @click="handleSortCoupon">手动排序</el-button>
+      <couponTable :currPageInfo="currPageInfo" @change="handleCouponTableSelectChange" :selected="couponSelected"></couponTable>
     </el-dialog>
 
     <el-dialog :visible.sync="addCouponBox" class="editorStore" title="新增优惠券" width="40%" top="3%">
@@ -357,6 +390,27 @@
         :total="reportData.totalCount"
         :page-size="reportData.pageSize"
       ></el-pagination>
+    </el-dialog>
+
+    <el-dialog :visible.sync="sortCouponBox" :title="`优惠券排序`" width="70%" :show-close="false" :close-on-click-modal="false">
+      <div class="color-list">
+        <div
+          class="color-item"
+          v-for="item in couponSelected"
+          v-dragging="{ item: item, list: couponSelected, group: 'color' }"
+          :key="item.id"
+        >
+          {{item.currentTitle}}
+          <i
+            class="el-icon-error deleteAdvert"
+            @click="deleteSelectedCoupon(item)"
+          ></i>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" round @click="submitCouponOrder">提交排序</el-button>
+        <el-button round @click="cancelCouponOrder">取消排序</el-button>
+      </span>
     </el-dialog>
   </section>
 </template>

@@ -95,7 +95,7 @@
       <el-pagination class="paginationStyle" background layout="total ,prev, pager, next" @current-change="storeChange" :total="tableData.totalCount" :page-size="tableData.pageSize"></el-pagination>
     </section>
 
-    <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券">
+    <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券" width="80%" top="2%">
       <couponTable :currPageInfo="currPageInfo"></couponTable>
     </el-dialog>
 

@@ -1,4 +1,4 @@
-import couponTable from '../siteCoupon/siteCoupon.vue';
+import couponTable from './couponTable.vue';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -69,7 +69,9 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      fileUrl: sessionStorage.axiosLocalUrl + 'site-manager/uploadFile'
+      fileUrl: sessionStorage.axiosLocalUrl + 'site-manager/uploadFile',
+      sortCouponBox: false,
+      couponSelected: []
     };
   },
   mounted() {
@@ -187,6 +189,37 @@ export default {
       this.$sendData('post', '', this.reportData, (data, all) => {
         this.reportData = data;
       });
+    },
+    /* 删除表中的优惠券 */
+    deleteSelectedCoupon(item) {
+      this.couponSelected = this.couponSelected.filter(i => i.id !== item.id);
+    },
+    /* 选择表中的优惠券 */
+    handleCouponTableSelectChange(val) {
+      this.couponSelected = val;
+    },
+    /* 优惠券排序弹窗 */
+    handleSortCoupon() {
+      console.log(this.couponSelected);
+      if (this.couponSelected && this.couponSelected.length > 0) {
+        this.sortCouponBox = true;
+        this.$nextTick(() => {
+          this.$dragging.$off('dragged')
+          this.$dragging.$on('dragged', ({ value }) => {
+            this.couponSelected = value.list;
+          });
+        });
+      } else {
+        this.$message({ type: 'error', message: '请选择排序的优惠券！' });
+      }
+    },
+    /* 提交排序 */
+    submitCouponOrder() {
+      console.log(this.couponSelected);
+    },
+    /* 取消排序 */
+    cancelCouponOrder() {
+      this.sortCouponBox = false;
     }
   },
   computed: {
