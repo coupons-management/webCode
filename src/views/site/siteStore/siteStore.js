@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getCatygory() {
-      this.$sendData('post', '/showSiteTwo/getStoreSort', { outId: this.siteId }, (data, all) => {
+      this.$sendData('post', 'showSiteTwo/getStoreSort', { outId: this.siteId }, (data, all) => {
         this.typeList = data;
       });
     },
@@ -125,6 +125,9 @@ export default {
       //查看优惠券
       this.currPageInfo = item;
       this.checkCouponsBox = true;
+      this.couponSelectedDefault = [];
+      this.couponSelected = [];
+      this.getSortCoupon(item.storeId);
     },
     addCoupon(item) {
       //新增优惠券
@@ -194,6 +197,14 @@ export default {
         this.reportData = data;
       });
     },
+    /* 获取已排序的优惠券 */
+    getSortCoupon(storeId) {
+      this.$sendData('post', 'showSiteCoupon/getCouponListWithSort', { storeId }, (data, all) => {
+        this.couponSelectedDefault = data;
+        this.couponSelected = data;
+      });
+    },
+
     /* 删除表中的优惠券 */
     deleteSelectedCoupon(item) {
       this.couponSelected = this.couponSelected.filter(i => i.id !== item.id);
@@ -214,9 +225,15 @@ export default {
     /* 提交排序 */
     submitCouponOrder() {
       console.log(this.couponSelected);
+      this.$sendData('post', 'coupon/updateSort', this.couponSelected.map((i, j) => ({ couponId: i.id, sort: j + 1 })), (data, all) => {
+        this.$message({ type: 'error', message: '排序成功！' });
+        this.couponSelected = this.couponSelectedDefault;
+        this.sortCouponBox = false;
+      });
     },
     /* 取消排序 */
     cancelCouponOrder() {
+      this.couponSelected = this.couponSelectedDefault;
       this.sortCouponBox = false;
     }
   },
