@@ -63,7 +63,7 @@ export default {
     storeChange() {},
     editorSubmit() {},
     handleSelectChange() {
-      this.$nextTrick(() => {
+      this.$nextTick(() => {
         this.getData();
       });
     },
