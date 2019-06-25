@@ -62,8 +62,8 @@
         <el-form-item label=" 有效优惠券范围">
           <el-input v-model="searchForm.range" placeholder="请输入数量"></el-input>
         </el-form-item>
-        <div>
-          <el-form-item label="商家类型">
+        <!-- <div> -->
+          <!-- <el-form-item label="商家类型">
             <el-select v-model="searchForm.storeType" placeholder="请选择">
               <el-option label="全部" value></el-option>
               <el-option label="有新增优惠券的商家" value="0"></el-option>
@@ -78,12 +78,12 @@
               end-placeholder="结束日期"
               value-format="yyyy-MM-DD"
             ></el-date-picker>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item>
             <el-button type="primary" @click="searchSubmit">查询</el-button>
             <el-button type="primary" @click="addStore">新增</el-button>
           </el-form-item>
-        </div>
+        <!-- </div> -->
       </el-form>
 
       <el-table :data="tableData.list" stripe style="width: 100%" border>
@@ -335,7 +335,7 @@
       title="查看优惠券"
     >
       <el-button type="primary" style="margin-bottom:20px;" @click="handleSortCoupon">手动排序</el-button>
-      <couponTable :currPageInfo="currPageInfo" @change="handleCouponTableSelectChange" :selected="couponSelected"></couponTable>
+      <couponTable v-if="checkCouponsBox" :currPageInfo="currPageInfo" @change="handleCouponTableSelectChange" :selected="couponSelected" :changeSort="changeSort"></couponTable>
     </el-dialog>
 
     <el-dialog :visible.sync="addCouponBox" class="editorStore" title="新增优惠券" width="40%" top="3%">

@@ -71,7 +71,8 @@ export default {
       ],
       fileUrl: sessionStorage.axiosLocalUrl + 'site-manager/uploadFile',
       sortCouponBox: false,
-      couponSelected: []
+      couponSelected: [],
+      changeSort: 0
     };
   },
   mounted() {
@@ -123,11 +124,10 @@ export default {
     },
     checkCoupons(item) {
       //查看优惠券
-      this.currPageInfo = item;
-      this.checkCouponsBox = true;
+      this.currPageInfo = JSON.parse(JSON.stringify(item));
       this.couponSelectedDefault = [];
       this.couponSelected = [];
-      this.getSortCoupon(item.storeId);
+      this.getSortCoupon(this.currPageInfo.storeId);
     },
     addCoupon(item) {
       //新增优惠券
@@ -200,8 +200,13 @@ export default {
     /* 获取已排序的优惠券 */
     getSortCoupon(storeId) {
       this.$sendData('post', 'showSiteCoupon/getCouponListWithSort', { storeId }, (data, all) => {
-        this.couponSelectedDefault = data;
+        console.log('data:', data);
+        this.couponSelectedDefault = JSON.parse(JSON.stringify(data));
         this.couponSelected = data;
+        this.$nextTick(() => {
+          this.checkCouponsBox = true;
+        });
+        // console.log(this.couponSelected);
       });
     },
 
@@ -215,7 +220,7 @@ export default {
     },
     /* 优惠券排序弹窗 */
     handleSortCoupon() {
-      console.log(this.couponSelected);
+      // console.log(this.couponSelected);
       if (this.couponSelected && this.couponSelected.length > 0) {
         this.sortCouponBox = true;
       } else {
@@ -224,16 +229,25 @@ export default {
     },
     /* 提交排序 */
     submitCouponOrder() {
-      console.log(this.couponSelected);
-      this.$sendData('post', 'coupon/updateSort', this.couponSelected.map((i, j) => ({ couponId: i.id, sort: j + 1 })), (data, all) => {
-        this.$message({ type: 'error', message: '排序成功！' });
-        this.couponSelected = this.couponSelectedDefault;
-        this.sortCouponBox = false;
-      });
+      // console.log(this.couponSelected);
+      this.$sendData(
+        'post',
+        'coupon/updateSort',
+        { storeId: this.currPageInfo.storeId, sortList: this.couponSelected.map((i, j) => ({ couponId: i.id, sort: this.couponSelected.length - j })) },
+        (data, all) => {
+          this.$message({ type: 'success', message: '排序成功！' });
+          this.couponSelectedDefault = JSON.parse(JSON.stringify(this.couponSelected));
+          this.sortCouponBox = false;
+          this.getSortCoupon(this.currPageInfo.storeId);
+          this.$nextTick(() => {
+            this.changeSort = this.changeSort + 1;
+          });
+        }
+      );
     },
     /* 取消排序 */
     cancelCouponOrder() {
-      this.couponSelected = this.couponSelectedDefault;
+      this.couponSelected = JSON.parse(JSON.stringify(this.couponSelectedDefault));
       this.sortCouponBox = false;
     }
   },

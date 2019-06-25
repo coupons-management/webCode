@@ -20,11 +20,12 @@
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               value-format="yyyy-MM-DD"
+              @change="searchSubmit"
             ></el-date-picker>
           </el-form-item>
         </div>
         <el-form-item>
-          <el-radio-group v-model="searchForm.storeType">
+          <el-radio-group v-model="searchForm.storeType" @change="searchSubmit">
             <el-radio-button label>全部</el-radio-button>
             <el-radio-button label="1">有新增优惠券的商家</el-radio-button>
             <el-radio-button label="2">无新增优惠券的商家</el-radio-button>
@@ -32,8 +33,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchSubmit">查询</el-button>
-          <el-button type="primary" @click="addStore">新增</el-button>
+          <!-- <el-button type="primary" @click="searchSubmit">查询</el-button> -->
+          <!-- <el-button type="primary" @click="addStore">新增</el-button> -->
         </el-form-item>
       </el-form>
 

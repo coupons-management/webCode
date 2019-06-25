@@ -23,7 +23,7 @@
 
     <el-tabs v-model="activeName" @tab-click="handleClick" style="margin-top: 20px;">
 
-      <el-tab-pane label="商家" name="storePage">
+      <!-- <el-tab-pane label="商家" name="storePage">
         <el-table :data="storeData.storeList" stripe style="width: 60%" border size="mini">
           <el-table-column prop="name" label="商家名" align="center"></el-table-column>
           <el-table-column label="官网" align="center">
@@ -48,9 +48,9 @@
           <el-table-column prop="time" label="审核时间" align="center"></el-table-column>
         </el-table>
         <el-pagination class="" background layout="total ,prev, pager, next" @current-change="storeChange" :total="storeData.pageTotal" :page-size="storeData.pageSize"></el-pagination>
-      </el-tab-pane>
+      </el-tab-pane> -->
 
-      <el-tab-pane label="优惠券" name="couponPage">
+      <el-tab-pane label="审核的优惠券" name="couponPage">
         <el-table :data="couponData.couponList" stripe style="width: 80%" border size="mini">
           <el-table-column prop="storeName" label="商家名" align="center"></el-table-column>
           <el-table-column prop="title" label="原标题" align="center"></el-table-column>
@@ -62,7 +62,7 @@
         <el-pagination class="" background layout="total ,prev, pager, next" @current-change="couponChange" :total="couponData.pageTotal" :page-size="couponData.pageSize"></el-pagination>
       </el-tab-pane>
 
-      <el-tab-pane label="管理的商家" name="manageStorePage">
+      <el-tab-pane label="审核的商家" name="manageStorePage">
         <el-table :data="manageStoreData.manageStoreList" stripe style="width: 60%" border size="mini">
           <el-table-column prop="name" label="商家名" align="center"></el-table-column>
           <el-table-column label="官网" align="center">

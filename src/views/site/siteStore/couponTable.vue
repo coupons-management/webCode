@@ -6,6 +6,9 @@
       style="width: 100%"
       border
       size="mini"
+      row-key="id"
+      :reserve-selection="true"
+      ref="multipleTable"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
@@ -93,7 +96,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "spiderCoupon",
-  props: ["currPageInfo", "selected"],
+  props: ["currPageInfo", "selected", "changeSort"],
   data() {
     return {
       searchForm: {
@@ -106,6 +109,7 @@ export default {
         pageNumber: 1,
         state: ""
       },
+      sortChange: false,
       tableData: {}, //从后台获取的数组
       editorCouponsBox: false,
       editorData: {}
@@ -118,9 +122,6 @@ export default {
       this.searchForm.storeId = this.currPageInfo.storeId;
     } else {
       this.initData(["dataSource", "couponType", "expiry", "approval"]);
-    }
-    if (this.selected) {
-      this.toggleSelection(this.selected);
     }
     this.getTableData();
   },
@@ -188,26 +189,41 @@ export default {
         _this.searchForm,
         (data, all) => {
           _this.tableData = data;
+          this.$nextTick(() => {
+            this.sortChange = false;
+            if (this.selected) {
+              this.toggleSelection(this.selected);
+            }
+          });
         }
       );
     },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach(row => {
-          this.$refs.multipleTable.toggleRowSelection(row, true);
+          let temp = this.tableData.list.filter(i => i.id === row.id);
+          if (temp.length > 0) {
+            this.$refs.multipleTable.toggleRowSelection(temp[0], true);
+          }
         });
       } else {
         this.$refs.multipleTable.clearSelection();
       }
     },
     handleSelectionChange(val) {
-      this.$emit("change", val);
+      if (!this.sortChange) {
+        this.$emit("change", val);
+      }
     }
   },
   watch: {
     currPageInfo: function(e) {
       this.searchForm.storeId = this.currPageInfo.storeId;
       this.searchForm.pageNumber = 1;
+      this.getTableData();
+    },
+    changeSort: function() {
+      this.sortChange = true;
       this.getTableData();
     }
   },

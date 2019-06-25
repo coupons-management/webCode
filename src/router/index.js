@@ -94,15 +94,15 @@ export const constantRouterMap = [
   {
     path: '/storeCheck',
     component: Layout,
-    name: '商家审核',
-    meta: { title: '商家审核', icon: 'example' },
+    name: '数据来源',
+    meta: { title: '数据来源', icon: 'example' },
     redirect: '/storeCheck/check',
     children: [
       {
         path: 'check',
-        name: '商家审核',
+        name: '数据来源',
         component: () => import('@/views/storeCheck/storeCheck.vue'),
-        meta: { title: '商家审核', icon: 'tree' }
+        meta: { title: '数据来源', icon: 'tree' }
       }
     ]
   },
