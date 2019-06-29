@@ -102,7 +102,7 @@
         </el-table-column>
         <el-table-column prop="webSite" label="官网" align="center">
           <template slot-scope="scope">
-            <a :href="scope.row.webSite" target="view_window">{{scope.row.webSite}}</a>
+            <a :href="`http://${scope.row.webSite}`" target="view_window">{{scope.row.webSite}}</a>
           </template>
         </el-table-column>
         <el-table-column label="logo" align="center">
@@ -375,7 +375,7 @@
         <el-button type="primary" @click="couponSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="reportBox" class="editorStore" title="新增优惠券" width="60%">
+    <el-dialog :visible.sync="reportBox" class="editorStore" title="报表" width="60%">
       <el-table :data="reportData.list" stripe style="width: 100%" border size="mini">
         <el-table-column prop="id" label="日期" align="center"></el-table-column>
         <el-table-column prop="sourceTile" label="新增优惠券数量" align="center"></el-table-column>

@@ -4,26 +4,24 @@
 <template>
   <section class="siteStorePage">
     <section class="pageSearch">
-      <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
-        <div>
-          <el-form-item>
-            <!-- <el-select v-model="searchForm.storeType" placeholder="请选择">
+      <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="default">
+        <el-form-item>
+          <!-- <el-select v-model="searchForm.storeType" placeholder="请选择">
             <el-option label="全部" value></el-option>
             <el-option label="有新增优惠券的商家" value="0"></el-option>
             <el-option label="无新增优惠券的商家" value="1"></el-option>
             <el-option label="新增的商家" value="2"></el-option>
-            </el-select>-->
-            <el-date-picker
-              v-model="searchForm.timer"
-              type="daterange"
-              range-separator="－"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              value-format="yyyy-MM-DD"
-              @change="searchSubmit"
-            ></el-date-picker>
-          </el-form-item>
-        </div>
+          </el-select>-->
+          <el-date-picker
+            v-model="searchForm.timer"
+            type="daterange"
+            range-separator="－"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-DD"
+            @change="searchSubmit"
+          ></el-date-picker>
+        </el-form-item>
         <el-form-item>
           <el-radio-group v-model="searchForm.storeType" @change="searchSubmit">
             <el-radio-button label>全部</el-radio-button>

@@ -1,6 +1,13 @@
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
 .webSiteSec {
   min-width: 1400px;
   background-color: rgb(235, 239, 242);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: #212529;
+  font-weight: 400;
   .topPart {
     padding: 0 13%;
     background-color: rgb(236, 96, 0);

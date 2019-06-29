@@ -1,33 +1,47 @@
 <style lang="scss" scoped>
-
 </style>
 
 <template>
   <section class="siteStatPage">
-    <el-date-picker v-model="value6" type="daterange" range-separator="－" start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
-    <el-radio-group v-model="radio3" style="margin: 20px 30px;">
+    <el-select v-model="spiderId" placeholder="请选择爬虫" @change="handleSelectChange">
+      <el-option
+        v-for="spiderItem in spiderList"
+        :key="spiderItem.key"
+        :value="spiderItem.key"
+        :label="spiderItem.value"
+      ></el-option>
+    </el-select>
+    <el-date-picker
+      v-model="time"
+      type="daterange"
+      range-separator="－"
+      value-format="timestamp"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      @change="handleSelectChange"
+    ></el-date-picker>
+    <el-radio-group v-model="range" style="margin: 20px 30px;" @change="handleSelectChange">
       <el-radio-button label="1">按日</el-radio-button>
       <el-radio-button label="2">按周</el-radio-button>
       <el-radio-button label="3">按月</el-radio-button>
     </el-radio-group>
-    <el-radio-group v-model="radio4" style="margin:20px 30px;">
+    <el-radio-group v-model="radio4" style="margin:20px 30px;" @change="handleSelectChange">
       <el-radio-button label="1">报表统计</el-radio-button>
       <el-radio-button label="2">商家统计</el-radio-button>
     </el-radio-group>
 
-    <el-table :data="totalStat.totalList" stripe style="width: 100%" border v-show="radio4 == 1">
+    <el-table :data="data" stripe style="width: 100%" border v-show="radio4 == 1">
       <el-table-column prop="date" label="日期" align="center"></el-table-column>
-      <el-table-column prop="newStoreNum" label="新增商家数量" align="center"></el-table-column>
-      <el-table-column prop="storeNum" label="更新的商家数量" align="center">
-        <template slot-scope="scope">
-          {{scope.row.storeNum}}/{{scope.row.totalStoreNum}}　　{{fixedNum(scope.row.storeNum/scope.row.totalStoreNum,'percent')}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="couponNum" label="新增优惠券数量" align="center"></el-table-column>
-      <el-table-column prop="rightCouponNum" label="有效优惠券总数" align="center"></el-table-column>
-      <el-table-column prop="totalCouponNum" label="优惠券总数" align="center"></el-table-column>
+      <el-table-column prop="incrementStore" label="新增商家数量" align="center"></el-table-column>
+      <el-table-column prop="updateStore" label="更新的商家数量" align="center"></el-table-column>
+      <el-table-column prop="incrementCoupon" label="新增优惠券数量" align="center"></el-table-column>
+      <el-table-column prop="validCoupon" label="有效优惠券总数" align="center"></el-table-column>
+      <el-table-column prop="totalCoupon" label="优惠券总数" align="center"></el-table-column>
     </el-table>
-
+    <section
+      v-show="radio4 == 2"
+      style="color: darkgrey;margin-bottom: 10px;font-size: 14px;"
+    >以下数量为：商家的有效优惠券数量</section>
     <el-table :data="storeStat.storeList" stripe style="width: 100%" border v-show="radio4 == 2">
       <el-table-column prop="date" label="日期" align="center"></el-table-column>
       <el-table-column prop="num0" label="数量为0" align="center"></el-table-column>
