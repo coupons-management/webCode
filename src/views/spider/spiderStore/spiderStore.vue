@@ -24,9 +24,9 @@
             <el-option v-for="typeItem in typeList" :key="typeItem.key" :value="typeItem.key" :label="typeItem.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label=" 有效优惠券范围">
+        <!-- <el-form-item label=" 有效优惠券范围">
           <el-input type="number" v-model="searchForm.validCouponsCount" placeholder="请输入数量"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item>
           <el-button type="primary" @click="searchSubmit">查询</el-button>
         </el-form-item>

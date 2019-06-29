@@ -3,14 +3,14 @@
 
 <template>
   <section class="siteStatPage">
-    <el-select v-model="spiderId" placeholder="请选择爬虫" @change="handleSelectChange">
+    <!-- <el-select v-model="spiderId" placeholder="请选择爬虫" @change="handleSelectChange">
       <el-option
         v-for="spiderItem in spiderList"
         :key="spiderItem.key"
         :value="spiderItem.key"
         :label="spiderItem.value"
       ></el-option>
-    </el-select>
+    </el-select> -->
     <el-date-picker
       v-model="time"
       type="daterange"
