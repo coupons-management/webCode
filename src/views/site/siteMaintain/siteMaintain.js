@@ -5,6 +5,9 @@ export default {
   components: { couponTable },
   name: 'siteMaintain',
   data() {
+    const end = new Date();
+    const start = new Date();
+    start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
     return {
       searchForm: {
         siteId: '',
@@ -15,7 +18,7 @@ export default {
         startTime: '',
         endTime: '',
         search: '',
-        timer: '',
+        timer: [start, end],
         pageSize: 10,
         pageNumber: 1,
         range: ''

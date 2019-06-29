@@ -20,7 +20,7 @@
             <el-input v-model="storeSearch.search" placeholder="请输入商家名、官网"></el-input>
           </el-form-item>
           <el-form-item label="国家">
-            <el-select v-model="storeSearch.scrapyId" placeholder="请选择国家">
+            <el-select v-model="storeSearch.country" placeholder="请选择国家">
               <el-option
                 v-for="countryItem in countryList"
                 :key="countryItem.key"
@@ -93,7 +93,7 @@
             <el-input v-model="storeSearch.search" placeholder="请输入商家名、官网"></el-input>
           </el-form-item>
           <el-form-item label="国家">
-            <el-select v-model="storeSearch.scrapyId" placeholder="请选择国家">
+            <el-select v-model="storeSearch.country" placeholder="请选择国家">
               <el-option
                 v-for="countryItem in countryList"
                 :key="countryItem.key"
@@ -102,13 +102,11 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <!-- <el-form-item label="爬虫分类">
+         <el-form-item label="爬虫分类">
             <el-select v-model="storeSearch.spiderType" placeholder="请选择分类">
-              <el-option label="全部" value="0"></el-option>
-              <el-option label="是" value="1"></el-option>
-              <el-option label="否" value="2"></el-option>
+             <el-option v-for="typeItem in typeList" :key="typeItem.key" :value="typeItem.key" :label="typeItem.value"></el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> <!-- 
           <el-form-item label=" 有效优惠券范围">
             <el-input v-model="storeSearch.couponNum" placeholder="请输入数量"></el-input>
           </el-form-item>-->

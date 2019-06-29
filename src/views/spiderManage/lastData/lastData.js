@@ -18,7 +18,7 @@ export default {
       },
       storeSearch: {
         search: '',
-        country: '0',
+        country: '',
         scrapyId: 0,
         couponNum: ''
       },
@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    this.initData(['spiderSite', 'couponType', 'country']);
+    this.initData(['spiderSite', 'spiderType', 'couponType', 'country']);
     this.getData();
   },
   methods: {
@@ -81,6 +81,6 @@ export default {
     couponChange() {}
   },
   computed: {
-    ...mapGetters(['spiderList', 'couponTypeList', 'countryList'])
+    ...mapGetters(['spiderList', 'typeList', 'couponTypeList', 'countryList'])
   }
 };

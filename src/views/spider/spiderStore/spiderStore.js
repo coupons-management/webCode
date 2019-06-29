@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    this.initData(['spiderSite', 'country']);
+    this.initData(['spiderSite', 'spiderType', 'country']);
     this.searchForm.pageNumber = 1;
     this.getTableList();
   },
@@ -70,6 +70,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['spiderList', 'countryList'])
+    ...mapGetters(['spiderList', 'countryList', 'typeList'])
   }
 };
