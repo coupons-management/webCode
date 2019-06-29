@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       searchForm: {
-        outId: '',
+        siteId: '',
         country: '',
         typeId: '',
         mark: '',
@@ -18,7 +18,7 @@ export default {
         timer: '',
         pageSize: 10,
         pageNumber: 1,
-        storeType: ''
+        range: ''
       },
       tableData: {
         pageSize: 10,
@@ -75,13 +75,13 @@ export default {
   mounted() {
     //this.getStoreCate();
     this.initData(['country', 'couponType']);
-    this.searchForm.outId = this.siteId;
+    this.searchForm.siteId = this.siteId;
     this.getCatygory();
     this.getTableData();
   },
   methods: {
     getCatygory() {
-      this.$sendData('post', '/showSiteTwo/getStoreSort', { outId: this.siteId }, (data, all) => {
+      this.$sendData('post', 'showSiteType/getList', { siteId: this.siteId }, (data, all) => {
         this.typeList = data;
       });
     },
@@ -92,7 +92,7 @@ export default {
     },
     statInfo(item) {
       //报表
-      this.reportData.outId = this.siteId;
+      this.reportData.siteId = this.siteId;
       this.getReport();
       this.reportBox = true;
     },
@@ -107,13 +107,14 @@ export default {
     editorInfo(data) {
       //编辑
       this.editorData = this.deepClone(data);
-      this.$sendData('post', 'showSiteTwo/getSiteStroreById', { id: data.id }, (data, all) => {
-        this.editorData = {
-          ...this.editorData,
-          ...data
-        };
-        this.editorStoreBox = true;
-      });
+      this.editorStoreBox = true;
+      // this.$sendData('post', 'showSiteTwo/getSiteStroreById', { id: data.id }, (data, all) => {
+      //   this.editorData = {
+      //     ...this.editorData,
+      //     ...data
+      //   };
+      //   this.editorStoreBox = true;
+      // });
     },
     checkCoupons(item) {
       //查看优惠券
@@ -148,10 +149,18 @@ export default {
     },
     editorSubmit() {
       //编辑商家提交
-      this.$sendData('post', 'showSiteTwo/updateSiteStore', this.editorData, (data, all) => {
-        this.getTableData();
-        this.editorStoreBox = false;
-        this.$message({ type: 'success', message: '编辑成功！' });
+      // this.$sendData('post', 'showSiteTwo/updateSiteStore', this.editorData, (data, all) => {
+      //   this.getTableData();
+      //   this.editorStoreBox = false;
+      //   this.$message({ type: 'success', message: '编辑成功！' });
+      // });
+
+      let _this = this;
+      _this.$sendData('post', 'store/edit', _this.editorData, (data, all) => {
+        //爬虫商家编辑提交
+        _this.getTableData();
+        _this.$message({ type: 'success', message: '修改成功!' });
+        _this.editorStoreBox = false;
       });
     },
     handleAvatarSuccess(e) {
@@ -164,16 +173,18 @@ export default {
         _this.searchForm.startTime = _this.changeDate(_this.searchForm.timer[0]);
         _this.searchForm.endTime = _this.changeDate(_this.searchForm.timer[1]);
       }
-      _this.$sendData('post', 'showSiteTwo/getTwoList', _this.searchForm, (data, all) => {
+      _this.$sendData('post', 'storeOperation/getPageInSite', _this.searchForm, (data, all) => {
         // console.log(data);
         this.tableData = data;
       });
     },
-    getStoreCate() {
-      //获取商家分类
-      let _this = this;
-      _this.$sendData('post', 'showSiteTwo/getStoreSort', { siteId: _this.siteId }, (data, all) => {});
-    },
+    // getStoreCate() {
+    //   //获取商家分类
+    //   let _this = this;
+    //   _this.$sendData('post', 'showSiteType/getList', { siteId: _this.siteId }, (data, all) => {
+    //     this.typeList = data;
+    //   });
+    // },
     couponSubmit() {
       this.$sendData('post', 'coupon/create', this.couponItem, (data, all) => {
         this.addCouponBox = false;

@@ -43,8 +43,8 @@ export default {
     getData() {
       this.$sendData(
         'post',
-        'statistic/spider',
-        { siteId: this.siteId, beginTime: this.time[0] || '', endTime: this.time[1] || '', spiderId: this.spiderId, range: this.range },
+        'statistic/site',
+        { siteId: this.siteId, beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range },
         (data, all) => {
           this.data = data;
         }

@@ -1,66 +1,86 @@
+import { mapGetters } from 'vuex';
 export default {
   name: 'lastData',
-  data(){
+  data() {
     return {
-      spiderSite:'0',
-      activeName:'storePage',
-      couponSearch: {//提交给后台的 查询条件
+      spiderSite: '0',
+      activeName: 'storePage',
+      couponSearch: {
+        //提交给后台的 查询条件
+        scrapyId: 0,
         title: '',
-        type: '0',
-        isPast: '0'
+        type: '',
+        expired: '0'
       },
-      couponData: {//从后台获取的数组
-        page:1,
-        pageTotal:3,
-        pageSize:10,
-        couponList:[
-          {id: '1', storeName: '商家1', couponName: '优惠券1', code: 'code', describe: '描述1', isPast: '2', pastTime: '2019-04-16',createTime:'2019-04-16'},
-          {id: '2', storeName: '商家2', couponName: '优惠券2', code: 'deal', describe: '描述2', isPast: '1', pastTime: '2019-04-16',createTime:'2019-04-16'},
-          {id: '3', storeName: '商家3', couponName: '优惠券3', code: 'code', describe: '描述3', isPast: '2', pastTime: '2019-04-16',createTime:'2019-04-16'}
-        ]
+      couponData: {
+        pageNumber: 1,
+        pageSize: 10
       },
       storeSearch: {
-        keyWord: '',
+        search: '',
         country: '0',
-        spiderType: '0',
-        couponNum:''
+        scrapyId: 0,
+        couponNum: ''
       },
       storeData: {
-        pageSize:10,
-        pageTotal:3,
-        page:1,
-        storeList:[
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '10', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '12', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '14', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'}
-        ]
+        pageNumber: 1,
+        pageSize: 10
       }
-    }
+    };
   },
-  mounted(){
-
+  mounted() {
+    this.initData(['spiderSite', 'couponType', 'country']);
+    this.getData();
   },
-  methods:{
-    handleClick(){
-
+  methods: {
+    getData() {
+      console.log(this.activeName);
+      if (this.activeName === 'storePage') {
+        this.$sendData('post', 'scrapyStore/getListPage', { ...this.storeSearch, pageNumber: this.storeData.pageNumber, pageSize: this.storeData.pageSize }, (data, all) => {
+          this.storeData = data;
+        });
+      }
+      if (this.activeName === 'unusualStore') {
+        this.$sendData('post', 'scrapyStore/getErrListPage', { ...this.storeSearch, pageNumber: this.storeData.pageNumber, pageSize: this.storeData.pageSize }, (data, all) => {
+          this.storeData = data;
+        });
+      }
+      if (this.activeName === 'couponPage') {
+        this.$sendData(
+          'post',
+          'scrapyStore/getScrapyCouponPageList',
+          { ...this.couponSearch, pageNumber: this.couponData.pageNumber, pageSize: this.couponData.pageSize },
+          (data, all) => {
+            this.couponData = data;
+          }
+        );
+      }
+      if (this.activeName === 'unusualCoupon') {
+        this.$sendData(
+          'post',
+          'scrapyStore/getErrScrapyCouponPageList',
+          { ...this.couponSearch, pageNumber: this.couponData.pageNumber, pageSize: this.couponData.pageSize },
+          (data, all) => {
+            this.couponData = data;
+          }
+        );
+      }
     },
-    couponSubmit(){
-
+    handleChangeSpider(val) {
+      this.couponSearch.scrapyId = val;
+      this.getData();
     },
-    storeSubmit(){
-
+    handleClick() {
+      this.couponData.pageNumber = 1;
+      this.storeData.pageNumber = 1;
+      this.getData();
     },
-    storeChange(){
-
-    },
-    couponChange(){
-
-    }
+    couponSubmit() {},
+    storeSubmit() {},
+    storeChange() {},
+    couponChange() {}
+  },
+  computed: {
+    ...mapGetters(['spiderList', 'couponTypeList', 'countryList'])
   }
-}
+};

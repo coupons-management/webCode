@@ -41,27 +41,36 @@ export default {
   },
   methods: {
     getCatygory() {
-      this.$sendData('post', '/showSiteTwo/getStoreSort', { outId: this.siteId }, (data, all) => {
+      this.$sendData('post', 'showSiteType/getList', { siteId: this.siteId }, (data, all) => {
         this.typeList = data;
       });
     },
     editorInfo(data) {
       //编辑
       this.editorData = this.deepClone(data);
-      this.$sendData('post', 'showSiteTwo/getSiteStroreById', { id: data.id }, (data, all) => {
-        this.editorData = {
-          ...this.editorData,
-          ...data
-        };
-        this.editorStoreBox = true;
-      });
+      this.editorStoreBox = true;
+      // this.$sendData('post', 'showSiteTwo/getSiteStroreById', { id: data.id }, (data, all) => {
+      //   this.editorData = {
+      //     ...this.editorData,
+      //     ...data
+      //   };
+      //   this.editorStoreBox = true;
+      // });
     },
     checkCoupons(item) {
       this.currPageInfo = item;
       this.checkCouponsBox = true;
     },
     storeChange() {},
-    editorSubmit() {},
+    editorSubmit() {
+      let _this = this;
+      _this.$sendData('post', 'store/edit', _this.editorData, (data, all) => {
+        //爬虫商家编辑提交
+        _this.getData();
+        _this.$message({ type: 'success', message: '修改成功!' });
+        _this.editorStoreBox = false;
+      });
+    },
     handleSelectChange() {
       this.$nextTick(() => {
         this.getData();

@@ -12,7 +12,7 @@
             v-model="scope.row.name"
             class="tableInput"
             @blur="inputBlur(scope.row)"
-          >
+          />
         </template>
       </el-table-column>
       <!-- <el-table-column label="top上限" align="center">
@@ -29,6 +29,12 @@
     </el-table>
 
     <el-dialog :visible.sync="advertBox" class="advert" :title="`${modalName}查看/排序`" width="70%">
+      <el-alert
+        style="margin: 0 20px;width: auto;"
+        title="删除更改数据保存后生效！"
+        type="warning"
+        :closable="false"
+      ></el-alert>
       <div class="color-list">
         <div
           class="color-item"
@@ -49,7 +55,7 @@
           round
           @click="addStore"
         >{{type === 'hotCoupon' || type === 'intruduceCoupon'?`编辑优惠券`:`编辑商家`}}</el-button>
-        <el-button type="primary" round @click="submitOrder">提交排序</el-button>
+        <el-button type="primary" round @click="submitOrder">保存</el-button>
       </section>
     </el-dialog>
 
@@ -77,12 +83,12 @@
           <template slot-scope="scope">
             <el-tooltip class="item" effect="light" placement="right">
               <div slot="content">
-                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1">
+                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1" />
+                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1" />
               </div>
               <div>
-                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg">
+                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg" />
+                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg" />
               </div>
             </el-tooltip>
           </template>

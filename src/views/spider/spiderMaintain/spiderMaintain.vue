@@ -143,7 +143,30 @@
       <couponTable :currPageInfo="currPageInfo"></couponTable>
     </el-dialog>
 
-    <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="60%" top="3%">
+    <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="30%">
+      <el-form :model="editorData" size="small" label-width="80px" label-position="left">
+        <el-form-item label=" 商家名" required>
+          <el-col :span="11">
+            <el-input v-model="editorData.name" placeholder="请输入名字"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="　国家">
+          <el-select v-model="editorData.country" placeholder="请选择语言">
+            <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div style="margin-bottom:15px;color: #606266;font-weight: bold;">　站点图片上传</div>
+      <div style="text-align: center;">
+        <el-upload class="avatar-uploader" :action="fileUrl" :show-file-list="false" :on-success="handleAvatarSuccess">
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">　提　交　</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="60%" top="3%">
       <el-form :model="editorData" size="small" label-width="140px" :inline="true">
         <div>
           <el-form-item label="id">
@@ -191,16 +214,6 @@
           <el-form-item label="商家浏览次数">
             <el-input v-model="editorData.storeCount" placeholder="请输入商家浏览次数"></el-input>
           </el-form-item>
-          <!-- <el-form-item label="标签">
-          <el-select v-model="editorData.tags" multiple placeholder="请选择">
-            <el-option
-              v-for="(item,index) in tagList"
-              :key="index"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-          </el-form-item>-->
 
           <el-form-item label="是否只显示人工增加优惠券" label-width="180px">
             <el-radio v-model="editorData.isManual" label="1">是</el-radio>
@@ -236,7 +249,7 @@
         </el-upload>
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
   </section>
 </template>
 

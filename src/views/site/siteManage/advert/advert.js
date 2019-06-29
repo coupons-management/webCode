@@ -100,10 +100,11 @@ export default {
     },
     deleteAdvertBtn(item) {
       //单个广告词条中 商家的单个删除
-      this.$sendData('post', this.deleteUrl[this.type], { id: item.id }, (data, all) => {
-        this.getAdSingle();
-        this.$message({ type: 'success', message: '删除成功！' });
-      });
+      // this.$sendData('post', this.deleteUrl[this.type], { id: item.id }, (data, all) => {
+      //   this.getAdSingle();
+      //   this.$message({ type: 'success', message: '删除成功！' });
+      // });
+      this.advData = this.advData.filter(i => i.id !== item.id);
     },
     tableChange(e) {
       this.tableData.pageNumber = e;

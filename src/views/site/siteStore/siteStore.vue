@@ -63,7 +63,7 @@
           <el-input v-model="searchForm.range" placeholder="请输入数量"></el-input>
         </el-form-item>
         <!-- <div> -->
-          <!-- <el-form-item label="商家类型">
+        <!-- <el-form-item label="商家类型">
             <el-select v-model="searchForm.storeType" placeholder="请选择">
               <el-option label="全部" value></el-option>
               <el-option label="有新增优惠券的商家" value="0"></el-option>
@@ -78,11 +78,11 @@
               end-placeholder="结束日期"
               value-format="yyyy-MM-DD"
             ></el-date-picker>
-          </el-form-item> -->
-          <el-form-item>
-            <el-button type="primary" @click="searchSubmit">查询</el-button>
-            <el-button type="primary" @click="addStore">新增</el-button>
-          </el-form-item>
+        </el-form-item>-->
+        <el-form-item>
+          <el-button type="primary" @click="searchSubmit">查询</el-button>
+          <el-button type="primary" @click="addStore">新增</el-button>
+        </el-form-item>
         <!-- </div> -->
       </el-form>
 
@@ -90,7 +90,7 @@
         <el-table-column prop="id" label="id" align="center">
           <template slot-scope="scope">
             {{scope.row.id}}
-            <input type="hidden" :value="scope.row.storeId">
+            <input type="hidden" :value="scope.row.storeId" />
           </template>
         </el-table-column>
         <el-table-column prop="storeName" label="商家名" align="center">
@@ -109,12 +109,12 @@
           <template slot-scope="scope">
             <el-tooltip class="item" effect="light" placement="right">
               <div slot="content">
-                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1">
+                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1" />
+                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1" />
               </div>
               <div>
-                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg">
+                <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg" />
+                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg" />
               </div>
             </el-tooltip>
           </template>
@@ -170,8 +170,8 @@
         <el-form-item label="官网">
           <el-input v-model="editorData.webSite"></el-input>
         </el-form-item>
-        <el-form-item label="商家类别">
-          <el-select v-model="editorData.category" placeholder="请选择语言">
+        <el-form-item label="商家分类">
+          <el-select v-model="editorData.category" placeholder="请选择商家分类">
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
@@ -227,7 +227,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
         >
-          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <el-button type="primary" @click="addSubmit" style="margin-top:20px;">提 交</el-button>
@@ -249,8 +249,8 @@
           <el-form-item label="官网">
             <el-input v-model="editorData.webSite" disabled></el-input>
           </el-form-item>
-          <el-form-item label="商家类别">
-            <el-select v-model="editorData.category" placeholder="请选择语言">
+          <el-form-item label="商家分类">
+            <el-select v-model="editorData.category" placeholder="请选择商家分类">
               <el-option
                 v-for="item in typeList"
                 :key="item.id"
@@ -321,7 +321,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
         >
-          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
@@ -335,7 +335,13 @@
       title="查看优惠券"
     >
       <el-button type="primary" style="margin-bottom:20px;" @click="handleSortCoupon">手动排序</el-button>
-      <couponTable v-if="checkCouponsBox" :currPageInfo="currPageInfo" @change="handleCouponTableSelectChange" :selected="couponSelected" :changeSort="changeSort"></couponTable>
+      <couponTable
+        v-if="checkCouponsBox"
+        :currPageInfo="currPageInfo"
+        @change="handleCouponTableSelectChange"
+        :selected="couponSelected"
+        :changeSort="changeSort"
+      ></couponTable>
     </el-dialog>
 
     <el-dialog :visible.sync="addCouponBox" class="editorStore" title="新增优惠券" width="40%" top="3%">
@@ -392,13 +398,25 @@
       ></el-pagination>
     </el-dialog>
 
-    <el-dialog :visible.sync="sortCouponBox" :title="`优惠券排序`" width="70%" :show-close="false" :close-on-click-modal="false">
+    <el-dialog
+      :visible.sync="sortCouponBox"
+      :title="`优惠券排序`"
+      width="70%"
+      :show-close="false"
+      :close-on-click-modal="false"
+    >
+      <el-alert
+        style="margin: 0 20px;width: auto;"
+        title="删除更改数据保存后生效！"
+        type="warning"
+        :closable="false"
+      ></el-alert>
       <div class="color-list">
         <div
           class="color-item"
-          v-for="item in couponSelected"
+          v-for="(item, index) in couponSelected"
           v-dragging="{ item: item, list: couponSelected, group: 'color' }"
-          :key="item.id"
+          :key="item.id+index"
         >
           {{item.currentTitle}}
           <i
@@ -408,8 +426,8 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" round @click="submitCouponOrder">提交排序</el-button>
-        <el-button round @click="cancelCouponOrder">取消排序</el-button>
+        <el-button type="primary" round @click="submitCouponOrder">保存</el-button>
+        <el-button round @click="cancelCouponOrder">取消</el-button>
       </span>
     </el-dialog>
   </section>

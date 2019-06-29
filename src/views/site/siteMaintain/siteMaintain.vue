@@ -23,7 +23,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-radio-group v-model="searchForm.storeType" @change="searchSubmit">
+          <el-radio-group v-model="searchForm.range" @change="searchSubmit">
             <el-radio-button label>全部</el-radio-button>
             <el-radio-button label="1">有新增优惠券的商家</el-radio-button>
             <el-radio-button label="2">无新增优惠券的商家</el-radio-button>
@@ -46,13 +46,13 @@
         <el-table-column prop="storeName" label="商家名" align="center">
           <template slot-scope="scope">
             <router-link :to="siteId==1?`/websiteSec`:`/websiteFir`" target="_blank">
-              <a>{{scope.row.storeName}}</a>
+              <a>{{scope.row.name}}</a>
             </router-link>
           </template>
         </el-table-column>
         <el-table-column prop="webSite" label="官网" align="center">
           <template slot-scope="scope">
-            <a :href="scope.row.webSite" target="view_window">{{scope.row.webSite}}</a>
+            <a :href="scope.row.website" target="view_window">{{scope.row.website}}</a>
           </template>
         </el-table-column>
         <el-table-column label="logo" align="center">
@@ -60,11 +60,11 @@
             <el-tooltip class="item" effect="light" placement="right">
               <div slot="content">
                 <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1">
+                <img v-else src="static/imgs/noImg.png" class="tableImg1">
               </div>
               <div>
                 <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg">
-                <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg">
+                <img v-else src="static/imgs/noImg.png" class="tableImg">
               </div>
             </el-tooltip>
           </template>
@@ -73,32 +73,32 @@
           <template slot-scope="scope">
             <el-tooltip class="item" effect="light" placement="right">
               <div slot="content">
-                <div v-for="item in scope.row.scrapyList" class="sitList">{{item}}</div>
+                <div v-for="item in scope.row.spiderSiteNameList" class="sitList">{{item}}</div>
               </div>
-              <div>{{scope.row.scrapyList.length}}</div>
+              <div>{{scope.row.spiderSiteNameList.length}}</div>
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column prop="typeName" label="商家分类" align="center"></el-table-column>
+        <el-table-column prop="scrapyType" label="商家分类" align="center"></el-table-column>
         <el-table-column label="有效优惠券数量" align="center">
           <template slot-scope="scope">
-            <span>{{scope.row.showCount}}</span>
+            <span>{{scope.row.validCouponsCount}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="addTime" label="加入时间" align="center"></el-table-column>
-        <el-table-column prop="endTime" label="优惠券最后新增时间" align="center"></el-table-column>
+        <el-table-column prop="createTime" label="加入时间" align="center"></el-table-column>
+        <el-table-column prop="couponUpdateTime" label="优惠券最后新增时间" align="center"></el-table-column>
         <el-table-column align="center" label="操作" width="180">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="editorInfo(scope.row)">编辑</el-button>
-            <el-button type="text" size="mini" @click="statInfo(scope.row)">报表</el-button>
-            <el-button type="text" size="mini" @click="deleteStore(scope.row)">删除</el-button>
+            <!-- <el-button type="text" size="mini" @click="statInfo(scope.row)">报表</el-button> -->
+            <!-- <el-button type="text" size="mini" @click="deleteStore(scope.row)">删除</el-button> -->
             <el-button
               type="text"
               size="mini"
               @click="checkCoupons(scope.row)"
               style="margin-left: 10px;"
             >查看优惠券</el-button>
-            <el-button type="text" size="mini" @click="addCoupon(scope.row)">新增优惠券</el-button>
+            <!-- <el-button type="text" size="mini" @click="addCoupon(scope.row)">新增优惠券</el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -183,7 +183,29 @@
         <el-button type="primary" @click="addSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
     </el-dialog>
-    <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="60%" top="3%">
+    <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="30%">
+      <el-form :model="editorData" size="small" label-width="80px" label-position="left">
+        <el-form-item label=" 商家名" required>
+          <el-col :span="11">
+            <el-input v-model="editorData.name" placeholder="请输入名字"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="　国家">
+          <el-select v-model="editorData.country" placeholder="请选择语言">
+            <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div style="margin-bottom:15px;color: #606266;font-weight: bold;">　站点图片上传</div>
+      <div style="text-align: center;">
+        <el-upload class="avatar-uploader" :action="fileUrl" :show-file-list="false" :on-success="handleAvatarSuccess">
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">　提　交　</el-button>
+      </div>
+    </el-dialog>
+    <!-- <el-dialog :visible.sync="editorStoreBox" class="editorStore" title="商家编辑" width="60%" top="3%">
       <el-form :model="editorData" size="small" label-width="140px" :inline="true">
         <div>
           <el-form-item label="id">
@@ -231,16 +253,6 @@
           <el-form-item label="商家浏览次数">
             <el-input v-model="editorData.storeCount" placeholder="请输入商家浏览次数"></el-input>
           </el-form-item>
-          <!-- <el-form-item label="标签">
-          <el-select v-model="editorData.tags" multiple placeholder="请选择">
-            <el-option
-              v-for="(item,index) in tagList"
-              :key="index"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-          </el-form-item>-->
 
           <el-form-item label="是否只显示人工增加优惠券" label-width="180px">
             <el-radio v-model="editorData.isManual" label="1">是</el-radio>
@@ -276,7 +288,7 @@
         </el-upload>
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
     <el-dialog :visible.sync="checkCouponsBox" class="editorStore" width="60%" title="查看优惠券">
       <couponTable :currPageInfo="currPageInfo"></couponTable>
     </el-dialog>

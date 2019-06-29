@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     getCatygory() {
-      this.$sendData('post', 'showSiteTwo/getStoreSort', { outId: this.siteId }, (data, all) => {
+      this.$sendData('post', 'showSiteType/getList', { siteId: this.siteId }, (data, all) => {
         this.typeList = data;
       });
     },
@@ -178,11 +178,13 @@ export default {
         this.tableData = data;
       });
     },
-    getStoreCate() {
-      //获取商家分类
-      let _this = this;
-      _this.$sendData('post', 'showSiteTwo/getStoreSort', { siteId: _this.siteId }, (data, all) => {});
-    },
+    // getStoreCate() {
+    //   //获取商家分类
+    //   let _this = this;
+    //   _this.$sendData('post', 'showSiteType/getList', { siteId: _this.siteId }, (data, all) => {
+    //     this.typeList = data;
+    //   });
+    // },
     couponSubmit() {
       this.$sendData('post', 'coupon/create', this.couponItem, (data, all) => {
         this.addCouponBox = false;
@@ -199,7 +201,7 @@ export default {
     },
     /* 获取已排序的优惠券 */
     getSortCoupon(storeId) {
-      this.$sendData('post', 'showSiteCoupon/getCouponListWithSort', { storeId }, (data, all) => {
+      this.$sendData('post', 'showSiteCoupon/getCouponListWithSort', { storeId, siteId: this.siteId }, (data, all) => {
         console.log('data:', data);
         this.couponSelectedDefault = JSON.parse(JSON.stringify(data));
         this.couponSelected = data;
