@@ -84,12 +84,12 @@
         <template slot-scope="scope">
           <el-tooltip class="item" effect="light" placement="right">
             <div slot="content">
-              <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1">
-              <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1">
+              <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg1" />
+              <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg1" />
             </div>
             <div>
-              <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg">
-              <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg">
+              <img v-if="scope.row.logo" :src="scope.row.logo" class="tableImg" />
+              <img v-else="scope.row.logo" src="static/imgs/noImg.png" class="tableImg" />
             </div>
           </el-tooltip>
         </template>
@@ -139,7 +139,7 @@
       :page-size="tableData.pageSize"
     ></el-pagination>
 
-    <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券">
+    <el-dialog :visible.sync="checkCouponsBox" class="checkCoupons" title="查看优惠券" width="60%">
       <couponTable :currPageInfo="currPageInfo"></couponTable>
     </el-dialog>
 
@@ -152,17 +152,27 @@
         </el-form-item>
         <el-form-item label="　国家">
           <el-select v-model="editorData.country" placeholder="请选择语言">
-            <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
+            <el-option
+              v-for="countryItem in countryList"
+              :key="countryItem.key"
+              :value="countryItem.key"
+              :label="countryItem.value"
+            ></el-option>
           </el-select>
         </el-form-item>
       </el-form>
-      <div style="margin-bottom:15px;color: #606266;font-weight: bold;">　站点图片上传</div>
+      <div style="margin-bottom:15px;color: #606266;font-weight: bold;">站点图片上传</div>
       <div style="text-align: center;">
-        <el-upload class="avatar-uploader" :action="fileUrl" :show-file-list="false" :on-success="handleAvatarSuccess">
-          <img v-if="editorData.logo" :src="editorData.logo" class="avatar">
+        <el-upload
+          class="avatar-uploader"
+          :action="fileUrl"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+        >
+          <img v-if="editorData.logo" :src="editorData.logo" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-        <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">　提　交　</el-button>
+        <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
     </el-dialog>
 
@@ -249,7 +259,7 @@
         </el-upload>
         <el-button type="primary" @click="editorSubmit" style="margin-top:20px;">提 交</el-button>
       </div>
-    </el-dialog> -->
+    </el-dialog>-->
   </section>
 </template>
 

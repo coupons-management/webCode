@@ -9,7 +9,7 @@ export default {
       time: [start.getTime(), end.getTime()],
       spiderId: '',
       range: '1',
-      radio4: '1',
+      type: 1,
       data: [],
       totalStat: {
         pageSize: 10,
@@ -23,6 +23,7 @@ export default {
           { date: '2019-04-18', couponNum: '1', newStoreNum: '5', totalStoreNum: '6', storeNum: '2', rightCouponNum: '3', totalCouponNum: '4' }
         ]
       },
+      storeData: [],
       storeStat: {
         pageSize: 10,
         pageTotal: 3,
@@ -41,14 +42,15 @@ export default {
   },
   methods: {
     getData() {
-      this.$sendData(
-        'post',
-        'statistic/site',
-        { siteId: this.siteId, beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range },
-        (data, all) => {
+      if (this.type === 1) {
+        this.$sendData('post', 'statistic/site', { siteId: this.siteId, beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
           this.data = data;
-        }
-      );
+        });
+      } else {
+        this.$sendData('post', 'statistic/storeStatistic', { siteId: this.siteId, beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
+          this.storeData = data;
+        });
+      }
     },
     handleSelectChange() {
       this.$nextTick(() => {

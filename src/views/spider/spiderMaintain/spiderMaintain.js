@@ -37,7 +37,7 @@ export default {
   },
   mounted() {
     this.getData();
-    this.getCatygory();
+    // this.getCatygory();
   },
   methods: {
     getCatygory() {

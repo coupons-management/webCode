@@ -44,7 +44,7 @@ export default {
   },
   watch:{
     'currPageInfo':function(e){
-      this.searchForm.storeId = this.currPageInfo;
+      this.searchForm.storeId = this.currPageInfo.storeId;
       this.searchForm.pageNumber = 1;
       this.getTableList();
     }

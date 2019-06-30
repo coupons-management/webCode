@@ -9,8 +9,9 @@ export default {
       time: [start.getTime(), end.getTime()],
       spiderId: '',
       range: '1',
-      radio4: '1',
+      type: 1,
       data: [],
+      storeData: [],
       totalStat: {
         pageSize: 10,
         pageTotal: 3,
@@ -42,10 +43,15 @@ export default {
   methods: {
     getData() {
       // console.log(this.time);
-
-      this.$sendData('post', 'statistic/spider', { beginTime: this.time[0] || '', endTime: this.time[1] || '', spiderId: this.spiderId, range: this.range }, (data, all) => {
-        this.data = data;
-      });
+      if (this.type === 1) {
+        this.$sendData('post', 'statistic/spider', { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
+          this.data = data;
+        });
+      } else {
+        this.$sendData('post', 'statistic/storeStatistic', { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
+          this.storeData = data;
+        });
+      }
     },
     handleSelectChange() {
       this.$nextTick(() => {
