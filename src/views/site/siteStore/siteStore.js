@@ -106,10 +106,13 @@ export default {
     addStore() {
       //添加商家
       console.log('add store');
-      this.editorData = {
-        tags: []
-      };
-      this.addStoreBox = true;
+      this.$sendData('get', 'showSite/getStoreTempalte', {}, (data, all) => {
+        this.editorData = data;
+        this.addStoreBox = true;
+      });
+      // this.editorData = {
+      //   tags: []
+      // };
     },
     editorInfo(data) {
       //编辑
