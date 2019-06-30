@@ -6,8 +6,8 @@
   <section class="spiderStorePage">
     <section class="pageSearch" >
       <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
-        <el-form-item label="选择爬虫">
-          <el-select v-model="searchForm.spiderId" placeholder="请选择爬虫">
+        <el-form-item label="选择数据源">
+          <el-select v-model="searchForm.spiderId" placeholder="请选择数据源">
             <el-option v-for="spiderItem in spiderList" :key="spiderItem.key" :value="spiderItem.key" :label="spiderItem.value"></el-option>
           </el-select>
         </el-form-item>
@@ -19,7 +19,7 @@
             <el-option v-for="countryItem in countryList" :key="countryItem.key" :value="countryItem.key" :label="countryItem.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="爬虫分类">
+        <el-form-item label="数据源分类">
           <el-select v-model="searchForm.scrapyType" placeholder="请选择分类" filterable >
             <el-option v-for="typeItem in typeList" :key="typeItem.key" :value="typeItem.key" :label="typeItem.value"></el-option>
           </el-select>

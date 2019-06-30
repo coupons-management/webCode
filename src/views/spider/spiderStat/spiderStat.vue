@@ -3,8 +3,8 @@
 
 <template>
   <section class="spiderStatPage">
-    <span style="color:grey;">选择爬虫：</span>
-    <el-select v-model="spiderId" placeholder="请选择爬虫" @change="handleSelectChange">
+    <span style="color:grey;">选择数据源：</span>
+    <el-select v-model="spiderId" placeholder="请选择数据源" @change="handleSelectChange">
       <el-option
         v-for="spiderItem in spiderList"
         :key="spiderItem.key"

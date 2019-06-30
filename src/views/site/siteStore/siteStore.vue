@@ -34,7 +34,7 @@
         <el-form-item label="关键字">
           <el-input v-model="searchForm.search" placeholder="商家名、官网、标签"></el-input>
         </el-form-item>
-        <el-form-item label="国家">
+        <!-- <el-form-item label="国家">
           <el-select v-model="searchForm.country" placeholder="请选择国家" style="width: 120px;">
             <el-option
               v-for="countryItem in countryList"
@@ -43,7 +43,7 @@
               :label="countryItem.value"
             ></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="商家分类">
           <el-select v-model="searchForm.typeId" placeholder="请选择分类" style="width: 120px;">
             <el-option label="全部" value></el-option>
@@ -165,13 +165,13 @@
     <el-dialog :visible.sync="addStoreBox" class="editorStore" title="添加商家" width="60%" top="3%">
       <el-form :model="editorData" size="small" label-width="140px" :inline="true">
         <el-form-item label="商家名">
-          <el-input v-model="editorData.storeName" placeholder="请输入商家名"></el-input>
+          <el-input v-model="editorData.name" placeholder="请输入商家名"></el-input>
         </el-form-item>
         <el-form-item label="官网">
           <el-input v-model="editorData.webSite"></el-input>
         </el-form-item>
         <el-form-item label="商家分类">
-          <el-select v-model="editorData.category" placeholder="请选择商家分类">
+          <el-select v-model="editorData.typeId" placeholder="请选择商家分类">
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
@@ -244,13 +244,13 @@
             <el-input v-model="editorData.endTime" disabled></el-input>
           </el-form-item>
           <el-form-item label="商家名">
-            <el-input v-model="editorData.showName" placeholder="请输入商家名"></el-input>
+            <el-input v-model="editorData.name" placeholder="请输入商家名"></el-input>
           </el-form-item>
           <el-form-item label="官网">
             <el-input v-model="editorData.webSite" disabled></el-input>
           </el-form-item>
           <el-form-item label="商家分类">
-            <el-select v-model="editorData.category" placeholder="请选择商家分类">
+            <el-select v-model="editorData.typeId" placeholder="请选择商家分类">
               <el-option
                 v-for="item in typeList"
                 :key="item.id"

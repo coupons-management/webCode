@@ -14,14 +14,13 @@ export default {
         country: '',
         typeId: '',
         mark: '',
-        range: '',
+        range: '1',
         startTime: '',
         endTime: '',
         search: '',
         timer: [start, end],
         pageSize: 10,
-        pageNumber: 1,
-        range: ''
+        pageNumber: 1
       },
       tableData: {
         pageSize: 10,

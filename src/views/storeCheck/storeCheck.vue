@@ -24,8 +24,8 @@
             <el-option v-for="approvalItem in approvalList" :key="approvalItem.key" :value="approvalItem.key" :label="approvalItem.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="爬虫列表">
-          <el-select v-model="searchForm.spiderId" placeholder="请选择爬虫站">
+        <el-form-item label="数据源">
+          <el-select v-model="searchForm.spiderId" placeholder="请选择数据源">
             <el-option v-for="spiderItem in spiderList" :key="spiderItem.key" :value="spiderItem.key" :label="spiderItem.value"></el-option>
           </el-select>
         </el-form-item>

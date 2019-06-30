@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item>
           <el-radio-group v-model="searchForm.range" @change="searchSubmit">
-            <el-radio-button label>全部</el-radio-button>
+            <!-- <el-radio-button label>全部</el-radio-button> -->
             <el-radio-button label="1">有新增优惠券的商家</el-radio-button>
             <el-radio-button label="2">无新增优惠券的商家</el-radio-button>
             <el-radio-button label="3">新增的商家</el-radio-button>

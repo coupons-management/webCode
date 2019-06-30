@@ -53,8 +53,8 @@
 
 <template>
   <section class="spiderMaintainPage">
-    <span style="color:grey;">选择爬虫：</span>
-    <el-select v-model="spiderId" placeholder="请选择爬虫" @change="handleSelectChange">
+    <span style="color:grey;">选择数据源：</span>
+    <el-select v-model="spiderId" placeholder="请选择数据源" @change="handleSelectChange">
       <el-option
         v-for="spiderItem in spiderList"
         :key="spiderItem.key"
@@ -114,7 +114,7 @@
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column prop="scrapyType" label="爬虫分类" align="center"></el-table-column>
+      <el-table-column prop="scrapyType" label="数据源分类" align="center"></el-table-column>
       <el-table-column label="有效优惠券数量" align="center">
         <template slot-scope="scope">
           <span>{{scope.row.validCouponsCount}}</span>

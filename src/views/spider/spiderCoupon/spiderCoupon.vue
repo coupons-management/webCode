@@ -6,8 +6,8 @@
   <section class="spiderCouponPage">
     <section v-if="!currPageInfo">
       <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
-        <el-form-item label="选择爬虫">
-          <el-select v-model="searchForm.scrapy" placeholder="请选择爬虫">
+        <el-form-item label="选择数据源">
+          <el-select v-model="searchForm.scrapy" placeholder="请选择数据源">
             <el-option v-for="spiderItem in spiderList" :key="spiderItem.key" :value="spiderItem.key" :label="spiderItem.value"></el-option>
           </el-select>
         </el-form-item>
