@@ -41,7 +41,7 @@ export default {
       this.editorStoreBox = true;
     },
     checkCoupons(data) {
-      this.currPageInfo = data.id;
+      this.currPageInfo = data;
       this.checkCouponsBox = true;
     },
     storeChange(e) {

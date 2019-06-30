@@ -47,7 +47,7 @@
       <el-table-column prop="num1" label="数量为0" align="center"></el-table-column>
       <el-table-column prop="num2" label="数量1-3" align="center"></el-table-column>
       <el-table-column prop="num3" label="数量4-6" align="center"></el-table-column>
-      <el-table-column prop="num4" label="数量>7=" align="center"></el-table-column>
+      <el-table-column prop="num4" label="数量>=7" align="center"></el-table-column>
     </el-table>
   </section>
 </template>
