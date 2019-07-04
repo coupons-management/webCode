@@ -7,10 +7,11 @@ export default {
     start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
     return {
       time: [start.getTime(), end.getTime()],
-      spiderId: '',
+      spiderId: 0,
       range: '1',
       type: 1,
       data: [],
+      loading: false,
       storeData: [],
       totalStat: {
         pageSize: 10,
@@ -38,19 +39,28 @@ export default {
     };
   },
   mounted() {
+    this.initData(['spiderSite']);
     this.getData();
   },
   methods: {
     getData() {
+      this.loading = true;
       // console.log(this.time);
       if (this.type === 1) {
-        this.$sendData('post', 'statistic/spider', { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
+        this.$sendData('post', 'statistic/spider', { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range, spiderId: this.spiderId }, (data, all) => {
           this.data = data;
+          this.loading = false;
         });
       } else {
-        this.$sendData('post', 'statistic/storeStatistic', { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range }, (data, all) => {
-          this.storeData = data;
-        });
+        this.$sendData(
+          'post',
+          'statistic/storeStatistic',
+          { beginTime: this.time[0] || '', endTime: this.time[1] || '', range: this.range, spiderId: this.spiderId },
+          (data, all) => {
+            this.storeData = data;
+            this.loading = false;
+          }
+        );
       }
     },
     handleSelectChange() {

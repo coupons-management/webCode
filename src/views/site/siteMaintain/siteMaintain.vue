@@ -20,6 +20,7 @@
             end-placeholder="结束日期"
             value-format="yyyy-MM-DD"
             @change="searchSubmit"
+            :clearable="false"
           ></el-date-picker>
         </el-form-item>
         <el-form-item>

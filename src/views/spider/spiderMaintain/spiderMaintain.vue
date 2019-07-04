@@ -69,6 +69,7 @@
       value-format="timestamp"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
+      :clearable="false"
       @change="handleSelectChange"
     ></el-date-picker>
     <el-radio-group v-model="range" style="margin: 20px 30px;" @change="handleSelectChange">

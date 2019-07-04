@@ -19,6 +19,7 @@
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       @change="handleSelectChange"
+      :clearable="false"
     ></el-date-picker>
     <el-radio-group v-model="range" style="margin: 20px 30px;" @change="handleSelectChange">
       <el-radio-button label="1">按日</el-radio-button>
