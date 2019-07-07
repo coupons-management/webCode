@@ -12,7 +12,7 @@ export default {
         validCouponsCount: '',
         pageNumber: 1,
         pageSize: 10,
-        siteId: 1,
+        siteId: '',
         approval: '',
         isComplete: ''
       },
@@ -26,15 +26,22 @@ export default {
       },
       fileUrl: sessionStorage.axiosLocalUrl + 'file/upload',
       isBatch: false, //批量操作按钮
-      storeList: [] //勾选数组
+      storeList: [], //勾选数组
+      typeList: []
     };
   },
   mounted() {
     this.initData(['spiderSite', 'country', 'isComplete', 'approval']);
     this.siteList = JSON.parse(localStorage.siteList);
     this.getTableList();
+    this.getCatygory();
   },
   methods: {
+    getCatygory() {
+      this.$sendData('post', 'showSiteType/getList', {}, (data, all) => {
+        this.typeList = data;
+      });
+    },
     checkRow(row, event, column) {
       //点击一行 进行勾选
       if (this.isBatch) {

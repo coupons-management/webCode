@@ -7,7 +7,7 @@ export default {
         choosePerson:'0',
         chooseSite:'0'
       },
-      activeName:'storePage',
+      activeName:'daily',
       storeData:{
         pageSize:10,
         pageTotal:3,

@@ -69,7 +69,7 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      fileUrl: sessionStorage.axiosLocalUrl + 'site-manager/uploadFile',
+      fileUrl: sessionStorage.axiosLocalUrl + 'file/upload',
       sortCouponBox: false,
       couponSelected: [],
       changeSort: 0
@@ -167,7 +167,9 @@ export default {
       });
     },
     handleAvatarSuccess(e) {
-      this.editorData.logo = 'http://39.98.53.2:3332/backend_scrapy_site/' + e.data;
+      this.editorData.logo = 'http://' + e.data;
+      this.editorData.logoUrl = 'http://' + e.data;
+      // this.editorData.logo = 'http://39.98.53.2:3332/backend_scrapy_site/' + e.data;
     },
     getTableData() {
       //获取table表

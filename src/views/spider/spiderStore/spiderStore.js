@@ -23,15 +23,22 @@ export default {
         pageName: 'spiderStore',
         storeId: ''
       },
-      fileUrl: sessionStorage.axiosLocalUrl + 'file/upload'
+      fileUrl: sessionStorage.axiosLocalUrl + 'file/upload',
+      typeList: []
     };
   },
   mounted() {
     this.initData(['spiderSite', 'spiderType', 'country']);
     this.searchForm.pageNumber = 1;
     this.getTableList();
+    this.getCatygory();
   },
   methods: {
+    getCatygory() {
+      this.$sendData('post', 'showSiteType/getList', {}, (data, all) => {
+        this.typeList = data;
+      });
+    },
     searchSubmit() {
       this.searchForm.pageNumber = 1;
       this.getTableList();
@@ -70,6 +77,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['spiderList', 'countryList', 'typeList'])
+    ...mapGetters(['spiderList', 'countryList'])
   }
 };

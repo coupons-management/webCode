@@ -34,7 +34,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="数据来源">
-        <el-select v-model="searchForm.cteateType" placeholder="是否过期" style="width: 150px;">
+        <el-select v-model="searchForm.cteateType" placeholder="数据来源" style="width: 150px;">
           <el-option
             v-for="sourceItem in dataSourceList"
             :key="sourceItem.key"
@@ -44,7 +44,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="searchForm.state" placeholder="是否过期" style="width: 150px;">
+        <el-select v-model="searchForm.state" placeholder="状态" style="width: 150px;">
           <el-option
             v-for="approvalItem in approvalList"
             :key="approvalItem.key"
@@ -126,17 +126,23 @@
       append-to-body
     >
       <el-form :model="editorData" size="small" label-width="80px" label-position="left">
-        <el-form-item label=" 现标题">
-          <el-input v-model="editorData.currentTitle" placeholder="请输入名字"></el-input>
+        <el-form-item label="现标题">
+          <el-input v-model="editorData.currentTitle" placeholder="请输入现标题"></el-input>
         </el-form-item>
-        <el-form-item label=" 描述" v-if="editorData.inType==1">
-          <el-input v-model="editorData.description" placeholder="请输入名字"></el-input>
+        <el-form-item label="描述" v-if="editorData.inType==1">
+          <el-input v-model="editorData.description" placeholder="请输入描述"></el-input>
         </el-form-item>
-        <el-form-item label=" code" v-if="editorData.inType==1">
-          <el-input v-model="editorData.code" placeholder="请输入名字"></el-input>
+        <el-form-item label="code" v-if="editorData.inType==1">
+          <el-input v-model="editorData.code" placeholder="请输入code"></el-input>
         </el-form-item>
-        <el-form-item label=" 过期时间" v-if="editorData.inType==1">
-          <el-input v-model="editorData.pastTime" placeholder="请输入名字"></el-input>
+        <el-form-item label="过期时间" v-if="editorData.inType==1">
+          <el-date-picker
+            v-model="editorData.expiryTime"
+            type="date"
+            value-format="timestamp"
+            placeholder="选择日期"
+          ></el-date-picker>
+          <!-- <el-input v-model="editorData.pastTime" placeholder="请输入名字"></el-input> -->
         </el-form-item>
       </el-form>
       <section style="display: flex;justify-content: space-around;">
