@@ -73,7 +73,6 @@
         </template>
       </el-table-column>
       <el-table-column prop="sourceTitle" label="原标题" align="center"></el-table-column>
-      <el-table-column prop="currentTitle" label="本站标题" align="center"></el-table-column>
       <el-table-column prop="couponType" label="类型" align="center"></el-table-column>
       <el-table-column prop="code" label="code" align="center"></el-table-column>
       <el-table-column prop="description" label="描述" align="center"></el-table-column>

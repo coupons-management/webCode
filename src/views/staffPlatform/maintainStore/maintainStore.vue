@@ -70,7 +70,24 @@
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column label="在爬虫站" align="center">
+        <el-table-column label="在展示站" align="center">
+          <template slot-scope="scope">
+            123
+            <!--<el-tooltip
+              class="item"
+              effect="light"
+              placement="right"
+              v-if="scope.row.showSiteNameList.length>0"
+            >
+              <div slot="content">
+                <div v-for="item in scope.row.showSiteNameList" class="sitList">{{item}}</div>
+              </div>
+              <div>{{scope.row.showSiteNameList.length}}</div>
+            </el-tooltip>
+            <div v-else>0</div>-->
+          </template>
+        </el-table-column>
+        <el-table-column label="来源站" align="center">
           <template slot-scope="scope">
             <el-tooltip class="item" effect="light" placement="right">
               <div slot="content">
@@ -80,14 +97,13 @@
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column prop="scrapyType" label="商家分类" align="center"></el-table-column>
+        <!--<el-table-column prop="scrapyType" label="商家分类" align="center"></el-table-column>-->
         <el-table-column label="有效优惠券数量" align="center">
           <template slot-scope="scope">
             <span>{{scope.row.validCouponsCount}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="加入时间" align="center"></el-table-column>
-        <el-table-column prop="couponUpdateTime" label="优惠券最后新增时间" align="center"></el-table-column>
+        <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
         <el-table-column align="center" label="操作" width="180">
           <template slot-scope="scope">
             <el-button type="text" size="mini" @click="editorInfo(scope.row)">编辑</el-button>
