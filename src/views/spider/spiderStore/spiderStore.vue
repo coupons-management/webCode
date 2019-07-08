@@ -29,12 +29,12 @@
           </el-select>
         </el-form-item>
         <el-form-item label="数据源分类">
-          <el-select v-model="searchForm.scrapyType" placeholder="请选择分类" filterable>
+          <el-select v-model="searchForm.scrapyType" placeholder="请选择分类" filterable clearable>
             <el-option
               v-for="typeItem in typeList"
               :key="typeItem.key"
-              :value="typeItem.key"
-              :label="typeItem.value"
+              :value="typeItem.id"
+              :label="typeItem.name"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -144,7 +144,7 @@
           </el-col>
         </el-form-item>
         <el-form-item label="商家分类">
-          <el-select v-model="editorData.typeId" placeholder="请选择商家分类">
+          <el-select v-model="editorData.typeId" placeholder="请选择商家分类" filterable clearable>
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>

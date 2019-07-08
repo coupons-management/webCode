@@ -45,8 +45,8 @@
           </el-select>
         </el-form-item> -->
         <el-form-item label="商家分类">
-          <el-select v-model="searchForm.typeId" placeholder="请选择分类" style="width: 120px;">
-            <el-option label="全部" value></el-option>
+          <el-select v-model="searchForm.typeId" placeholder="请选择分类" style="width: 180px;" filterable clearable>
+            <!--<el-option label="全部" value></el-option>-->
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             <!-- <el-option label="分类1" value="1"></el-option> -->
             <!-- <el-option label="分类2" value="2"></el-option> -->
@@ -171,7 +171,7 @@
           <el-input v-model="editorData.webSite"></el-input>
         </el-form-item>
         <el-form-item label="商家分类">
-          <el-select v-model="editorData.typeId" placeholder="请选择商家分类">
+          <el-select v-model="editorData.typeId" placeholder="请选择商家分类" filterable clearable>
             <el-option v-for="item in typeList" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
@@ -250,7 +250,7 @@
             <el-input v-model="editorData.webSite" disabled></el-input>
           </el-form-item>
           <el-form-item label="商家分类">
-            <el-select v-model="editorData.typeId" placeholder="请选择商家分类">
+            <el-select v-model="editorData.typeId" placeholder="请选择商家分类" filterable clearable>
               <el-option
                 v-for="item in typeList"
                 :key="item.id"

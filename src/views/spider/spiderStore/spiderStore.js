@@ -9,7 +9,7 @@ export default {
       searchForm: {
         search: '',
         country: '',
-        scrapyType: 0,
+        scrapyType: '',
         validCouponsCount: '',
         pageNumber: 1,
         pageSize: 10,
@@ -36,6 +36,7 @@ export default {
   methods: {
     getCatygory() {
       this.$sendData('post', 'showSiteType/getList', {}, (data, all) => {
+        console.log(data);
         this.typeList = data;
       });
     },
