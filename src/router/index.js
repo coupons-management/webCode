@@ -92,20 +92,41 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/storeCheck',
+    path: '/staffPlatform',
     component: Layout,
-    name: '商家审核',
-    meta: { title: '商家审核', icon: 'example' },
-    redirect: '/storeCheck/check',
+    name: '员工平台',
+    meta: { title: '员工平台', icon: 'example' },
+    redirect: '/staffPlatform/check',
     children: [
       {
         path: 'check',
         name: '商家审核',
-        component: () => import('@/views/storeCheck/storeCheck.vue'),
+        component: () => import('@/views/staffPlatform/storeCheck/storeCheck.vue'),
         meta: { title: '商家审核', icon: 'tree' }
+      },
+      {
+        path: 'storeManage',
+        name: '商家管理',
+        component: () => import('@/views/staffPlatform/storeManage/storeManage.vue'),
+        meta: { title: '商家管理', icon: 'tree' }
       }
     ]
   },
+/*{
+  path: '/storeCheck',
+    component: Layout,
+    name: '商家审核',
+    meta: { title: '商家审核', icon: 'example' },
+  redirect: '/storeCheck/check',
+    children: [
+    {
+      path: 'check',
+      name: '商家审核',
+      component: () => import('@/views/storeCheck/storeCheck.vue'),
+  meta: { title: '商家审核', icon: 'tree' }
+}
+]
+},*/
   {
     path: '/staffWork',
     component: Layout,
