@@ -6,16 +6,10 @@
   <section class="roleManagePage">
     <el-button type="primary" @click="addNew" size="mini" style="margin-bottom: 20px;">新增角色</el-button>
 
-    <el-table :data="tableList.list" stripe style="width: 50%" border >
+    <el-table :data="tableList" stripe style="width: 50%" border >
       <el-table-column prop="id" label="ID" align="center"></el-table-column>
-      <el-table-column prop="account" label="员工账号" align="center"></el-table-column>
-      <el-table-column prop="name" label="用户名" align="center"></el-table-column>
-      <el-table-column label="性别" align="center">
-        <template slot-scope="scope">
-          <span v-if="scope.row.gender == 1">男</span>
-          <span v-else>女</span>
-        </template>
-      </el-table-column>
+      <el-table-column prop="name" label="角色名" align="center"></el-table-column>
+      <el-table-column prop="description" label="描述" align="center"></el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="mini" @click="editorInfo(scope.row)">编辑</el-button>
@@ -25,24 +19,13 @@
       </el-table-column>
     </el-table>
 
-    <el-pagination background layout="total, prev, pager, next" :total="tableList.totalCount" @current-change="checkPage" style="margin-top: 20px;"></el-pagination>
-
     <el-dialog :visible.sync="roleBox" class="roleBox" :title="isAddRole?'新增角色':'修改角色'" width="30%">
       <el-form :model="roleForm" size="small">
-        <el-form-item label="员工账号">
-          <el-input v-model="roleForm.account" placeholder="请输入用户名" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="名称">
+        <el-form-item label="角色名称">
           <el-input v-model="roleForm.name" placeholder="请输入用户名" clearable></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="roleForm.password" placeholder="请输入用户名" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="性别">
-          <el-radio-group v-model="roleForm.gender">
-            <el-radio label="1">男</el-radio>
-            <el-radio label="0">女</el-radio>
-          </el-radio-group>
+        <el-form-item label="角色描述">
+          <el-input v-model="roleForm.description" placeholder="请输入用户名" clearable></el-input>
         </el-form-item>
       </el-form>
       <div style="text-align: center">

@@ -20,13 +20,26 @@ export default {
       tableList: '',
       isAddRole:false,
       roleBox:false,
-      showPwd:true
+      showPwd:true,
+      assignmentBox:false,
+      roleList:[],
+      checkList:[],
+      currUser:''
     }
   },
   mounted(){
     this.getTableList();
+    this.getRoleList();
   },
   methods:{
+    getRoleList(){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'role/list', _this.sendData).then(function(response) {
+        if (response.data.code == 0) {
+          _this.roleList = response.data.data;
+        }
+      });
+    },
     getTableList(){
       let _this = this;
       _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/getPage', _this.sendData).then(function(response) {
@@ -121,8 +134,29 @@ export default {
         gender:'1'
       }
     },
-    permissions(){
-
+    permissions(data){
+      let _this = this;
+      if(data.roleList.length>0){
+        for(let i of data.roleList){
+          _this.checkList.push(i.id);
+        }
+      }
+      _this.currUser = data.id;
+      _this.assignmentBox = true;
+    },
+    submitRole(){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/assignRole', {
+        "userId":_this.currUser,
+        "roles":_this.checkList
+      }).then(function(response) {
+        if (response.data.code == 0) {
+          _this.assignmentBox = false;
+          _this.getTableList();
+        }else{
+          _this.$message({ type: 'error', message: response.data.message });
+        }
+      });
     }
   }
 }

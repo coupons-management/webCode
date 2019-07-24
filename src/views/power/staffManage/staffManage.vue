@@ -6,7 +6,7 @@
   <section class="staffManagePage">
     <el-button type="primary" @click="addNew" size="mini" style="margin-bottom: 20px;">新增用户</el-button>
 
-    <el-table :data="tableList.list" stripe style="width: 50%" border >
+    <el-table :data="tableList.list" stripe style="width: 70%" border >
       <el-table-column prop="id" label="ID" align="center"></el-table-column>
       <el-table-column prop="account" label="员工账号" align="center"></el-table-column>
       <el-table-column prop="name" label="用户名" align="center"></el-table-column>
@@ -14,6 +14,11 @@
         <template slot-scope="scope">
           <span v-if="scope.row.gender == 1">男</span>
           <span v-else>女</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="角色" align="center" width="250">
+        <template slot-scope="scope">
+         <span v-for="item in scope.row.roleList">{{item.name}}　</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作">
@@ -53,6 +58,17 @@
         <el-button type="primary" @click="rebuildData" size="mini" style="margin-bottom: 20px;" v-if="isAddRole">重置</el-button>
         <el-button type="primary" @click="editorPwd" size="mini" style="margin-bottom: 20px;" v-if="!isAddRole">修改密码</el-button>
         <el-button type="primary" @click="cancelEditorPwd" size="mini" style="margin-bottom: 20px;" v-if="roleForm.passwordOld">取消修改密码</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :visible.sync="assignmentBox" class="assignmentBox" title="角色分配" width="30%">
+
+      <el-checkbox-group v-model="checkList">
+        <el-checkbox :label="item.id" v-for="item in roleList" :key="item.id">{{item.name}}</el-checkbox>
+      </el-checkbox-group>
+
+      <div style="text-align: center">
+        <el-button type="primary" @click="submitRole" size="mini" style="margin-bottom: 20px;">提交</el-button>
       </div>
     </el-dialog>
   </section>
