@@ -3,30 +3,20 @@ export default {
   data(){
     return {
       searchForm:{
-        choosePerson:'0',
-        chooseSite:'0'
+        choosePerson:'',
+        chooseSite:''
       },
       activeName:'apportion',
-      tableData:{
-        pageSize:10,
-        pageTotal:3,
-        page:1,
-        tableList:[
-          {id: '1', storeName: '商家1', website: 'https://www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '10', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '12', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'},
-          {id: '1', storeName: '商家1', website: 'www.baidu.com', logo: 'static/imgs/nike.jpg', sitNum: '3',sitList:[{name:'站点1'},{name:'站点2'},{name:'站点3'}],
-            spiderSitNum: '2',spiderSitList:[{name:'爬虫站1'},{name:'爬虫站2'}],spiderType: 'abc', couponNum: '10',couponNumTotal: '14', createTime: '2019-04-16',
-            lastUpdateTime: '2019-04-16', lastAddTime: '2019-04-16'}
-        ]
-      }
+      tableData:{},
+      tableData2:{},
+      siteList:JSON.parse(localStorage.siteList),
+      staffList:[]
     }
   },
   mounted(){
-
+    this.searchForm.chooseSite = this.siteList[0].id;
+    this.getStaffList();
+    this.getUnStore();
   },
   methods:{
     editorStore(data){
@@ -37,6 +27,42 @@ export default {
     },
     storeChange(){
 
+    },
+    getStaffList(){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/getPage', {pageNumber: 1,pageSize: 100}).then(function(response) {
+        if (response.data.code == 0) {
+          _this.staffList = response.data.data.list;
+          _this.searchForm.choosePerson = _this.staffList[0].id;
+          _this.getStore();
+        }
+      });
+    },
+    getUnStore(){//未分配
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'store/availableAssign', {name:"",pageNumber: 1,pageSize: 10}).then(function(response) {
+        if (response.data.code == 0) {
+          _this.tableData = response.data.data;
+        }
+      });
+    },
+    getStore(){//已分配
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/stores', {userId:_this.searchForm.choosePerson,name:"",pageNumber: 1,pageSize: 10}).then(function(response) {
+        if (response.data.code == 0) {
+          _this.tableData2 = response.data.data;
+        }
+      });
+    }
+  },
+  watch:{
+    'searchForm.choosePerson':function(){
+      this.getUnStore();
+      this.getStore();
+    },
+    'searchForm.chooseSite':function(){
+      this.getUnStore();
+      this.getStore();
     }
   }
 }

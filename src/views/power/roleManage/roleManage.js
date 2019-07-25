@@ -8,11 +8,20 @@ export default {
       },
       tableList: [],
       isAddRole:false,
-      roleBox:false
+      roleBox:false,
+      powerBox:false,
+      powerList:[],
+      checkedList:[],
+      defaultProps:{
+        children: 'children',
+        label: 'name'
+      },
+      currRole:''
     }
   },
   mounted(){
     this.getTableList();
+    this.getPermissList();
   },
   methods:{
     getTableList(){
@@ -74,8 +83,40 @@ export default {
         name:''
       }
     },
-    permissions(){
-
+    permissions(data){
+      let _this = this;
+      _this.currRole = data.id;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'role/resource', { "id": data.id}).then(function(response) {
+        if (response.data.code == 0) {
+          for(let i of response.data.data){
+            _this.checkedList.push(i.id);
+          }
+          _this.powerBox = true;
+        }
+      });
+    },
+    getPermissList(){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'role/allResource', {}).then(function(response) {
+        if (response.data.code == 0) {
+          _this.powerList = response.data.data
+        }
+      });
+    },
+    powerSend(){
+      let _this = this,powerSendData = [];
+      let powerArray = _this.$refs.tree.getCheckedNodes();
+      for(let i of powerArray){
+        powerSendData.push(i.id);
+      }
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'role/updateResource', {
+        "roleId": _this.currRole,
+        "resources": powerSendData
+      }).then(function(response) {
+        if (response.data.code == 0) {
+          _this.powerBox = false;
+        }
+      });
     }
   }
 }

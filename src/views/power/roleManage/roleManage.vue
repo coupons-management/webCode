@@ -33,6 +33,16 @@
         <el-button type="primary" @click="rebuildData" size="mini" style="margin-bottom: 20px;" v-if="isAddRole">重置</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog :visible.sync="powerBox" class="powerBox" title="权限配置" width="30%">
+
+      <el-tree :data="powerList" show-checkbox node-key="id" :default-checked-keys="checkedList" :default-expanded-keys="checkedList" ref="tree" :props="defaultProps"></el-tree>
+
+      <div style="text-align: center">
+        <el-button type="primary" @click="powerBox = false" size="mini" style="margin-bottom: 20px;">取消</el-button>
+        <el-button type="primary" @click="powerSend" size="mini" style="margin-bottom: 20px;">提交</el-button>
+      </div>
+    </el-dialog>
   </section>
 </template>
 
