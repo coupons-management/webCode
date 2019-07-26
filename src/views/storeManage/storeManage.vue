@@ -26,7 +26,7 @@
           </el-table-column>
           <el-table-column align="center" label="操作" width="180">
             <template slot-scope="scope">
-              <el-button type="text" size="mini" @click="editorStore(scope.row)">分配</el-button>
+              <el-button type="text" size="mini" @click="editorStore(scope.row,'1')">分配</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -44,7 +44,7 @@
           </el-table-column>
           <el-table-column align="center" label="操作" width="180">
             <template slot-scope="scope">
-              <el-button type="text" size="mini" @click="editorStore(scope.row)">取消管理</el-button>
+              <el-button type="text" size="mini" @click="editorStore(scope.row,'2')">取消管理</el-button>
             </template>
           </el-table-column>
         </el-table>

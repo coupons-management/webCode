@@ -19,8 +19,18 @@ export default {
     this.getUnStore();
   },
   methods:{
-    editorStore(data){
-
+    editorStore(data,type){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/assignOrCancel', {
+        "userId":_this.searchForm.choosePerson,
+        "storeId":data.id,
+        "operation":type
+      }).then(function(response) {
+        if (response.data.code == 0) {
+          _this.getUnStore();
+          _this.getStore();
+        }
+      });
     },
     handleClick(){//切换查看table
 
