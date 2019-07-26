@@ -36,7 +36,7 @@
 
     <el-dialog :visible.sync="powerBox" class="powerBox" title="权限配置" width="30%">
 
-      <el-tree :data="powerList" show-checkbox node-key="id" :default-checked-keys="checkedList" :default-expanded-keys="checkedList" ref="tree" :props="defaultProps"></el-tree>
+      <el-tree :data="powerList" show-checkbox node-key="id" :default-checked-keys="checkedList" :default-expanded-keys="checkedList" ref="tree" :props="defaultProps" v-if="powerBox"></el-tree>
 
       <div style="text-align: center">
         <el-button type="primary" @click="powerBox = false" size="mini" style="margin-bottom: 20px;">取消</el-button>

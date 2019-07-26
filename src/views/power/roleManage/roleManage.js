@@ -88,6 +88,7 @@ export default {
       _this.currRole = data.id;
       _this.$axios.post(sessionStorage.axiosLocalUrl + 'role/resource', { "id": data.id}).then(function(response) {
         if (response.data.code == 0) {
+          _this.checkedList = [];
           for(let i of response.data.data){
             _this.checkedList.push(i.id);
           }
