@@ -32,6 +32,8 @@ export default {
         tags: [],
         logo: ''
       },
+
+      siteList:JSON.parse(localStorage.siteList),
       addCouponBox: false,
       couponItem: {},
       reportBox: false,
@@ -200,6 +202,13 @@ export default {
       this.$sendData('post', '', this.reportData, (data, all) => {
         this.reportData = data;
       });
+    }
+  },
+  watch:{
+    'searchForm.siteId':function(e){
+      console.log(e);
+      this.searchForm.pageNumber = 1;
+      this.getTableData();
     }
   },
   computed: {

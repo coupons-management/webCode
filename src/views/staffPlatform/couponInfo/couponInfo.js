@@ -15,6 +15,7 @@ export default {
         pageNumber: 1,
         state: ''
       },
+      siteList:JSON.parse(localStorage.siteList),
       tableData: {}, //从后台获取的数组
       editorCouponsBox: false,
       editorData: {}

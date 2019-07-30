@@ -10,9 +10,7 @@
 
     <span style="margin:0 5px 0 20px;color: grey;">选择员工:</span>
     <el-select v-model="searchForm.choosePerson" placeholder="请选择员工">
-      <el-option label="员工1" value="0"></el-option>
-      <el-option label="员工2" value="1"></el-option>
-      <el-option label="员工3" value="2"></el-option>
+      <el-option :label="staffItem.account" :value="staffItem.id" v-for="staffItem in staffList"></el-option>
     </el-select>
     <!-- <span style="margin:0 5px 0 20px;color: grey;">站点选择:</span>
     <el-select v-model="searchForm.chooseSite" placeholder="请选择爬虫站">

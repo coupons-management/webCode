@@ -3,22 +3,37 @@ export default {
   data(){
     return {
       searchForm:{
-        choosePerson:'',
-        chooseSite:''
+        userId:'',
+        site:'',
+        rangeStart:'',
+        rangeEnd:'',
+        typeId:'',
+        search:'',
+        pageNumber: 1,
+        pageSize: 10
       },
       activeName:'apportion',
       tableData:{},
       tableData2:{},
       siteList:JSON.parse(localStorage.siteList),
-      staffList:[]
+      staffList:[],
+      typeList:[]
     }
   },
   mounted(){
-    this.searchForm.chooseSite = this.siteList[0].id;
+    this.searchForm.site = this.siteList[0].id;
+    this.getCatygory();
     this.getStaffList();
-    this.getUnStore();
   },
   methods:{
+    searchSubmit(){
+      this.searchForm.pageNumber = 1;
+      if(this.activeName == 'apportion'){
+        this.getUnStore();
+      }else{
+        this.getStore();
+      }
+    },
     editorStore(data,type){
       let _this = this;
       _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/assignOrCancel', {
@@ -27,6 +42,7 @@ export default {
         "operation":type
       }).then(function(response) {
         if (response.data.code == 0) {
+          _this.searchForm.pageNumber = 1;
           _this.getUnStore();
           _this.getStore();
         }
@@ -35,22 +51,33 @@ export default {
     handleClick(){//切换查看table
 
     },
-    storeChange(){
-
+    storeChange(e){
+      this.searchForm.pageNumber = e;
+      if(this.activeName == 'apportion'){
+        this.getUnStore();
+      }else{
+        this.getStore();
+      }
+    },
+    getCatygory() {
+      this.$sendData('post', 'showSiteType/getList', {}, (data, all) => {
+        this.typeList = data;
+      });
     },
     getStaffList(){
       let _this = this;
       _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/getPage', {pageNumber: 1,pageSize: 100}).then(function(response) {
         if (response.data.code == 0) {
           _this.staffList = response.data.data.list;
-          _this.searchForm.choosePerson = _this.staffList[0].id;
+          _this.searchForm.userId = _this.staffList[0].id;
           _this.getStore();
+          _this.getUnStore();
         }
       });
     },
     getUnStore(){//未分配
       let _this = this;
-      _this.$axios.post(sessionStorage.axiosLocalUrl + 'store/availableAssign', {name:"",pageNumber: 1,pageSize: 10}).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'store/availableAssign', _this.searchForm).then(function(response) {
         if (response.data.code == 0) {
           _this.tableData = response.data.data;
         }
@@ -58,7 +85,7 @@ export default {
     },
     getStore(){//已分配
       let _this = this;
-      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/stores', {userId:_this.searchForm.choosePerson,name:"",pageNumber: 1,pageSize: 10}).then(function(response) {
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/stores', _this.searchForm).then(function(response) {
         if (response.data.code == 0) {
           _this.tableData2 = response.data.data;
         }
@@ -66,13 +93,13 @@ export default {
     }
   },
   watch:{
-    'searchForm.choosePerson':function(){
+    /*'searchForm.choosePerson':function(){
       this.getUnStore();
       this.getStore();
     },
     'searchForm.chooseSite':function(){
       this.getUnStore();
       this.getStore();
-    }
+    }*/
   }
 }

@@ -159,12 +159,12 @@ export default {
       };
       let params = { outId: this.siteId };
       if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
-        params.cpOutSiteCouponList = this.orderList.map((i, x) => ({
+        params.cpOutSiteCouponList = this.advData.map((i, x) => ({
           id: i.id,
           [_data[this.type]]: x + 1
         }));
       } else {
-        params.cpOutSiteStoreList = this.orderList.map((i, x) => ({
+        params.cpOutSiteStoreList = this.advData.map((i, x) => ({
           id: i.id,
           [_data[this.type]]: x + 1
         }));
@@ -172,6 +172,9 @@ export default {
       this.$sendData('post', this.urlsPostList[this.type], params, (data, all) => {
         this.$message({ type: 'success', message: '排序成功！' });
       });
+    },
+    selectAll(e){
+      this.selectList = e;
     },
     handleSelectionChange(vals) {
       this.selectList = vals;
@@ -185,6 +188,7 @@ export default {
         intruduceCoupon: 'adviseSort'
       };
       let params = { outId: this.siteId };
+      console.log(this.selectList);
       if (this.type === 'hotCoupon' || this.type === 'intruduceCoupon') {
         params.cpOutSiteCouponList = this.selectList.map((i, x) => ({
           id: i.mapId,

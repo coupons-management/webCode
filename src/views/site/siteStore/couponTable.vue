@@ -71,27 +71,40 @@
       append-to-body
     >
       <el-form :model="editorData" size="small" label-width="80px" label-position="left">
+        <el-form-item label="原标题">
+          <el-input v-model="editorData.sourceTitle" placeholder="请输入现标题" :disabled="editorData.inType==1?false:true"></el-input>
+        </el-form-item>
         <el-form-item label=" 现标题">
           <el-input v-model="editorData.currentTitle" placeholder="请输入名字"></el-input>
         </el-form-item>
-        <el-form-item label=" 描述" v-if="editorData.inType==1">
+        <el-form-item label="类型">
+          <el-select v-model="editorData.couponType" placeholder="优惠券类型" style="width: 150px;" :disabled="editorData.inType==1?false:true">
+            <el-option
+              v-for="couponTypeItem in couponTypeList"
+              :key="couponTypeItem.key"
+              :value="couponTypeItem.key"
+              :label="couponTypeItem.value"
+              ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label=" 描述">
           <el-input v-model="editorData.description" placeholder="请输入名字"></el-input>
         </el-form-item>
-        <el-form-item label=" code" v-if="editorData.inType==1">
-          <el-input v-model="editorData.code" placeholder="请输入名字"></el-input>
+        <el-form-item label=" code">
+          <el-input v-model="editorData.code" :disabled="editorData.inType==1?false:true"></el-input>
         </el-form-item>
-        <el-form-item label=" 过期时间" v-if="editorData.inType==1">
+        <el-form-item label=" 过期时间">
           <el-input v-model="editorData.pastTime" placeholder="请输入名字"></el-input>
         </el-form-item>
       </el-form>
       <section style="display: flex;justify-content: space-around;">
-        <el-button type="danger" @click="deleteCoupon" size="small" v-if="editorData.inType==1">删除</el-button>
+        <el-button type="danger" @click="deleteCoupon" size="small">删除</el-button>
         <el-button type="primary" @click="editorSubmit" size="small">提交</el-button>
       </section>
     </el-dialog>
   </div>
 </template>
-<script>
+<script type="es6">
 import { mapGetters } from "vuex";
 
 export default {

@@ -47,13 +47,24 @@ export default {
           {date:'2019-04-20',storeNum:'6',couponNum:'8'},
           {date:'2019-04-21',storeNum:'7',couponNum:'9'}
         ]
-      }
+      },
+      staffList:[]
     }
   },
   mounted(){
-
+    this.getStaffList();
   },
   methods:{
+    getStaffList(){
+      let _this = this;
+      _this.$axios.post(sessionStorage.axiosLocalUrl + 'user/getPage', {pageNumber: 1,pageSize: 100}).then(function(response) {
+        if (response.data.code == 0) {
+          _this.staffList = response.data.data.list;
+          _this.searchForm.choosePerson = _this.staffList[0].id;
+          _this.getStore();
+        }
+      });
+    },
     handleClick(){//切换查看table
 
     },

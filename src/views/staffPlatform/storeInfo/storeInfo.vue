@@ -5,16 +5,6 @@
   <section class="spiderStorePage">
     <section class="pageSearch">
      <el-form :inline="true" :model="searchForm" class="demo-form-inline" size="mini">
-       <!-- <el-form-item label="选择数据源">
-         <el-select v-model="searchForm.spiderId" placeholder="请选择数据源">
-           <el-option
-             v-for="spiderItem in spiderList"
-             :key="spiderItem.key"
-             :value="spiderItem.key"
-             :label="spiderItem.value"
-           ></el-option>
-         </el-select>
-       </el-form-item>-->
         <el-form-item label="关键字">
           <el-input v-model="searchForm.search" placeholder="请输入商家名、官网"></el-input>
         </el-form-item>
@@ -24,9 +14,14 @@
          </el-select>
        </el-form-item>
        <el-form-item label=" 有效优惠券范围">
-         <el-input v-model="searchForm.range" placeholder="请输入数量"></el-input>
+         <el-input v-model="searchForm.rangeStart" placeholder="请输入数量" style="width:120px;"></el-input>~
+         <el-input v-model="searchForm.rangeEnd" placeholder="请输入数量" style="width:120px;"></el-input>
        </el-form-item>
-
+       <el-form-item label=" 站点">
+         <el-select v-model="searchForm.outId">
+           <el-option :label="siteItem.name" :value="siteItem.id" v-for="siteItem in siteList"></el-option>
+         </el-select>
+       </el-form-item>
         <!--<el-form-item label="国家">
           <el-select v-model="searchForm.country" placeholder="请选择国家">
             <el-option
@@ -79,19 +74,18 @@
         </el-table-column>
         <el-table-column label="在展示站" align="center">
           <template slot-scope="scope">
-            123
-            <!--<el-tooltip
+            <el-tooltip
               class="item"
               effect="light"
               placement="right"
-              v-if="scope.row.showSiteNameList.length>0"
+              v-if="scope.row.showSiteNameList"
             >
               <div slot="content">
                 <div v-for="item in scope.row.showSiteNameList" class="sitList">{{item}}</div>
               </div>
               <div>{{scope.row.showSiteNameList.length}}</div>
             </el-tooltip>
-            <div v-else>0</div>-->
+            <div v-else>0</div>
           </template>
         </el-table-column>
         <el-table-column label="来源站" align="center">

@@ -75,6 +75,7 @@
         style="width: 100%"
         border
         row-key="id"
+        @select-all="selectAll"
         @select="handleSelectionChange"
       >
         <el-table-column type="selection" reserve-selection width="55"></el-table-column>
