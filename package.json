@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "awe-dnd": "^0.3.4",
-    "axios": "0.18.0",
+    "axios": "0.21.1",
     "element-ui": "2.4.6",
     "js-cookie": "2.2.0",
     "js-md5": "^0.7.3",
